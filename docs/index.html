@@ -141,14 +141,14 @@ var config = {
          //loop 
          var i;
 	 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
-         $('<p style="font-size:12px;" class="sansserif"><b>ID:</b> '+(sel_record.id_persons).toString()+'</p>').appendTo('#Content');
-         $('<p style="font-size:12px;" class="sansserif"><b>Name:</b> '+(sel_record.name).toString()+'</p>').appendTo('#Content');
-         $('<p style="font-size:12px;" class="sansserif"><b>Name (translit):</b> '+(sel_record.name_translit).toString()+'</p>').appendTo('#Content');
-         $('<h2 style="font-size:16px; font-type: Arial"><font color="white">METADATA</font></h2>').appendTo('#Content');
-	 $('<p style="font-size:12px;" class="sansserif"><b>Creator:</b> Anni-Maus</p>').appendTo('#Content');
-         $('<p style="font-size:12px;" class="sansserif"><b>Co-Creator:</b>Dr. Strong Fish</p>').appendTo('#Content');
-         $('<p style="font-size:12px;" class="sansserif"><b>Date:</b>01.06.2019</p>').appendTo('#Content');
-         $('<p style="font-size:12px;" class="sansserif"><b>Commend:</b>Besser als diese verfickte Edition Topoi, die von alten Maennern kontrolliert wird, die sich wie Koenige auffuehren. Man sollte ihnen mit einer Erdbohrer die Rosette sprengen!</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>ID:</b> '+(sel_record.id_persons).toString()+'</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name:</b> '+(sel_record.name).toString()+'</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name (translit):</b> '+(sel_record.name_translit).toString()+'</p>').appendTo('#Content');
+         $('<h2 style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
+	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator:</b> Anni-Maus</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator:</b>Dr. Strong Fish</p>').appendTo('#Content');
+         $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Date:</b>01.06.2019</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Commend:</b>Besser als diese verfickte Edition Topoi, die von alten Maennern kontrolliert wird, die sich wie Koenige auffuehren. Man sollte ihnen mit einer Erdbohrer die Rosette sprengen!</p>').appendTo('#Content');
          
 //########################################################################
 //                           Create JSON    
@@ -207,7 +207,7 @@ var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
    $tbody.append('<tr align="center" />').children('tr:last')
-    .append("<td>"+p.object_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_id+"</td>")
     .append("<td>"+p.object_type+"</td>")
     .append("<td>"+p.object_provenance+"</td>")
     .append("<td>"+p.object_provenance_detail+"</td>")
@@ -215,7 +215,7 @@ $.each(objects_arr, function( index, p ) {
     .append("<td>"+p.object_description+"</td>")
 })
 
-$('<h2 style="font-size:16px; font-type: Arial"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 
 
@@ -232,7 +232,7 @@ $.each(persons_arr, function( index, p ) {
     .append("<td>"+p.person_name_translit+"</td>")
     .append("<td>"+p.gender+"</td>")
 })
-$('<h2 style="font-size:16px; font-type: Arial"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 //###########################################################################################################
 var $table = $('<table>');
@@ -249,7 +249,7 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 
 
 })
-$('<h2 style="font-size:16px; font-type: Arial"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }}
 }},
