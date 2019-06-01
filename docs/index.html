@@ -148,7 +148,7 @@ var config = {
 	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator:</b> Anni-Maus</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator:</b>Dr. Strong Fish</p>').appendTo('#Content');
          $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Date:</b>01.06.2019</p>').appendTo('#Content');
-         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Commend:</b>Besser als diese verfickte Edition Topoi, die von alten Maennern kontrolliert wird, die sich wie Koenige auffuehren. Man sollte ihnen mit einer Erdbohrer die Rosette sprengen!</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Commend:</b>Besser als diese verfickte Edition Topoi, die von alten Maennern kontrolliert wird, die sich wie Koenige auffuehren. Man sollte ihnen mit einem Erdbohrer die Rosette sprengen!</p>').appendTo('#Content');
          
 //########################################################################
 //                           Create JSON    
@@ -202,17 +202,17 @@ titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_t
 //###########################################################################################################
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th>ID</th><th>Type</th><th>Provenance</th><th>Provenance (Detail)</th><th>Material</th><th>Description</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Type</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Provenance</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Provenance (Detail)</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Material</th><t style="font-size:12px; font-family: Arial, Helvetica, sans-serif"h>Description</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
    $tbody.append('<tr align="center" />').children('tr:last')
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_id+"</td>")
-    .append("<td>"+p.object_type+"</td>")
-    .append("<td>"+p.object_provenance+"</td>")
-    .append("<td>"+p.object_provenance_detail+"</td>")
-    .append("<td>"+p.object__material+"</td>")
-    .append("<td>"+p.object_description+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_type+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance_detail+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object__material+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_description+"</td>")
 })
 
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
@@ -222,30 +222,30 @@ $table.appendTo('#Content');
 //###########################################################################################################
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th>ID</th><th>Name</th><th>Name (translit)</th><th>Gender</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name (translit)</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(persons_arr, function( index, p ) {
  $tbody.append('<tr align="center"/>').children('tr:last')
-    .append("<td>"+p.person_id+"</td>")
-    .append("<td>"+p.person_name+"</td>")
-    .append("<td>"+p.person_name_translit+"</td>")
-    .append("<td>"+p.gender+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 //###########################################################################################################
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr align="center"/>').children('tr').append('<th>ID</th><th>Translat</th><th>Gottkult</th>');
+  .append('<tr align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Translat</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Gottkult</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(titles_arr, function( index, p ) {
 
 $tbody.append('<tr align="center"/>').children('tr:last')
-    .append("<td>"+p.title_id+"</td>")
-    .append("<td>"+p.title_translat+"</td>")
-    .append("<td>"+p.title_gott_kult+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_gott_kult+"</td>")
 
 
 })
