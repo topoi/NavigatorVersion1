@@ -129,7 +129,7 @@ var config = {
         records: persons[2],
         onClick: function(event) {
 
-        w2ui.layout.content('main','<div class="row" style="height: 20%"><div class="columnmain" id="Content"><h2 style="font-size:20px" class="text"><font color="white">SELECTED PERSON</font></h2></div><div class="columnmain"><div class="image"></div></div></div><div class="row" style="height: 50%"><div class="row" id="Content1" style="height: 100%"></div><div class="row" id="Content2" style="height: 0%"><h2 style="font-size:18px;" ><font color="white">RELATED PERSONS</font></h2></div><div class="row" id="Content3" style="height: 0%"><h2 style="font-size:18px;"><font color="white">RELATED TITLES</font></h2></div></div><div class="row" style="height: 30%" id="metadata"><h2 style="font-size:18px;"><font color="white">METADATA</font></h2></div>');
+        w2ui.layout.content('main','<div class="row" style="height: 100%"><div class="columnmain" id="Content"><h2 style="font-size:20px" class="text"><font color="white">SELECTED PERSON</font></h2></div><div class="columnmain"><div class="image"></div></div></div><div class="row" style="height: 50%"><div class="row" id="Content1" style="height: 100%"></div><div class="row" id="Content2" style="height: 0%"><h2 style="font-size:18px;" ><font color="white">RELATED PERSONS</font></h2></div><div class="row" id="Content3" style="height: 0%"><h2 style="font-size:18px;"><font color="white">RELATED TITLES</font></h2></div></div><div class="row" style="height: 30%" id="metadata"><h2 style="font-size:18px;"><font color="white">METADATA</font></h2></div>');
 
         var grid = this;
         event.onComplete = function() {
@@ -215,7 +215,7 @@ $.each(objects_arr, function( index, p ) {
 })
 
 $('<h2 style="font-size:18px; font-type: Arial"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content1');
-$table.appendTo('#Content1');
+$table.appendTo('#Content');
 
 
 //###########################################################################################################
@@ -232,7 +232,7 @@ $.each(persons_arr, function( index, p ) {
     .append("<td>"+p.gender+"</td>")
 })
 $('<h2 style="font-size:18px; font-type: Arial"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content1');
-$table.appendTo('#Content1');
+$table.appendTo('#Content');
 //###########################################################################################################
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
@@ -249,7 +249,7 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 
 })
 $('<h2 style="font-size:18px; font-type: Arial"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content1');
-$table.appendTo('#Content1');
+$table.appendTo('#Content');
 }}
 }},
     grid2: { 
