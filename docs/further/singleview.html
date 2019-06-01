@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memphis Navigator</title>
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/w2ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
+</head>
+<body>
+<style>
+
+.Content {
+  float: left;
+  background: -webkit-gradient(linear, left top, right top, from(#968c78), to(#d6d1bd));
+  //border-style: solid;
+  width: 100%;
+  padding: 10px;
+  overflow: scroll;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+td {
+  padding: 3px 40px;
+}
+
+</style>
+
+<div class="Content" id="Content" style="height: 1000px"></div>
+<script type="text/javascript">
+function getParameters()
+{
+    var parameterFragments = location.search.substr(1).split("&");
+    var parameters = {}
+    for(var i = 0; i < parameterFragments.length; i++)
+    {
+        var splittedParameter = parameterFragments[i].split("=");
+        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
+    }
+    return parameters;
+}
+var parameters = getParameters();
+
+function getValue(file){
+   var value= $.ajax({ 
+      url: file, 
+      async: false
+   }).responseText;
+   return value;
+}
+
+persons=$.parseJSON(getValue('persons.json'))
+objects=$.parseJSON(getValue('objects.json'))
+titles=$.parseJSON(getValue('titles.json'))
+relation=$.parseJSON(getValue('relation.json'))   
+     
+        var sel_record = parameters.id;
+    
+         //loop 
+         var i;
+	 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
+        $.each(persons[2], function( index, value_pers ) {
+       if (sel_record == value_pers.id_persons)
+       {   $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>ID: </b> '+(value_pers.id_persons).toString()+'</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name: </b> '+(value_pers.name).toString()+'</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name (translit): </b> '+(value_pers.name_translit).toString()+'</p>').appendTo('#Content');}
+})
+         $('<h2 style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
+	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator: </b> Anni-Maus</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator: </b>Dr. Strong Fish</p>').appendTo('#Content');
+         $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Date: </b>01.06.2019</p>').appendTo('#Content');
+         $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Comment: </b>Besser als diese verfickte Edition Topoi, die von alten Maennern kontrolliert wird, die sich wie Koenige auffuehren. Man sollte ihnen mit einem Erdbohrer die Rosette sprengen!</p>').appendTo('#Content');
+         
+//########################################################################
+//                           Create JSON    
+//########################################################################
+       
+var myObject = new Object();
+var objects_arr =[]
+var persons_arr = []
+var titles_arr = []
+$.each(relation[2], function( index, value_rel ) {
+//------------------ objects -------------------
+
+$.each(objects[2], function( index, value_obj ) {
+if (sel_record == value_rel.left_id && value_rel.right_table=="objects")
+{
+if (value_rel.right_id == value_obj.id_objects)
+{
+objects_arr.push({"object_id":value_obj.id_objects,"object_type":value_obj.object_type,"object_provenance":value_obj.object_provenance,"object_provenance_detail":value_obj.object_provenance_detail,"object_material":value_obj.object_material,"object_description":value_obj.object_description});
+}
+}});
+//------------------------------------------------------
+//----------------- persons -----------------------
+$.each(persons[2], function( index, value_pers ) {
+if (sel_record == value_rel.left_id&& value_rel.right_table=="persons")
+{
+
+if (value_rel.right_id == value_pers.id_persons )
+{
+
+persons_arr.push({"person_id":value_pers.id_persons,"person_name":value_pers.name,"person_name_translit":value_pers.name_translit, "gender": value_pers.gender});
+
+}
+}});
+//------------------------------------------------------
+//----------------- titles -----------------------
+$.each(titles[2], function( index, value_title ) {
+if (sel_record == value_rel.left_id&& value_rel.right_table=="titles")
+{
+if (value_rel.right_id == value_title.id)
+{
+titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_translat,"title_gott_kult":value_title.gott_kult});
+}
+}});
+//------------------------------------------------------
+});
+
+
+//################################################
+//--------  Create JSON Visualize ----------------
+//################################################
+
+
+//###########################################################################################################
+var $table = $('<table>');
+$table.append('<thead>').children('thead')
+  .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Type</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Provenance</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Provenance (Detail)</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Material</th><t style="font-size:12px; font-family: Arial, Helvetica, sans-serif"h>Description</th>');
+var $tbody = $table.append('<tbody />').children('tbody');
+
+$.each(objects_arr, function( index, p ) {
+   $tbody.append('<tr align="center" />').children('tr:last')
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_type+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance_detail+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object__material+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_description+"</td>")
+})
+
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
+$table.appendTo('#Content');
+
+
+//###########################################################################################################
+var $table = $('<table>');
+$table.append('<thead>').children('thead')
+  .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name (translit)</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Gender</th>');
+var $tbody = $table.append('<tbody />').children('tbody');
+
+$.each(persons_arr, function( index, p ) {
+ $tbody.append('<tr align="center"/>').children('tr:last')
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+})
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
+$table.appendTo('#Content');
+//###########################################################################################################
+var $table = $('<table>');
+$table.append('<thead>').children('thead')
+  .append('<tr align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Translat</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Gottkult</th>');
+var $tbody = $table.append('<tbody />').children('tbody');
+
+$.each(titles_arr, function( index, p ) {
+
+$tbody.append('<tr align="center"/>').children('tr:last')
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_gott_kult+"</td>")
+
+
+})
+
+//}
+
+
+</script>
+
+</body>
+</html>
