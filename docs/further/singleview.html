@@ -61,14 +61,14 @@ relation=$.parseJSON(getValue('../relation.json'))
         var sel_record = parameters.id;
         //loop 
          var i;
-	 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
+	 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="grey">SELECTED PERSON</font></h2>').appendTo('#Content');
         $.each(persons[2], function( index, value_pers ) {
        if (sel_record == value_pers.id_persons)
        {   $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>ID: </b> '+(value_pers.id_persons).toString()+'</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name: </b> '+(value_pers.name).toString()+'</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name (translit): </b> '+(value_pers.name_translit).toString()+'</p>').appendTo('#Content');}
 })
-         $('<h2 style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
+         $('<h2 style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="grey">METADATA</font></h2>').appendTo('#Content');
 	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator: </b> Anni-Maus</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator: </b>Dr. Strong Fish</p>').appendTo('#Content');
          $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Date: </b>01.06.2019</p>').appendTo('#Content');
@@ -141,7 +141,7 @@ $.each(objects_arr, function( index, p ) {
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_description+"</td>")
 })
 
-$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="grey">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 
 
@@ -163,7 +163,7 @@ $.each(persons_arr, function( index, p ) {
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
-$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
+$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="grey">RELATED PERSON(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 //###########################################################################################################
 var $table = $('<table>');
