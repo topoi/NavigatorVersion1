@@ -125,6 +125,7 @@ titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_t
 
 
 //###########################################################################################################
+if (objects_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Type</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Provenance</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Provenance (Detail)</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Material</th><t style="font-size:12px; font-family: Arial, Helvetica, sans-serif"h>Description</th>');
@@ -144,9 +145,10 @@ $.each(objects_arr, function( index, p ) {
 
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
-
+}
 
 //###########################################################################################################
+if (persons_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name (translit)</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Gender</th>');
@@ -163,7 +165,9 @@ $.each(persons_arr, function( index, p ) {
 })
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
+}
 //###########################################################################################################
+if (titles_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
   .append('<tr align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Translat</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Gottkult</th>');
@@ -181,7 +185,7 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 
-//}
+}
 
 
 </script>
