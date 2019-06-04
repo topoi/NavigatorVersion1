@@ -206,7 +206,8 @@ var config = {
         
         
         w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString());
+        
+        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString());
 }
 }}},
     grid2: { 
