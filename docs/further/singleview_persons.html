@@ -202,7 +202,7 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
-
+if (samename.length > 0) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
@@ -222,7 +222,7 @@ $.each(samename, function( index, p ) {
 
 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">PERSONS WITH SAME NAME</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
-
+}
 
 </script>
 </body>
