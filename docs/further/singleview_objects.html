@@ -70,6 +70,7 @@ function getValue(file){
          {
 	   $('#Content').append('<a href="https://www.rmo.nl/collectie/collectiezoeker/collectiestuk/?object=F+1991%2f10.1"><img id="theImg" class="Image" width="320"/></a>')
            document.getElementById('theImg').setAttribute('src',value_image.link);
+           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif">for gallery view click on the image</p>').appendTo('#Content');
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Holder: </b> '+(value_image.holder).toString()+'</p>').appendTo('#Content');
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Credits: </b> '+(value_image.credits).toString()+'</p>').appendTo('#Content');
            return false;
