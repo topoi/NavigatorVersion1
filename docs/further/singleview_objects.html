@@ -68,8 +68,9 @@ function getValue(file){
          $.each(images, function( index, value_image ) {
          if (value_image.id == sel_record)
          {
-	   $('#Content').append('<a href="https://www.rmo.nl/collectie/collectiezoeker/collectiestuk/?object=F+1991%2f10.1"><img id="theImg" class="Image" width="320"/></a>')
-           document.getElementById('theImg').setAttribute('src',value_image.link);
+	   $('#Content').append('<a target="_blank" rel="noopener noreferrer" id="external"><img id="image" class="Image" width="320"/></a>')
+           document.getElementById('image').setAttribute('src',value_image.link);
+           document.getElementById('external').setAttribute('href',value_image.weblink);
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif">for gallery view click on the image</p>').appendTo('#Content');
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Holder: </b> '+(value_image.holder).toString()+'</p>').appendTo('#Content');
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Credits: </b> '+(value_image.credits).toString()+'</p>').appendTo('#Content');
