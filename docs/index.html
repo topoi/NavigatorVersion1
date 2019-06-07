@@ -73,6 +73,7 @@ objects=$.parseJSON(getValue('objects.json'))
 objects_with_image=$.parseJSON(getValue('objects_with_image.json'))
 titles=$.parseJSON(getValue('titles.json'))
 relation=$.parseJSON(getValue('relation.json'))
+selection=$.parseJSON(getValue('selection.json'))
 
 
 var config = {
@@ -110,26 +111,21 @@ var config = {
                            { id: 'grid1', text: 'Persons', icon: 'fa-star-empty' },
                            { id: 'grid2', text: 'Objects', icon: 'fa-star-empty' },
                            { id: 'grid3', text: 'Titles', icon: 'fa-star-empty' },
-                          { id: 'grid12', text: 'Objects with image', icon: 'fa-star-empty' },
+                          { id: 'grid12', text: 'Objects with image', icon: 'fa-star-empty' }
 
                        ]},
+                 { id: 'p3', text: 'Relations', img: 'icon-folder', count: 1,
+                           nodes: [
+                           { id: 'grid13', text: 'Object types', icon: 'fa-star-empty' }
+                         
+                       ]}
+
+,
                     
                      ]
             },
 
-//{ id: 'general1', text: 'Project information', group: true, expanded: true, nodes: [
-  //            { id: 'grid4', text: 'Project', img: 'icon-page', selected: true },
-  //            { id: 'grid5', text: 'Project description', img: 'icon-page', selected: true },
-  //            { id: 'grid7', text: 'The database', img: 'icon-page', selected: true },
-  //            { id: 'grid8', text: 'Museums and Archives', img: 'icon-page', selected: true },
-  //            { id: 'grid9', text: 'Relevant Bibliography', img: 'icon-page', selected: true },
-  //          ]},
-           
- // { id: 'general2', text: 'SQL Selection', group: true, expanded: true, nodes: [
- //             { id: 'grid1', text: 'Persons', img: 'icon-page', selected: true },
-//           { id: 'grid2', text: 'Objects', img: 'icon-page' },
-//         { id: 'grid3', text: 'Titles', img: 'icon-page' }
-//   ]},
+
             { id: 'general3', text: '<p style="font-size:15px;color:gray">Statistics</p>', group: true, expanded: true, nodes: [
                 { id: 'grid6', text: 'Job groups vs. Period', img: 'icon-folder', selected: true },
                 { id: 'grid11', text: 'Trismegistos', img: 'icon-folder', selected: true }
@@ -154,6 +150,9 @@ var config = {
                     break;
                 case 'grid12':
                     w2ui.layout.content('main', w2ui.grid12);
+                    break;
+                case 'grid13':
+                    w2ui.layout.content('main', w2ui.grid13);
                     break;
                 case 'grid4':
                     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
@@ -291,6 +290,32 @@ var config = {
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
         document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
+       
+}
+}}},
+ grid12: { 
+        name: 'grid13',
+        show : { toolbar : true,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false},
+        multiSearch: true,
+        searches: selection[0],
+        columns: selection[1],
+        records: selection[2],
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.obj_id).toString());
        
 }
 }}}
