@@ -8,12 +8,19 @@
 </head>
 <body>
 <style>
+body {
+   height: 2000px;
+   overflow: auto;
+}
 
 .Content {
+  top: 5%;
   float: left;
+  //position: absolute;
   background: linear-gradient(lightgrey, lightblue);
   //border-style: solid;
   width: 100%;
+  height: 100%;
   padding: 10px;
   overflow: scroll;
 }
@@ -26,10 +33,56 @@ td {
   padding: 3px 40px;
 }
 
+#toc {
+ margin: 9px 10px 20px 10px;
+ background:#809cac;
+ color:#fff;
+ padding: 15px 16px 5px 20px;
+ min-height: 15%;
+ width: 15%;
+ position: fixed;
+ font-size:20px; 
+ font-family: Arial, Helvetica, sans-serif;
+ top: 15%;
+ left: 80%;
+}
+#toc {
+  z-index: 10;
+}
+
+#toc ul {
+	margin: 0;
+	padding:0;
+	font-size:16px;
+}
+#toc ul li {
+	margin-bottom:10px;
+}
+#toc ul li a {
+	color:#fff;
+	text-decoration:none;
+}
+#toc ul li a:hover {
+	color:#484740;
+}
 </style>
 
-<div class="Content" id="Content" style="height: 1000px"></div>
+
+<div class="Content" id="Content" ></div>
+
+<div id="toc">
+    <ul class="jump">
+    <li><a href="#selected">Selected Person</a></li>
+    <li><a href="#metadata">Metadata</a></li>
+    <li><a href="#relatedobjects">Related Object(s)</li>
+    <li><a href="#relatedpersons">Related Person(s)</a></li>
+    <li><a href="#relatedtitles">Related Title(s)</a></li>
+    <li><a href="#samepersons">Persons with same name</a></li>
+</ul>
+ </div>
+
 <script type="text/javascript">
+
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -62,7 +115,8 @@ relation=$.parseJSON(getValue('../relation.json'))
         
         //loop 
          var i;
-	 $('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
+         
+	 $('<h2 id="selected" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
 
        var samename= [];
 
@@ -81,8 +135,8 @@ relation=$.parseJSON(getValue('../relation.json'))
       
       };
  });
-         
-         $('<h2 style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
+        
+         $('<h2 id="metadata" style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
 	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator: </b> Anni-Maus</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator: </b>Dr. Strong Fish</p>').appendTo('#Content');
          $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Date: </b>01.06.2019</p>').appendTo('#Content');
@@ -157,7 +211,7 @@ string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_description+"</td>")
 })
 
-$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
+$('<h2 id="relatedobjects" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 
@@ -179,7 +233,8 @@ $.each(persons_arr, function( index, p ) {
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
-$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
+
+$('<h2 id="relatedpersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 //###########################################################################################################
@@ -199,7 +254,8 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 
 
 })
-$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
+
+$('<h2 id="relatedtitles" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 if (samename.length > 0) {
@@ -220,10 +276,25 @@ $.each(samename, function( index, p ) {
     
 })
 
-$('<h2 style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">PERSONS WITH SAME NAME</font></h2>').appendTo('#Content');
+$('<h2 id="samepersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">PERSONS WITH SAME NAME</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 
+	$('a[href*="#"]').on('click',function(e) {
+                
+		e.preventDefault();
+               
+		var target = this.hash;
+                var $target = $(target);
+                
+		$('html, body, Content').stop().animate({
+                        
+			'scrollTop': $target.offset().top
+		}, 400, 'swing', function () {
+			window.location.hash = target;
+		});
+	});
 </script>
+
 </body>
 </html>
