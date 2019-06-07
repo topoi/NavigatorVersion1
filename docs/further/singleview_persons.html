@@ -108,8 +108,11 @@ function getValue(file){
 persons=$.parseJSON(getValue('../persons.json'))
 objects=$.parseJSON(getValue('../objects.json'))
 titles=$.parseJSON(getValue('../titles.json'))
-relation=$.parseJSON(getValue('../relation.json'))   
+ 
+relation=$.parseJSON(getValue('../relation_new.json'))   
      
+        //alert(relation.persons_objects_40.lefttable)
+
         var sel_record = parameters.ids;
         var sel_name = parameters.name;
         
@@ -119,14 +122,16 @@ relation=$.parseJSON(getValue('../relation.json'))
 	 $('<h2 id="selected" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
 
        var samename= [];
-
+       
+       
        $.each(persons[2], function( index, value_pers ) {
        if (sel_record == value_pers.id_persons)
+           
        {   $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>ID: </b> '+(value_pers.id_persons).toString()+'</p>').appendTo('#Content');
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name: </b> '+(value_pers.name).toString()+'</p>').appendTo('#Content');
            $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name (translit): </b> '+(value_pers.name_translit).toString()+'</p>').appendTo('#Content');
     
-          //return false;
+          
          }
       
         if (sel_name == value_pers.name){
@@ -135,7 +140,7 @@ relation=$.parseJSON(getValue('../relation.json'))
       
       };
  });
-        
+
          $('<h2 id="metadata" style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
 	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator: </b> Anni-Maus</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator: </b>Dr. Strong Fish</p>').appendTo('#Content');
@@ -150,43 +155,35 @@ var myObject = new Object();
 var objects_arr =[]
 var persons_arr = []
 var titles_arr = []
-$.each(relation[2], function( index, value_rel ) {
-//------------------ objects -------------------
 
 $.each(objects[2], function( index, value_obj ) {
-if (sel_record == value_rel.left_id && value_rel.right_table=="objects")
+key="persons_objects_"+sel_record;
+
+
+if (relation[key].rightid == value_obj.id_objects)
 {
-if (value_rel.right_id == value_obj.id_objects)
-{
+
 objects_arr.push({"object_id":value_obj.id_objects,"object_type":value_obj.object_type,"object_provenance":value_obj.object_provenance,"object_provenance_detail":value_obj.object_provenance_detail,"object_material":value_obj.object_material,"object_description":value_obj.object_description});
+return false;
 }
-}});
-//------------------------------------------------------
-//----------------- persons -----------------------
-$.each(persons[2], function( index, value_pers ) {
-if (sel_record == value_rel.left_id&& value_rel.right_table=="persons")
-{
-
-if (value_rel.right_id == value_pers.id_persons )
-{
-
-persons_arr.push({"person_id":value_pers.id_persons,"person_name":value_pers.name,"person_name_translit":value_pers.name_translit, "gender": value_pers.gender});
-
-}
-}});
-//------------------------------------------------------
-//----------------- titles -----------------------
-$.each(titles[2], function( index, value_title ) {
-if (sel_record == value_rel.left_id&& value_rel.right_table=="titles")
-{
-if (value_rel.right_id == value_title.id)
-{
-titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_translat,"title_gott_kult":value_title.gott_kult});
-}
-}});
-//------------------------------------------------------
 });
 
+$.each(persons[2], function( index, value_pers ) {
+key="persons_persons_"+sel_record
+if (relation[key].rightid == value_pers.id_persons)
+{
+persons_arr.push({"person_id":value_pers.id_persons,"person_name":value_pers.name,"person_name_translit":value_pers.name_translit, "gender": value_pers.gender});
+return false;
+}
+});
+
+$.each(titles[2], function( index, value_title ) {
+if (relation[key].rightid == value_title.id)
+{
+titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_translat,"title_gott_kult":value_title.gott_kult});
+return false;
+}}
+);
 
 //################################################
 //--------  Create JSON Visualize ----------------
