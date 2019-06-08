@@ -4,7 +4,7 @@
     <title>Memphis Navigator</title>
     <script src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/w2ui.js"></script>
-    <script type="text/javascript" src="../js/plotly.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="../css/w2ui.css" />
    
 </head>
@@ -35,8 +35,6 @@ table {
 td {
   padding: 3px 40px;
 }
-
-
 
 #toc{
  margin: 9px 10px 20px 10px;
@@ -78,12 +76,7 @@ td {
 <div style="width:80%" id="myDiv2"></div>
 <div id="toc">
     <ul class="jump">
-    <!--<li><a href="#selected">Selected Person</a></li>
-    <li><a href="#metadata">Metadata</a></li>-->
-    <!--<li><a href="#relatedobjects">Related Object(s)</li>
-    <li><a href="#relatedpersons">Related Person(s)</a></li>
-    <li><a href="#relatedtitles">Related Title(s)</a></li>
-    <li><a href="#samepersons">Persons with same name</a></li>-->
+   
 </ul>
  </div>
 
@@ -301,10 +294,14 @@ $.each(samename, function( index, p ) {
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.no_ranke+"</td>")
     
 })
-$('<li><a href="#samepersons" style="color:#fff; font-size:20px; text-decoration: none;">Perons with same name</li>').appendTo('#toc');
+$('<li><a href="#samepersons" style="color:#fff; font-size:20px; text-decoration: none;">Persons with same name</li>').appendTo('#toc');
 $('<h2 id="samepersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">PERSONS WITH SAME NAME</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
+$.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
+  
+
+
 
 var x = nametranslit;
 var data1 = [
@@ -334,7 +331,7 @@ Plotly.newPlot('myDiv1', data1, {}, {showSendToCloud: true});
 $('#myDiv1').appendTo('#Content')
 /Plotly.newPlot('myDiv2', data2, {}, {showSendToCloud: true});
 $('#myDiv2').appendTo('#Content')
-
+});
 
 $('a[href*="#"]').on('click',function(e) {
                 
@@ -350,7 +347,12 @@ $('a[href*="#"]').on('click',function(e) {
 			window.location.hash = target;
 		});
 	});
+
+
+
 </script>
+
+
 
 </body>
 </html>
