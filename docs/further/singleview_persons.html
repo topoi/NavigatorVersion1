@@ -156,54 +156,58 @@ var objects_arr =[]
 var persons_arr = []
 var titles_arr = []
 
-$.each(objects[2], function( index, value_obj ) {
+
+
+
 key="persons_objects_"+sel_record;
-try{
-if (relation[key].rightid == value_obj.id_objects)
+try {
+arr=relation[key].right_id
+
+$.each(objects[2], function( index, value_obj ) {
+var i = 0;
+while(arr[i]) {
+
+if (value_obj.id_objects == arr[i] )
 {
-
 objects_arr.push({"object_id":value_obj.id_objects,"object_type":value_obj.object_type,"object_provenance":value_obj.object_provenance,"object_provenance_detail":value_obj.object_provenance_detail,"object_material":value_obj.object_material,"object_description":value_obj.object_description});
-return false;
-}}catch (e) {
-	// Fehler entdeckt
-	console.log(e);
-} finally {
-	console.log("Hier gehts auf jeden Fall weiter");
-}}
+}
+i++;
+}
 
-);
+}
+);} catch(e)
+{console.log(e)}
+
+
+key="persons_persons_"+sel_record;
+try{
+arr1=relation[key].right_id
 
 $.each(persons[2], function( index, value_pers ) {
-try{
-key="persons_persons_"+sel_record
-if (relation[key].rightid == value_pers.id_persons)
+var i = 0;
+while(arr1[i]) {
+if (value_pers.id_persons == arr1[i] )
 {
-persons_arr.push({"person_id":value_pers.id_persons,"person_name":value_pers.name,"person_name_translit":value_pers.name_translit, "gender": value_pers.gender});
-return false;
-}
-}catch (e) {
-	// Fehler entdeckt
-	console.log(e);
-} finally {
-	console.log("Hier gehts auf jeden Fall weiter");
-}
-
-});
+persons_arr.push({"person_id":value_pers.id_persons,"person_name":value_pers.name,"person_name_translit":value_pers.name_translit, "gender": value_pers.gender});}
+i++;
+}});
+}catch(e)
+{console.log(e)}
+key="persons_titles_"+sel_record;
+try{
+arr=relation[key].right_id
 
 $.each(titles[2], function( index, value_title ) {
-try{
-key="persons_titles_"+sel_record
-if (relation[key].rightid == value_title.id)
+var i = 0;
+while(arr[i]) {
+if (value_title.id == arr[i] )
 {
 titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_translat,"title_gott_kult":value_title.gott_kult});
-return false;
-}}catch (e) {
-	// Fehler entdeckt
-	console.log(e);
-} finally {
-	console.log("Hier gehts auf jeden Fall weiter");
-}}
-);
+}
+i++;
+}});} catch(e)
+{console.log(e)}
+
 
 //################################################
 //--------  Create JSON Visualize ----------------
