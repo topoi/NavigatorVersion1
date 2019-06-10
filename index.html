@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memphis Navigator</title>
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/w2ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
+    
+</head>
+<body>
+<style>
+
+/* Create two equal columns that floats next to each other */
+
+left::after {
+  content: "";
+  background: url(Logo.png);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.row {
+  float: left;
+  text-align: left;
+  background: linear-gradient(lightgrey, lightblue);
+  //border-style: solid;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  border-style: none
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+td {
+  padding: 3px 40px;
+}
+
+</style>
+<div id="main" class="main" style="width: 100%; height: 1000px;"></div>
+<!--<div id="sidebar" style="height: 300px; width: 200px; float: left"></div>-->
+
+<script type="text/javascript">
+function getValue(file){
+   var value= $.ajax({ 
+      url: file, 
+      async: false
+   }).responseText;
+   return value;
+}
+
+var pstyle = 'background: lightgrey;';
+persons=$.parseJSON(getValue('persons.json'))
+objects=$.parseJSON(getValue('objects.json'))
+objects_with_image=$.parseJSON(getValue('objects_with_image.json'))
+titles=$.parseJSON(getValue('titles.json'))
+relation=$.parseJSON(getValue('relation.json'))
+selection=$.parseJSON(getValue('selection.json'))
+
+
+var config = {
+  
+   layout: {
+        name: 'layout',
+        padding: 0,
+        panels: [
+            { type: 'left', size: 200, resizable: true, minSize: 120, style: pstyle},
+            { type: 'main', minSize: 550, overflow: 'hidden' }
+        ]
+ 
+    },
+ 
+    sidebar: {
+        name: 'sidebar',
+        topHTML    : '<div style="background-color: #eee; padding: 10px 5px; border-top: 1px solid silver; font-size:22px;color:gray">Memphis Navigator</div>',
+        bottomHTML : '<div style="background-color: #eee; padding: 10px 5px; border-top: 1px solid silver">Some HTML</div>',
+       
+        nodes: [ 
+       { id: 'general1', text: '<p align="center" style="font-size:15px;color:gray">General</p>', img: 'icon-folder', expanded: true, group: true,
+              nodes: [ { id: 'p1', text: 'Project information', img: 'icon-folder', count: 5,
+                           nodes: [
+                           { id: 'grid4', text: 'Project', icon: 'fa-star-empty' },
+                           { id: 'grid5', text: 'Project description', icon: 'fa-star-empty' },
+                           { id: 'grid7', text: 'Database', icon: 'fa-star-empty' },
+                           { id: 'grid8', text: 'Museums and Archives', icon: 'fa-star-empty' },
+                           { id: 'grid9', text: 'Relevant Bibliography', icon: 'fa-star-empty' },
+                          
+
+                       ]},
+                    
+                     ]
+            },
+      { id: 'general2', text: '<p style="font-size:15px;color:gray">SQL Selection</p>',  img: 'icon-folder', expanded: true, group: true,
+              nodes: [ { id: 'p2', text: 'Tables', img: 'icon-folder', count: 4,
+                           nodes: [
+                           { id: 'grid1', text: 'Persons', icon: 'fa-star-empty' },
+                           { id: 'grid2', text: 'Objects', icon: 'fa-star-empty' },
+                           { id: 'grid3', text: 'Titles', icon: 'fa-star-empty' },
+                          { id: 'grid12', text: 'Objects with image', icon: 'fa-star-empty' }
+
+                       ]},
+                          { id: 'p3', text: 'Relations', img: 'icon-folder', count: 1,
+                           nodes: [
+                           { id: 'grid13', text: 'Object types', icon: 'fa-star-empty' }
+                         
+                       ]}
+
+,
+                    
+                     ]
+            },
+
+
+            { id: 'general3', text: '<p style="font-size:15px;color:gray">Statistics</p>', group: true, expanded: true, nodes: [
+                { id: 'grid6', text: 'Job groups vs. Period', img: 'icon-folder', selected: true },
+                { id: 'grid11', text: 'Trismegistos', img: 'icon-folder', selected: true }
+          
+            
+            ]},       
+             { id: 'general4', text: '<p style="font-size:15px;color:gray">Help</p>', group: true, expanded: true, nodes: [
+                { id: 'grid10', text: 'Navigator', img: 'icon-folder', selected: true }
+            
+            ]}     
+        ],
+        onClick: function (event) {
+            $('#sidebar').css('width', (event.goFlat ? '35px' : '200px'));
+            switch (event.target) {
+                case 'grid1':
+                    w2ui.layout.content('main', w2ui.grid1);
+                    break;
+                case 'grid2':
+                    w2ui.layout.content('main', w2ui.grid2);
+                    break;
+                case 'grid3':
+                    w2ui.layout.content('main', w2ui.grid3);
+                    break;
+                case 'grid12':
+                    w2ui.layout.content('main', w2ui.grid12);
+                    break;
+                case 'grid13':
+                    w2ui.layout.content('main', w2ui.grid13);
+                    break;
+                case 'grid4':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
+                    break;
+                case 'grid5':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/project_description.html" style="width: 100%; height: 100%"></iframe>');
+                    break;
+               case 'grid7':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/database.html" style="width: 100%; height: 100%"></iframe>');
+                    break;
+              case 'grid8':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/museums_and_archives.html" style="width: 100%; height: 100%"></iframe>');
+                    break;
+              case 'grid9':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/relevant_bibliography.html" style="width: 100%; height: 100%"></iframe>');
+                    break;
+              case 'grid10':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="further/instructions.html" style="width: 100%; height: 100%"></iframe>');
+                    break;
+              case 'grid11':
+                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src=" https://www.trismegistos.org/network/" style="width: 100%; height: 100%"></iframe>');
+                    break;
+
+
+                case 'grid6':
+                    w2ui.layout.content('main', '<iframe class="Statistics" id="Statistics" src="https://topoi.github.io/Tombs/" style="width: 100%; height: 100%"></iframe>');
+                    break;
+
+            }
+        }
+    },
+    grid1: { 
+        name: 'grid1',
+        show : { toolbar : true,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false},
+        multiSearch: true,
+        searches: persons[0],
+        columns: persons[1],
+        records: persons[2],
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        
+        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString());
+}
+}}},
+    grid2: { 
+        name: 'grid2',
+        show : { toolbar : true ,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false},
+        multiSearch: true,
+        searches: objects[0],
+        columns: objects[1],
+        records: objects[2],
+        onClick: function(event) 
+      {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
+}
+}}
+    },
+    grid3: { 
+        name: 'grid3',
+        show : { toolbar : true,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false },
+        multiSearch: true,
+        searches: titles[0],
+        columns: titles[1],
+        records: titles[2],
+        onClick: function(event) 
+{
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        document.getElementById('Content2').setAttribute('src',"further/singleview_titles.html?ids="+(sel_record.id).toString());
+}
+}}
+    },
+ grid12: { 
+        name: 'grid12',
+        show : { toolbar : true,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false},
+        multiSearch: true,
+        searches: objects_with_image[0],
+        columns: objects_with_image[1],
+        records: objects_with_image[2],
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
+       
+}
+}}},
+ grid13: { 
+        name: 'grid13',
+        show : { toolbar : true,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false},
+        multiSearch: true,
+        searches: selection[0],
+        columns: selection[1],
+        records: selection[2],
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.obj_id).toString());
+       
+}
+}}}
+
+};
+
+function loadMetadata(obj)
+{
+      document.getElementById('metadata').setAttribute('src', "http://repositorytest.ancient-astronomy.org/collection/PROM/object/"+obj);
+};
+
+
+$(function () {
+    // initialization
+    $('#main').w2layout(config.layout);
+    w2ui.layout.content('left', $().w2sidebar(config.sidebar));
+    w2ui.layout.content('main', $().w2grid(config.grid1));
+    // in memory initialization
+    $().w2grid(config.grid2);
+    $().w2grid(config.grid3);
+    $().w2grid(config.grid12);
+    $().w2grid(config.grid13);
+});
+
+
+
+
+
+
+
+//Project information
+
+
+
+</script>
+
+</body>
+</html>
