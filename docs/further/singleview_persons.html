@@ -11,8 +11,9 @@
 <body>
 
 <div class="Content" id="Content" ></div>
-<div style="width:80%" id="myDiv1"></div>
-<div style="width:80%" id="myDiv2"></div>
+<div style="width:70%" id="myDiv1"></div>
+<div style="width:70%" id="myDiv2"></div>
+<div style="width:70%" id="myDiv3"></div>
 <div id="toc">
     <ul class="jump">
    
@@ -44,7 +45,9 @@ function getValue(file){
 }
 
 persons=$.parseJSON(getValue('../persons.json'))
+persons_sel=$.parseJSON(getValue('persons_selection.json'))
 objects=$.parseJSON(getValue('../objects.json'))
+objects_sel=$.parseJSON(getValue('objects_selection.json'))
 titles=$.parseJSON(getValue('../titles.json'))
 relation=$.parseJSON(getValue('../relation_new.json'))   
  
@@ -54,38 +57,26 @@ relation=$.parseJSON(getValue('../relation_new.json'))
         //loop 
          var i;
          $('<li><a href="#selected" style="color:#fff; font-size:20px; text-decoration: none;">Selected person</li>').appendTo('#toc');
-	 $('<h2 id="selected" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">SELECTED PERSON</font></h2>').appendTo('#Content');
+	 $('<h2 id="selected" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">SELECTED PERSON</font></h2>').appendTo('#Content');
 
        var samename= [];
        
-       
+           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>ID: </b> '+(persons_sel[sel_record].id_persons).toString()+'</p>').appendTo('#Content');
+           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name: </b> '+(persons_sel[sel_record].name).toString()+'</p>').appendTo('#Content');
+           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name (translit): </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#Content');
+
+
+      
        $.each(persons[2], function( index, value_pers ) {
-       if (sel_record == value_pers.id_persons)
-           
-       {   $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>ID: </b> '+(value_pers.id_persons).toString()+'</p>').appendTo('#Content');
-           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name: </b> '+(value_pers.name).toString()+'</p>').appendTo('#Content');
-           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Name (translit): </b> '+(value_pers.name_translit).toString()+'</p>').appendTo('#Content');
-        if (value_pers.link_bonner_totenbuch != "")
-{
-		       $('<p><a style="font-size:12px; font-family: Arial, Helvetica, sans-serif" id="bonn"><b>Bonner Totenbuch </b> </a></p>').appendTo('#Content');
-document.getElementById('bonn').setAttribute('href', value_pers.link_bonner_totenbuch);
- }         
-      if (value_pers.link_trismegistos != "") {
-		       $('<p><a style="font-size:12px; font-family: Arial, Helvetica, sans-serif" id="trismegistos"><b>Trismegistos </b> </a></p>').appendTo('#Content');
-
-document.getElementById('trismegistos').setAttribute('href', value_pers.link_trismegistos);
-}
-          }
-
-
-        if (sel_name == value_pers.name){
+       if (sel_name == value_pers.name){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name+"'>";
-        samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"no_ranke":value_pers.person_no_ranke})
+        samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"no_ranke":value_pers.person_no_ranke, "key":value_pers.id_persons.toString()})
       
       };
+         
  });
          $('<li><a href="#metadata" style="color:#fff; font-size:20px; text-decoration: none;">Metadata</li>').appendTo('#toc');
-         $('<h2 id="metadata" style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="white">METADATA</font></h2>').appendTo('#Content');
+         $('<h2 id="metadata" style="font-size:16px;font-family: Arial, Helvetica, sans-serif" ><font color="darkgray">METADATA</font></h2>').appendTo('#Content');
 	 $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#Content');
          $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#Content');
          $('<p style="font-size:12px;font-family: Arial, Helvetica, sans-serif" ><b>Date: </b>07.06.2019</p>').appendTo('#Content');
@@ -178,7 +169,7 @@ string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a
 })
 
 $('<li><a href="#relatedobjects" style="color:#fff; font-size:20px; text-decoration: none;">Related Object(s)</li>').appendTo('#toc');
-$('<h2 id="relatedobjects" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
+$('<h2 id="relatedobjects" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">RELATED OBJECT(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 
@@ -199,7 +190,7 @@ $.each(persons_arr, function( index, p ) {
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<li><a href="#relatedpersons" style="color:#fff; font-size:20px; text-decoration: none;">Related Person(s)</li>').appendTo('#toc');
-$('<h2 id="relatedpersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED PERSON(S)</font></h2>').appendTo('#Content');
+$('<h2 id="relatedpersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">RELATED PERSON(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 //###########################################################################################################
@@ -220,7 +211,7 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 
 })
 $('<li><a href="#relatedtitles" style="color:#fff; font-size:20px; text-decoration: none">Related Title(s)</li>').appendTo('#toc');
-$('<h2 id="relatedtitles" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">RELATED TITLE(S)</font></h2>').appendTo('#Content');
+$('<h2 id="relatedtitles" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">RELATED TITLE(S)</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 if (samename.length > 0) {
@@ -230,50 +221,108 @@ $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">ID</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name</th><th style="font-size:12px; font-family: Arial, Helvetica, sans-serif">Name no Ranke</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
-
-
 $.each(samename, function( index, p ) {
   string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.ids+"&name="+p.name+"'>";
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.name+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.no_ranke+"</td>")
-    
+
 })
 $('<li><a href="#samepersons" style="color:#fff; font-size:20px; text-decoration: none;">Persons with same name</li>').appendTo('#toc');
-$('<h2 id="samepersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">PERSONS WITH SAME NAME</font></h2>').appendTo('#Content');
+$('<h2 id="samepersons" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">PERSONS WITH SAME NAME</font></h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 
 $.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
-var x = nametranslit;
+
+object_type=[]
+object_provenance=[]
+object_material=[]
+
+$.each(samename, function( index, p ) {
+k=p.key
+try {
+object_type.push(objects_sel[k].object_type)
+object_provenance.push(objects_sel[p.key.toString()].object_provenance)
+object_material.push(objects_sel[p.key.toString()].object_material)
+} catch(e)
+{}
+});
+
+var layout = {
+  bargap: 0.05, 
+  bargroupgap: 0.2, 
+  barmode: "overlay", 
+  title: "Distribution", 
+  xaxis: {title: "Count"}, 
+  yaxis: {title: ""} 
+ 
+  
+};
+var y = object_type;
 var data1 = [
   {
     histfunc: "count",
-    x: x,
+    y: y,
+    offset: 0.5,
+   
     type: "histogram",
+marker: {
+    color: 'darkgray',
+	},
     name: "count"
   }
 ]
-Plotly.newPlot('myDiv1', data1)
 
-var x = objecttype;
+
+var y = object_provenance;
 var data2 = [
   {
     histfunc: "count",
-    x: x,
+    y: y,
     type: "histogram",
+marker: {
+    color: 'darkgray',
+	},
     name: "count"
   }
 ]
-Plotly.newPlot('myDiv2', data2)
-$('<li><a href="#statistics" style="color:#fff; font-size:20px; text-decoration: none;">Statistics</li>').appendTo('#toc');
-$('<h2 id="statistics" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="white">STATISTICS</font></h2>').appendTo('#Content');
 
-Plotly.newPlot('myDiv1', data1, {}, {showSendToCloud: true});
+
+var y = object_material;
+var data3 = [
+  {
+    histfunc: "count",
+    y: y,
+    type: "histogram",
+marker: {
+    color: 'darkgray',
+	},
+    name: "count"
+  }
+]
+
+
+$('<li><a href="#statistics" style="color:#fff; font-size:20px; text-decoration: none;">Statistics</li>').appendTo('#toc');
+$('<h2 id="statistics" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">STATISTICS</font></h2>').appendTo('#Content');
+
+
+Plotly.newPlot('myDiv1', data1, layout, {}, {showSendToCloud: true});
+$('<li><a href="#1" style="color:#fff; font-size:16px; text-decoration: none;">object type</li>').appendTo('#toc');
+$('<h2 id="1" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="black">object type</font></h2>').appendTo('#Content');
 $('#myDiv1').appendTo('#Content')
-/Plotly.newPlot('myDiv2', data2, {}, {showSendToCloud: true});
+
+Plotly.newPlot('myDiv2', data2, layout, {}, {showSendToCloud: true});
+$('<li><a href="#2" style="color:#fff; font-size:16px; text-decoration: none;">object provenance</li>').appendTo('#toc');
+$('<h2 id="2" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="black">object provenance</font></h2>').appendTo('#Content');
 $('#myDiv2').appendTo('#Content')
+
+Plotly.newPlot('myDiv3', data3, layout, {}, {showSendToCloud: true});
+$('<li><a href="#3" style="color:#fff; font-size:16px; text-decoration: none;">object material</li>').appendTo('#toc');
+$('<h2 id="3" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="black">object material</font></h2>').appendTo('#Content');
+$('#myDiv3').appendTo('#Content')
+
 });
 
 $('a[href*="#"]').on('click',function(e) {
