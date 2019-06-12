@@ -14,6 +14,8 @@
 <div style="width:70%" id="myDiv1"></div>
 <div style="width:70%" id="myDiv2"></div>
 <div style="width:70%" id="myDiv3"></div>
+<div style="width:70%" id="myDiv4"></div>
+<div style="width:70%" id="myDiv5"></div>
 <div id="toc">
     <ul class="jump">
    
@@ -49,6 +51,7 @@ persons_sel=$.parseJSON(getValue('persons_selection.json'))
 objects=$.parseJSON(getValue('../objects.json'))
 objects_sel=$.parseJSON(getValue('objects_selection.json'))
 titles=$.parseJSON(getValue('../titles.json'))
+titles_sel=$.parseJSON(getValue('titles_selection.json'))
 relation=$.parseJSON(getValue('../relation_new.json'))   
  
        var sel_record = parameters.ids;
@@ -239,34 +242,41 @@ $.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
 object_type=[]
 object_provenance=[]
 object_material=[]
-
+titles_gott_kult=[]
+titles_name=[]
 $.each(samename, function( index, p ) {
-k=p.key
+
+
+
 try {
-object_type.push(objects_sel[k].object_type)
-object_provenance.push(objects_sel[p.key.toString()].object_provenance)
-object_material.push(objects_sel[p.key.toString()].object_material)
+kobj=relation['persons_objects_'+p.key].right_id
+ktit=relation['persons_titles_'+p.key].right_id
+object_type.push(objects_sel[kobj].object_type)
+object_provenance.push(objects_sel[kobj].object_provenance)
+object_material.push(objects_sel[kobj].object_material)
+titles_gott_kult.push(titles_sel[ktit].gott_kult)
+titles_name.push(titles_sel[ktit].titles_translat_eng)
 } catch(e)
 {}
 });
 
-var layout = {
-  bargap: 0.05, 
-  bargroupgap: 0.2, 
-  barmode: "overlay", 
-  title: "Distribution", 
-  xaxis: {title: "Count"}, 
-  yaxis: {title: ""} 
- 
-  
-};
-var y = object_type;
-var data1 = [
+$('<li><a href="#statistics" style="color:#fff; font-size:20px; text-decoration: none;">Statistics:</li>').appendTo('#toc');
+$('<h2 id="statistics" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">STATISTICS</font></h2>').appendTo('#Content');
+
+dist=[object_type, object_provenance, object_material, titles_gott_kult, titles_name]
+label=["object type", "object provenance", "object material", "gotteskult", "title (english)"]
+divelements1=['myDiv1','myDiv2', 'myDiv3', 'myDiv4', 'myDiv5']
+divelements2=['#myDiv1','#myDiv2', '#myDiv3', '#myDiv4', '#myDiv5']
+index1=["#1", "#2", "#3", "#4", "#5"]
+index2=["1", "2", "3", "4", "5"]
+
+$.each(dist, function( index, p ) {
+var y = p;
+var data = [
   {
     histfunc: "count",
     y: y,
     offset: 0.5,
-   
     type: "histogram",
 marker: {
     color: 'darkgray',
@@ -274,62 +284,27 @@ marker: {
     name: "count"
   }
 ]
+var layout = {
+  bargap: 0.05, 
+  bargroupgap: 0.2, 
+  barmode: "overlay", 
+  title: label[index]+" distribution for "+persons_sel[sel_record].name, 
+  xaxis: {title: "Count"}, 
+  yaxis: {title: ""} 
+ };
 
+Plotly.newPlot(divelements1[index], data, layout, {}, {showSendToCloud: true});
+$('<li><a href='+index1[index]+' style="color:#fff; font-size:16px; text-decoration: none; margin-left: 10%">'+label[index]+'</li>').appendTo('#toc');
+$('<h2 id='+index2[index]+' style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">'+label[index]+' distribution for all persons with the name: '+persons_sel[sel_record].name+'</font></h2>').appendTo('#Content');
 
-var y = object_provenance;
-var data2 = [
-  {
-    histfunc: "count",
-    y: y,
-    type: "histogram",
-marker: {
-    color: 'darkgray',
-	},
-    name: "count"
-  }
-]
-
-
-var y = object_material;
-var data3 = [
-  {
-    histfunc: "count",
-    y: y,
-    type: "histogram",
-marker: {
-    color: 'darkgray',
-	},
-    name: "count"
-  }
-]
-
-
-$('<li><a href="#statistics" style="color:#fff; font-size:20px; text-decoration: none;">Statistics</li>').appendTo('#toc');
-$('<h2 id="statistics" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="darkgray">STATISTICS</font></h2>').appendTo('#Content');
-
-
-Plotly.newPlot('myDiv1', data1, layout, {}, {showSendToCloud: true});
-$('<li><a href="#1" style="color:#fff; font-size:16px; text-decoration: none;">object type</li>').appendTo('#toc');
-$('<h2 id="1" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="black">object type</font></h2>').appendTo('#Content');
-$('#myDiv1').appendTo('#Content')
-
-Plotly.newPlot('myDiv2', data2, layout, {}, {showSendToCloud: true});
-$('<li><a href="#2" style="color:#fff; font-size:16px; text-decoration: none;">object provenance</li>').appendTo('#toc');
-$('<h2 id="2" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="black">object provenance</font></h2>').appendTo('#Content');
-$('#myDiv2').appendTo('#Content')
-
-Plotly.newPlot('myDiv3', data3, layout, {}, {showSendToCloud: true});
-$('<li><a href="#3" style="color:#fff; font-size:16px; text-decoration: none;">object material</li>').appendTo('#toc');
-$('<h2 id="3" style="font-size:16px; font-family: Arial, Helvetica, sans-serif"><font color="black">object material</font></h2>').appendTo('#Content');
-$('#myDiv3').appendTo('#Content')
-
+$(divelements2[index]).appendTo('#Content')
+})
 });
 
 $('a[href*="#"]').on('click',function(e) {
                 
 		e.preventDefault();
-               
-		var target = this.hash;
+              	var target = this.hash;
                 var $target = $(target);
                 
 		$('html, body, Content').stop().animate({
@@ -339,12 +314,6 @@ $('a[href*="#"]').on('click',function(e) {
 			window.location.hash = target;
 		});
 	});
-
-
-
 </script>
-
-
-
 </body>
 </html>
