@@ -198,7 +198,7 @@ var config = {
      
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString());
 }
 }}
     },
