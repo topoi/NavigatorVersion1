@@ -23,7 +23,7 @@
  </div>
 
 <script type="text/javascript">
-
+alert("Under construction!!")
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -72,12 +72,11 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
           
            $('<p class="pstyle"><b>Material: </b> '+(objects_sel[sel_record].object_material).toString()+'</p>').appendTo('#Content');
 
-          alert(sel_record)
+          
           key=relationright["objects_dating_"+sel_record].right_id;
-          alert(key)
-	  $('<p class="pstyle"><b>Dating: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
-          //$('<p class="pstyle"><b>Kingdom: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
-          //$('<p class="pstyle"><b>Period: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
+          $('<p class="pstyle"><b>Dating: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
+          $('<p class="pstyle"><b>Kingdom: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
+          $('<p class="pstyle"><b>Period: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
 
        $.each(objects[2], function( index, value_obj ) {
        if (sel_type == value_obj.object_type){
