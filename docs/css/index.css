@@ -1,0 +1,39 @@
+/* Create two equal columns that floats next to each other */
+
+left::after {
+  content: "";
+  background: url(Logo.png);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.row {
+  float: left;
+  text-align: left;
+  background: linear-gradient(lightgrey);
+  //border-style: solid;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  border-style: none
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+td {
+  padding: 3px 40px;
+}
