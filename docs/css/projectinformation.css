@@ -1,0 +1,22 @@
+/* Create two equal columns that floats next to each other */
+
+.instruction {
+  float: left;
+  background: #c8d3ce;
+  //border-style: solid;
+  width: 100%;
+  overflow: scroll;
+  padding: 10px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+*div.image {
+   content:url(https://repositorytest.ancient-astronomy.org/PROM/ServicePROM/Images/PROM.jpg);
+
+
+
