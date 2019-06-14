@@ -94,8 +94,9 @@ var myObject = new Object();
 var persons_arr = []
 
 key="persons_titles_"+sel_record;
+alert(key)
 try{
-arr=relationright[key].right_id
+arr=relationleft[key].left_id
 
 $.each(persons[2], function( index, value_pers ) {
 var i = 0;
@@ -166,18 +167,7 @@ object_material=[]
 titles_gott_kult=[]
 titles_name=[]
 $.each(sametitle, function( index, p ) {
-try{
-kobj=relationright['persons_objects_'+p.key].right_id
-i=0;
-while(kobj[i])
-{
-object_type.push(objects_sel[kobj[i]].object_type)
-object_provenance.push(objects_sel[kobj[i]].object_provenance)
-object_material.push(objects_sel[kobj[i]].object_material)
-i++;
-}
-} catch(e)
-{}
+
 try{
 ktit=relationright['persons_titles_'+p.key].right_id
 i=0;
