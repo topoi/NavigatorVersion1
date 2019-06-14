@@ -11,6 +11,7 @@
 <body>
 
 <div class="Content" id="Content" ></div>
+<div class="ContentSame" id="ContentSame" ></div>
 <div style="width:90%; margin-left:2px" id="myDiv1"></div>
 <div style="width:90%; margin-left:2px" id="myDiv2"></div>
 <div style="width:90%; margin-left:2px" id="myDiv3"></div>
@@ -23,7 +24,7 @@
  </div>
 
 <script type="text/javascript">
-//alert("Under construction!!")
+
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -254,8 +255,10 @@ $.each(sametype, function( index, p ) {
 })
 $('<li><a href="#sameobjects" class="tocstyle">Objects with same type</li>').appendTo('#toc');
 $('<h2 id="sameobjects" class="h2style">OBJECTS WITH SAME TYPE</h2>').appendTo('#Content');
-$table.appendTo('#Content');
+$table.appendTo('#ContentSame');
+$('#ContentSame').appendTo('#Content')
 }
+
 
 $.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
 
@@ -280,6 +283,7 @@ i++;
 if (sametype.length > 1)
 {
 $('<li><a href="#statistics" class="tocstyle">Statistics:</li>').appendTo('#toc');
+
 $('<h2 id="statistics" class="h2style">STATISTICS for objects with same type</h2>').appendTo('#Content');
 $('<h3 class="h3style">Appearance of '+objects_sel[sel_record].object_type+ ' in Database: '+sametype.length+' ('+sametype.length/objects[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
 
