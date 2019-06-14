@@ -76,7 +76,7 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
 
        $.each(persons[2], function( index, value_pers ) {
        if (sel_name == value_pers.name_translit){
-        string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name+"'>";
+        string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name_translit+"'>";
         samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"no_ranke":value_pers.person_no_ranke, "key":value_pers.id_persons.toString()})
       
       };
@@ -194,7 +194,7 @@ $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Name (translit)</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
-     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
+     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
    
  $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
