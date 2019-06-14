@@ -23,7 +23,7 @@
  </div>
 
 <script type="text/javascript">
-alert("Under construction!!")
+//alert("Under construction!!")
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -259,46 +259,32 @@ $table.appendTo('#Content');
 
 $.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
 
-object_type=[]
-object_provenance=[]
-object_material=[]
-titles_gott_kult=[]
-titles_name=[]
+persons_name=[]
+
 $.each(sametype, function( index, p ) {
+
 try{
-kobj=relationright['persons_objects_'+p.key].right_id
+kpers=relationleft['persons_objects_'+p.key].left_id
 i=0;
-while(kobj[i])
+while(kpers[i])
 {
-object_type.push(objects_sel[kobj[i]].object_type)
-object_provenance.push(objects_sel[kobj[i]].object_provenance)
-object_material.push(objects_sel[kobj[i]].object_material)
-i++;
-}
-} catch(e)
-{}
-try{
-ktit=relationright['persons_titles_'+p.key].right_id
-i=0;
-while(ktit[i])
-{
-titles_gott_kult.push(titles_sel[ktit[i]].gott_kult)
-titles_name.push(titles_sel[ktit[i]].titles_translat_eng)
+persons_name.push(persons_sel[kpers[i]].name_translit)
 i++;
 }
 } catch(e)
 {}
 });
 
+
+	    
 if (sametype.length > 1)
 {
 $('<li><a href="#statistics" class="tocstyle">Statistics:</li>').appendTo('#toc');
 $('<h2 id="statistics" class="h2style">STATISTICS for objects with same type</h2>').appendTo('#Content');
-$('<h3 class="h3style">Appearance of '+persons_sel[sel_record].object_type+ ' in Database: '+sametype.length+' ('+sametype.length/objects[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
+$('<h3 class="h3style">Appearance of '+objects_sel[sel_record].object_type+ ' in Database: '+sametype.length+' ('+sametype.length/objects[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
 
-
-dist=[object_type, object_provenance, object_material, titles_gott_kult, titles_name]
-label=["object type", "object provenance", "object material", "gotteskult", "title (english)"]
+dist=[persons_name]
+label=["person name"]
 divelements1=['myDiv1','myDiv2', 'myDiv3', 'myDiv4', 'myDiv5']
 divelements2=['#myDiv1','#myDiv2', '#myDiv3', '#myDiv4', '#myDiv5']
 index1=["#1", "#2", "#3", "#4", "#5"]
@@ -306,9 +292,11 @@ index2=["1", "2", "3", "4", "5"]
 
 $.each(dist, function( index, p ) {
 var y = p;
+
 var data = [
   {
     histfunc: "count",
+    autobiny: true,
     y: y,
     offset: 0.5,
     type: "histogram",
@@ -318,9 +306,6 @@ marker: {
     name: "count"
   }
 ]
-
-
-
 var layout = {
   paper_bgcolor:'rgba(0,0,0,0)',
   plot_bgcolor:'rgba(0,0,0,0)',
@@ -328,10 +313,11 @@ var layout = {
     l: 300
   },
   width: 1000,
-  bargap: 0.05, 
+  height: 1200,
+  bargap: 0.15, 
   bargroupgap: 0.2, 
   barmode: "overlay", 
-  title: label[index]+" distribution for "+persons_sel[sel_record].name, 
+  title: label[index]+" distribution for "+objects_sel[sel_record].object_type, 
   xaxis: {title: "Count"}, 
   yaxis: {title: ""} 
  };

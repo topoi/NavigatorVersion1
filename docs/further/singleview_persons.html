@@ -75,7 +75,7 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
           $('<p class="pstyle"><b>Period: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
 
        $.each(persons[2], function( index, value_pers ) {
-       if (sel_name == value_pers.name){
+       if (sel_name == value_pers.name_translit){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name+"'>";
         samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"no_ranke":value_pers.person_no_ranke, "key":value_pers.id_persons.toString()})
       
@@ -284,7 +284,7 @@ if (samename.length > 1)
 {
 $('<li><a href="#statistics" class="tocstyle">Statistics:</li>').appendTo('#toc');
 $('<h2 id="statistics" class="h2style">STATISTICS for persons with same name</h2>').appendTo('#Content');
-$('<h3 class="h3style">Appearance of '+persons_sel[sel_record].name+ ' in Database: '+samename.length+' ('+samename.length/persons[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
+$('<h3 class="h3style">Appearance of '+persons_sel[sel_record].name_translit+ ' in Database: '+samename.length+' ('+samename.length/persons[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
 
 
 dist=[object_type, object_provenance, object_material, titles_gott_kult, titles_name]
@@ -321,7 +321,7 @@ var layout = {
   bargap: 0.05, 
   bargroupgap: 0.2, 
   barmode: "overlay", 
-  title: label[index]+" distribution for "+persons_sel[sel_record].name, 
+  title: label[index]+" distribution for "+persons_sel[sel_record].name_translit, 
   xaxis: {title: "Count"}, 
   yaxis: {title: ""} 
  };
