@@ -14,6 +14,7 @@
 
 </style>
 <div id="main" class="main" style="width: 100%; height: 1000px;"></div>
+<!--<iframe class="row" id="Content2" style="height: 100%"></iframe>-->
 <!--<div id="sidebar" style="height: 300px; width: 200px; float: left"></div>-->
 
 <script type="text/javascript">
@@ -38,18 +39,22 @@ dating=$.parseJSON(getValue('data/dating_selection.json'))
 objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
 selection=$.parseJSON(getValue('data/selection.json'))  
 
+
+//define nested layout
+
+ 
 var config = {
-  
-   layout: {
+
+ layout:{
         name: 'layout',
         padding: 0,
         panels: [
             { type: 'left', size: 200, resizable: true, minSize: 120, style: pstyle},
-            { type: 'main', minSize: 550, overflow: 'hidden' }
+            { type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
+            { type: 'main', resizable: true, overflow: 'hidden' }
+ 
         ]
- 
     },
- 
     sidebar: {
         name: 'sidebar',
         topHTML    : '<div style="background-color: #eee; padding: 10px 5px; border-top: 1px solid silver; font-size:22px;color:gray">Memphis Navigator</div>',
@@ -106,6 +111,7 @@ var config = {
             switch (event.target) {
                 case 'grid1':
                     w2ui.layout.content('main', w2ui.grid1);
+                    w2ui['layout'].hide('right', window.instant)
                     break;
                 case 'grid2':
                     w2ui.layout.content('main', w2ui.grid2);
@@ -140,9 +146,7 @@ var config = {
               case 'grid11':
                     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src=" https://www.trismegistos.org/network/" style="width: 100%; height: 100%"></iframe>');
                     break;
-
-
-                case 'grid6':
+              case 'grid6':
                     w2ui.layout.content('main', '<iframe class="Statistics" id="Statistics" src="https://topoi.github.io/Tombs/" style="width: 100%; height: 100%"></iframe>');
                     break;
 
@@ -168,11 +172,12 @@ var config = {
         var sel_rec_ids = grid.getSelection();
         
         if (sel_rec_ids.length) {
-     
+        w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        
-        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString());
+       
+        w2ui.layout.content('right', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString())
+       
 }
 }}},
     grid2: { 
@@ -293,6 +298,7 @@ function loadMetadata(obj)
 $(function () {
     // initialization
     $('#main').w2layout(config.layout);
+    w2ui['layout'].hide('right', window.instant)
     w2ui.layout.content('left', $().w2sidebar(config.sidebar));
     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
     // in memory initialization
