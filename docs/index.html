@@ -8,16 +8,54 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
 <body>
-<style>
-
-
-
-</style>
+<button id="backbutton" class="backbutton">Back to search Menu</button>
 <div id="main" class="main" style="width: 100%; height: 1000px;"></div>
-<!--<iframe class="row" id="Content2" style="height: 100%"></iframe>-->
-<!--<div id="sidebar" style="height: 300px; width: 200px; float: left"></div>-->
+
 
 <script type="text/javascript">
+
+function reload_cart() {
+
+ w2ui.layout.content('main', '<div id="Search" style="background: #c8d3ce; height: 100%; font-size:17px; font-family: Arial, Helvetica, sans-serif;"><h2>PERSONS</h2><h3>Name</h3><div id="dropdown1"><select id="dd1"></select></div><h3>Other name</h3><div id="dropdown2"><select id="dd2">Other name</select></div><h3>Name translat english</h3><div id="dropdown3"><select id="dd3">Name translat english</select></div><button id="bt1">Start Search</button></div>');
+
+                    $.each(persons[3][0], function( index, p ) {
+                             $('#dropdown1 select').append('<option value='+index+'>'+p+'</option>');
+                    });
+                    $.each(persons[3][1], function( index, p ) {
+                             $('#dropdown2 select').append('<option value='+index+'>'+p+'</option>');
+                    });
+                    $.each(persons[3][2], function( index, p ) {
+                             $('#dropdown3 select').append('<option value='+index+'>'+p+'</option>');
+                    });
+                             
+                   
+                    $('#dd1').click(function(){ 
+                          w2ui['grid1'].search('name', $('#dd1 :selected').text() );
+                    });
+                      $('#dd2').click(function(){ 
+                          w2ui['grid1'].search('other_name',$('#dd2 :selected').text() );
+                      });
+                      $('#dd3').click(function(){ 
+                          w2ui['grid1'].search('name_translit', $('#dd3 :selected').text());
+                          w2ui['grid1'].save()
+                          
+                      });
+                      $('#bt1').click(function(){ 
+                          w2ui['grid1'].search('name_translit', 'Ahmose');
+                          w2ui.grid1.save();
+                          w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+                          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+w2ui.grid1.getCellValue(0, 0).toString()+"&name=test")
+                          
+                          w2ui.layout.content('top', w2ui.grid1);
+                          
+                          w2ui['layout'].hide('left', window.instant)
+                          w2ui['layout'].show('top', window.instant)
+                        
+                      });
+                     
+}; 
+
+
 function getValue(file){
    var value= $.ajax({ 
       url: file, 
@@ -41,7 +79,37 @@ selection=$.parseJSON(getValue('data/selection.json'))
 
 
 //define nested layout
+$('#grid1').w2grid({
+    name    : 'grid1',
+ show: { 
+            toolbar: true,
+            footer: true
+        },
+multiSearch: false,
+    searches: persons[0],
+        columns: persons[1],
+        records: persons[2],
+        onSearch: function (target, info) {
+	    var grid = this;
+            //console.log(grid)
+	    console.table(grid.last); 
+            
+	},
+        onClick: function(event) {
 
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+        //w2ui['layout'].show('right', window.instant)
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString())
+       
+}
+}}
+});
  
 var config = {
 
@@ -49,6 +117,7 @@ var config = {
         name: 'layout',
         padding: 0,
         panels: [
+            { type: 'top', size: 250, resizable: true, minSize: 250, style: pstyle},
             { type: 'left', size: 200, resizable: true, minSize: 120, style: pstyle},
             { type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
             { type: 'main', resizable: true, overflow: 'hidden' }
@@ -109,8 +178,27 @@ var config = {
         onClick: function (event) {
             $('#sidebar').css('width', (event.goFlat ? '35px' : '200px'));
             switch (event.target) {
-                case 'grid1':
-                    w2ui.layout.content('main', w2ui.grid1);
+                case 'p2':
+                  
+                     $(document).ready(function() {
+                       reload_cart();
+                      })//end ready function
+                      
+                            $('#backbutton').click(function(){ 
+                            w2ui['layout'].show('left', window.instant)
+                            w2ui['layout'].hide('top', window.instant)
+                            reload_cart();
+                            //w2ui.layout.destroy('left');
+                            //$('#main').w2layout(config.layout);
+                            //w2ui.layout.set('left', { size: 50 });
+                            //w2ui.layout.content('left', $().w2sidebar(config.sidebar));
+                      
+                           
+                     
+                      });
+                    
+               
+                   
                     w2ui['layout'].hide('right', window.instant)
                     break;
                 case 'grid2':
@@ -153,7 +241,7 @@ var config = {
             }
         }
     },
-    grid1: { 
+    /*grid1: { 
         name: 'grid1',
         show : { toolbar : true,
                  toolbar     : true,
@@ -174,12 +262,12 @@ var config = {
         if (sel_rec_ids.length) {
         w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
-       
         w2ui.layout.content('right', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
         document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString())
        
 }
 }}},
+    */
     grid2: { 
         name: 'grid2',
         show : { toolbar : true ,
@@ -287,18 +375,15 @@ var config = {
 }
 }}}
 
-};
 
-function loadMetadata(obj)
-{
-      document.getElementById('metadata').setAttribute('src', "http://repositorytest.ancient-astronomy.org/collection/PROM/object/"+obj);
-};
 
+};
 
 $(function () {
     // initialization
     $('#main').w2layout(config.layout);
     w2ui['layout'].hide('right', window.instant)
+    w2ui['layout'].hide('top', window.instant)
     w2ui.layout.content('left', $().w2sidebar(config.sidebar));
     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
     // in memory initialization
@@ -309,18 +394,7 @@ $(function () {
     $().w2grid(config.grid12);
     $().w2grid(config.grid13);
 });
-
-
-
-
-
-
-
 //Project information
-
-
-
 </script>
-
 </body>
 </html>
