@@ -22,6 +22,17 @@ left::after {
   padding: 10px;
   border-style: none
 }
+
+.stylebox {
+  float: left;
+  text-align: left;
+  background: linear-gradient(lightgrey);
+  //border-style: solid;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  border-style: none
+}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -36,4 +47,15 @@ table {
 
 td {
   padding: 3px 40px;
+}
+
+
+.backbutton {
+  top: 5%;
+  float: left;
+  background: #c8d3ce;
+  width: 20%;
+  height: 20%;
+  padding: 10px;
+  z-index:10;
 }
