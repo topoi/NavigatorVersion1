@@ -11,37 +11,45 @@
 <button id="backbutton" class="backbutton">Back to search Menu</button>
 <div id="main" class="main" style="width: 100%; height: 1000px;"></div>
 
-
 <script type="text/javascript">
 
 function reload_cart() {
 
- w2ui.layout.content('main', '<div id="Search" style="background: #c8d3ce; height: 100%; font-size:17px; font-family: Arial, Helvetica, sans-serif;"><h2>PERSONS</h2><h3>Name</h3><div id="dropdown1"><select id="dd1"></select></div><h3>Other name</h3><div id="dropdown2"><select id="dd2">Other name</select></div><h3>Name translat english</h3><div id="dropdown3"><select id="dd3">Name translat english</select></div><button id="bt1">Start Search</button></div>');
+ //w2ui.layout.content('main', '<div id="Search" style="background: #c8d3ce; height: 100%; font-size:17px; font-family: Arial, Helvetica, sans-serif;"><h2>PERSONS</h2><h3>Name</h3><div id="dropdown1"><select id="dd1"></select></div><h3>Other name</h3><div id="dropdown2"><select id="dd2">Other name</select></div><h3>Name translat english</h3><div id="dropdown3"><select id="dd3">Name translat english</select></div><button id="bt1">Start Search</button></div>');
+
+w2ui.layout.content('main', '<nav role="navigation"><ul class="dropdown"><li id="dd1"><a href="#">Name</a><ul id="dropdown1"></ul></li><li><a href="#">Other name</a><ul id="dropdown2"></ul></li><li><a href="#">Name translit (englisch)</a><ul id="dropdown3"></ul></li></ul></nav>');
+
 
                     $.each(persons[3][0], function( index, p ) {
-                             $('#dropdown1 select').append('<option value='+index+'>'+p+'</option>');
+                             $('#dropdown1').append('<li><a href="#" value='+index+'>'+p+'</a></li>');
                     });
                     $.each(persons[3][1], function( index, p ) {
-                             $('#dropdown2 select').append('<option value='+index+'>'+p+'</option>');
+                             $('#dropdown2').append('<li><a href="#"  value='+index+'>'+p+'</a></li>');
                     });
                     $.each(persons[3][2], function( index, p ) {
-                             $('#dropdown3 select').append('<option value='+index+'>'+p+'</option>');
+                             $('#dropdown3').append('<li><a href="#"  value='+index+'>'+p+'</a></li>');
                     });
                              
-                   
+                    var var1=""; var var2=""; var var3="";
+                    SearchArray=[];
                     $('#dd1').click(function(){ 
-                          w2ui['grid1'].search('name', $('#dd1 :selected').text() );
+                    
+                      var1= $('#dropdown1 t :selected').text();
+                      alert(var1) 
                     });
                       $('#dd2').click(function(){ 
-                          w2ui['grid1'].search('other_name',$('#dd2 :selected').text() );
+                      var2= $('#dd2 :selected').text();
+                      
                       });
                       $('#dd3').click(function(){ 
-                          w2ui['grid1'].search('name_translit', $('#dd3 :selected').text());
-                          w2ui['grid1'].save()
-                          
+                      var3= $('#dd3 :selected').text();
+                     
                       });
                       $('#bt1').click(function(){ 
-                          w2ui['grid1'].search('name_translit', 'Ahmose');
+                          if (var1!="") {SearchArray.push({ field: 'name', value: var1, operator: 'is'})}
+                          if (var2!="") {SearchArray.push({ field: 'name_other', value: var2, operator: 'is'})}
+                          if (var3!="") {SearchArray.push({ field: 'name_translit', value: var3, operator: 'is'})}
+                          w2ui.grid1.search(SearchArray, 'AND');
                           w2ui.grid1.save();
                           w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
                           document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+w2ui.grid1.getCellValue(0, 0).toString()+"&name=test")
@@ -64,7 +72,7 @@ function getValue(file){
    return value;
 }
 
-var pstyle = 'background: lightgrey;';
+var pstyle = 'background: #c8d3ce;';
 persons=$.parseJSON(getValue('data/persons.json'))
 persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
 objects=$.parseJSON(getValue('data/objects.json'))
@@ -77,7 +85,6 @@ dating=$.parseJSON(getValue('data/dating_selection.json'))
 objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
 selection=$.parseJSON(getValue('data/selection.json'))  
 
-
 //define nested layout
 $('#grid1').w2grid({
     name    : 'grid1',
@@ -85,15 +92,14 @@ $('#grid1').w2grid({
             toolbar: true,
             footer: true
         },
-multiSearch: false,
+multiSearch: true,
     searches: persons[0],
         columns: persons[1],
         records: persons[2],
         onSearch: function (target, info) {
 	    var grid = this;
             //console.log(grid)
-	    console.table(grid.last); 
-            
+	    
 	},
         onClick: function(event) {
 
@@ -110,7 +116,97 @@ multiSearch: false,
 }
 }}
 });
+
+$('#grid2').w2grid({
+    name    : 'grid2',
+ show: { 
+            toolbar: true,
+            footer: true
+        },
+multiSearch: true,
+    searches: objects[0],
+        columns: objects[1],
+        records: objects[2],
+        onSearch: function (target, info) {
+	    var grid = this;
+	    
+	},
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+        //w2ui['layout'].show('right', window.instant)
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString())
+       
+}
+}}
+});
  
+$('#grid3').w2grid({
+    name    : 'grid3',
+ show: { 
+            toolbar: true,
+            footer: true
+        },
+multiSearch: true,
+    searches: titles[0],
+        columns: titles[1],
+        records: titles[2],
+        onSearch: function (target, info) {
+	    var grid = this;
+            //console.log(grid)
+	    
+	},
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+        //w2ui['layout'].show('right', window.instant)
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        document.getElementById('Content2').setAttribute('src',"further/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
+      
+       
+}
+}}
+});
+
+$('#grid12').w2grid({
+        name: 'grid12',
+        show : { toolbar : true,
+                 toolbar     : true,
+                 footer        : true,
+                 lineNumbers    : true,
+                 selectColumn: true,
+                 expandColumn: false},
+        multiSearch: true,
+        searches: objects_with_image[0],
+        columns: objects_with_image[1],
+        records: objects_with_image[2],
+        onClick: function(event) {
+
+        var grid = this;
+        event.onComplete = function() {
+        var sel_rec_ids = grid.getSelection();
+        
+        if (sel_rec_ids.length) {
+     
+        var sel_record = grid.get(sel_rec_ids[0]);
+        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
+        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
+       
+}
+}}});
+
+
 var config = {
 
  layout:{
@@ -120,7 +216,7 @@ var config = {
             { type: 'top', size: 250, resizable: true, minSize: 250, style: pstyle},
             { type: 'left', size: 200, resizable: true, minSize: 120, style: pstyle},
             { type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
-            { type: 'main', resizable: true, overflow: 'hidden' }
+            { type: 'main', resizable: true, overflow: 'hidden', style: pstyle }
  
         ]
     },
@@ -178,8 +274,8 @@ var config = {
         onClick: function (event) {
             $('#sidebar').css('width', (event.goFlat ? '35px' : '200px'));
             switch (event.target) {
-                case 'p2':
-                  
+                case 'grid1':
+                   /*
                      $(document).ready(function() {
                        reload_cart();
                       })//end ready function
@@ -196,11 +292,12 @@ var config = {
                            
                      
                       });
-                    
+                    */
                
-                   
-                    w2ui['layout'].hide('right', window.instant)
+                    w2ui.layout.content('main', w2ui.grid1);
                     break;
+                    //w2ui['layout'].hide('right', window.instant)
+                    //break;
                 case 'grid2':
                     w2ui.layout.content('main', w2ui.grid2);
                     break;
@@ -241,113 +338,9 @@ var config = {
             }
         }
     },
-    /*grid1: { 
-        name: 'grid1',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: persons[0],
-        columns: persons[1],
-        records: persons[2],
-        onClick: function(event) {
+    
+    
 
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-        w2ui['layout'].show('right', window.instant)
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('right', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString())
-       
-}
-}}},
-    */
-    grid2: { 
-        name: 'grid2',
-        show : { toolbar : true ,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: objects[0],
-        columns: objects[1],
-        records: objects[2],
-        onClick: function(event) 
-      {
-
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString());
-}
-}}
-    },
-    grid3: { 
-        name: 'grid3',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false },
-        multiSearch: true,
-        searches: titles[0],
-        columns: titles[1],
-        records: titles[2],
-        onClick: function(event) 
-{
-
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
-}
-}}
-    },
- grid12: { 
-        name: 'grid12',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: objects_with_image[0],
-        columns: objects_with_image[1],
-        records: objects_with_image[2],
-        onClick: function(event) {
-
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
-       
-}
-}}},
  grid13: { 
         name: 'grid13',
         show : { toolbar : true,
@@ -387,6 +380,10 @@ $(function () {
     w2ui.layout.content('left', $().w2sidebar(config.sidebar));
     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
     // in memory initialization
+    //w2ui['grid1'].hideColumn('id_persons')
+    w2ui['grid2'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_location','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
+    w2ui['grid3'].hideColumn('titles_index','titles_translat','region','gott_kult','ad_sec','field2','field3','field5','field6','titel_hierach','titel_kern','titel_spez_taetigkeit','titel_spez_gott_koenig_pers','titel_spez_epitheton','titel_spez_institution','titel_spez_toponym','old_ids')
+    w2ui['grid12'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_location','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
 
     $().w2grid(config.grid1);
     $().w2grid(config.grid2);
@@ -394,7 +391,7 @@ $(function () {
     $().w2grid(config.grid12);
     $().w2grid(config.grid13);
 });
-//Project information
+
 </script>
 </body>
 </html>
