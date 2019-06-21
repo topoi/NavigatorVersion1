@@ -293,7 +293,7 @@ $table.appendTo('#ContentSame');
 $('#ContentSame').appendTo('#Content')
 }
 
-
+/*
 $.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
 
 persons_name=[]
@@ -368,15 +368,17 @@ $('<h3 id='+index2[index]+' class="h3style"></h3>').appendTo('#Content');
 $(divelements2[index]).appendTo('#Content')
 })
 }
-  $('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
+
+});
+*/
+
+    $('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
   $('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#Content');
   $('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#Content');
   $('<p class="pstyle"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#Content');
   $('<p class="pstyle" ><b>Date: </b>07.06.2019</p>').appendTo('#Content');
   $('<p class="pstyle"><b>Comment: </b>Verteilung der Personen</p>').appendTo('#Content');
-});
 
-   
 $('a[href*="#"]').on('click',function(e) {
                 
 		e.preventDefault();
