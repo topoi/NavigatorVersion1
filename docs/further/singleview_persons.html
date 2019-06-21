@@ -11,6 +11,7 @@
 <body>
 
 <div class="Content" id="Content" ></div>
+<div class="ContentSame" id="ContentSame" ></div>
 <div style="width:90%; margin-left:2px" id="myDiv1"></div>
 <div style="width:90%; margin-left:2px" id="myDiv2"></div>
 <div style="width:90%; margin-left:2px" id="myDiv3"></div>
@@ -253,7 +254,8 @@ $.each(samename, function( index, p ) {
 })
 $('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
 $('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#Content');
-$table.appendTo('#Content');
+$table.appendTo('#ContentSame');
+$('#ContentSame').appendTo('#Content')
 }
 
 $.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
