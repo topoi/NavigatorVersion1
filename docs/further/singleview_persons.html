@@ -46,7 +46,7 @@ function getValue(file){
    return value;
 }
 persons=$.parseJSON(getValue('../data/persons.json'))
-persons_sel=$.parseJSON(getValue('../data/persons_selection.json'))
+persons_sel=persons[4]
 objects=$.parseJSON(getValue('../data/objects.json'))
 objects_sel=$.parseJSON(getValue('../data/objects_selection.json'))
 titles=$.parseJSON(getValue('../data/titles.json'))
@@ -62,17 +62,26 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
         //loop 
          var i;
          $('<li><a href="#selected" class="tocstyle">Selected Person</li>').appendTo('#toc');
-	 $('<h2 id="selected" class="h2style">SELECTED PERSON</h2>').appendTo('#Content');
+	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#Content');
 
        var samename= [];
        
            $('<p class="pstyle"><b>ID: </b> '+(persons_sel[sel_record].id_persons).toString()+'</p>').appendTo('#Content');
            $('<p class="pstyle"><b>Name: </b> '+(persons_sel[sel_record].name).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Name (translit): </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#Content');
-         key=relationright["persons_dating_"+sel_record].right_id;
-	  $('<p class="pstyle"><b>Dating: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
-          $('<p class="pstyle"><b>Kingdom: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
-          $('<p class="pstyle"><b>Period: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>English: </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Additional name: </b> '+(persons_sel[sel_record].other_name).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Gender: </b> '+(persons_sel[sel_record].gender).toString()+'</p>').appendTo('#Content');
+
+           $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
+	   $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#Content');
+           $('<p class="pstyle"><b>Reference: </b> '+(persons_sel[sel_record].person_no_ranke).toString()+'</p>').appendTo('#Content');
+          
+           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
+	   $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
+           key=relationright["persons_dating_"+sel_record].right_id;
+	   $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
 
        $.each(persons[2], function( index, value_pers ) {
        if (sel_name == value_pers.name_translit){

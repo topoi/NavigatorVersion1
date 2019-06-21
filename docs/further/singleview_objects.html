@@ -88,11 +88,18 @@ images=$.parseJSON(getValue('../data/Konkordanzliste.json'))
            $('<li><a href="#technicaldata" class="tocstyle">Technical Data</li>').appendTo('#toc');
            $('<h2 id="technicaldata" class="h2style">TECHNICAL DATA</h2>').appendTo('#Content');
            $('<p class="pstyle"><b>Material: </b> '+(objects_sel[sel_record].object_material).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Length: </b> '+(objects_sel[sel_record].object_lenght).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Width: </b> '+(objects_sel[sel_record].object_width).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Height: </b> '+(objects_sel[sel_record].object_height).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>State of preservation: </b> '+(objects_sel[sel_record].condition).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Length [cm]: </b> '+(objects_sel[sel_record].object_lenght).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Width [cm]: </b> '+(objects_sel[sel_record].object_width).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Height [cm]: </b> '+(objects_sel[sel_record].object_height).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Conservation status: </b> '+(objects_sel[sel_record].condition).toString()+'</p>').appendTo('#Content');
       
+           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
+           $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
+           key=relationright["objects_dating_"+sel_record].right_id;
+           $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
+
            $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
            $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#Content');
            $('<p class="pstyle"><b>Text: </b> '+(objects_sel[sel_record].object_text_format).toString()+'</p>').appendTo('#Content');
@@ -104,26 +111,21 @@ images=$.parseJSON(getValue('../data/Konkordanzliste.json'))
            $('<h2 id="provenance" class="h2style">PROVENANCE</h2>').appendTo('#Content');
 
            $('<p class="pstyle"><b>Provenance: </b> '+(objects_sel[sel_record].object_provenance).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Information on excavation: </b> '+(objects_sel[sel_record].object_provenance_detail).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>conservation status: </b> '+(objects_sel[sel_record].object_provenance_reconstructed).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Reconstructed provenance: </b> '+(objects_sel[sel_record].object_provenance_reconstructed).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Excavation: </b> '+(objects_sel[sel_record].object_provenance_detail).toString()+'</p>').appendTo('#Content');
+           
            
            $('<li><a href="#location" class="tocstyle">Location</li>').appendTo('#toc');
            $('<h2 id="location" class="h2style">LOCATION</h2>').appendTo('#Content');
            $('<p class="pstyle"><b>Location: </b> '+(objects_sel[sel_record].object_location).toString()+'</p>').appendTo('#Content');
            $('<p class="pstyle"><b>Inv no: </b> '+(objects_sel[sel_record].inventory_no).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Information on acquisition: </b> '+(objects_sel[sel_record].object_location_detail).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>Acquisition: </b> '+(objects_sel[sel_record].object_location_detail).toString()+'</p>').appendTo('#Content');
 
            $('<li><a href="#literature" class="tocstyle">Literature</li>').appendTo('#toc');
            $('<h2 id="literature" class="h2style">LITERATURE</h2>').appendTo('#Content');
            $('<p class="pstyle"><b>Literature: </b> '+(objects_sel[sel_record].literature).toString()+'</p>').appendTo('#Content');
 
-           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
-           $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
-           key=relationright["objects_dating_"+sel_record].right_id;
-           $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
-
+         
        $.each(objects[2], function( index, value_obj ) {
        if (sel_type == value_obj.object_type){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_objects.html?ids="+value_obj.id_objects+"&type="+value_obj.object_type+"'>";
