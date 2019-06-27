@@ -95,7 +95,8 @@ images=$.parseJSON(getValue('../data/Konkordanzliste.json'))
       
            $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
            $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
-           key=relationright["objects_dating_"+sel_record].right_id;
+           key=relationleft["objects_dating_"+sel_record].right_id;
+           
            $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
            $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
            $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
@@ -134,6 +135,9 @@ images=$.parseJSON(getValue('../data/Konkordanzliste.json'))
       };
          
  });
+
+  
+  console.log(sametype)
 
 //########################################################################
 //                           Create JSON    
@@ -287,7 +291,7 @@ $.each(sametype, function( index, p ) {
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.material+"</td>")
 })
-$('<li><a href="#sameobjects" class="tocstyle">Objects with same type</li>').appendTo('#toc');
+$('<li><a href="#sameobjects" class="tocstyle">Objects of same type</li>').appendTo('#toc');
 $('<h2 id="sameobjects" class="h2style">OBJECTS OF SAME TYPE</h2>').appendTo('#Content');
 $table.appendTo('#ContentSame');
 $('#ContentSame').appendTo('#Content')
