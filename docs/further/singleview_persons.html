@@ -109,7 +109,7 @@ var titles_arr = []
 
 key="persons_objects_"+sel_record;
 try {
-arr=relationright[key].right_id
+arr=relationleft[key].right_id
 objecttype=[]
 
 $.each(objects[2], function( index, value_obj ) {
@@ -131,7 +131,7 @@ i++;
 
 key="persons_persons_"+sel_record;
 try{
-arr1=relationright[key].right_id
+arr1=relationright[key].left_id
 
 nametranslit=[]
 $.each(persons[2], function( index, value_pers ) {
@@ -151,7 +151,7 @@ key="persons_titles_"+sel_record;
 
 $.each(titles[2], function( index, value_title ) {
 try{
-arr=relationright[key].right_id
+arr=relationleft[key].right_id
 var i = 0;
 while(arr[i]) {
 if (value_title.id == arr[i] )
