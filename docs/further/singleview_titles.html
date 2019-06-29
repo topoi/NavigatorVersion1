@@ -46,9 +46,9 @@ function getValue(file){
    return value;
 }
 persons=$.parseJSON(getValue('../data/persons.json'))
-persons_sel=$.parseJSON(getValue('../data/persons_selection.json'))
+persons_sel=persons[4]
 objects=$.parseJSON(getValue('../data/objects.json'))
-objects_sel=$.parseJSON(getValue('../data/objects_selection.json'))
+objects_sel=objects[4]
 titles=$.parseJSON(getValue('../data/titles.json'))
 titles_sel=titles[4]
 relationright=$.parseJSON(getValue('../data/relation_rightid.json'))  

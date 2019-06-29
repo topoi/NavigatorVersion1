@@ -49,14 +49,14 @@ function getValue(file){
 persons=$.parseJSON(getValue('../data/persons.json'))
 persons_sel=persons[4]
 objects=$.parseJSON(getValue('../data/objects.json'))
-objects_sel=$.parseJSON(getValue('../data/objects_selection.json'))
+objects_sel=objects[4]
 titles=$.parseJSON(getValue('../data/titles.json'))
-titles_sel=$.parseJSON(getValue('../data/titles_selection.json'))
+titles_sel=titles[4]
 relationright=$.parseJSON(getValue('../data/relation_rightid.json'))  
 relationleft=$.parseJSON(getValue('../data/relation_leftid.json'))  
 datings=$.parseJSON(getValue('../data/dating_selection.json'))  
 
- alert("gordon")
+ 
        var sel_record = parameters.ids;
         var sel_name = parameters.name;
         
@@ -153,7 +153,7 @@ key="persons_titles_"+sel_record;
 $.each(titles[2], function( index, value_title ) {
 
 try{
-arr=relationright[key].left_id
+arr=relationleft[key].right_id
 var i = 0;
 while(arr[i]) {
 if (value_title.id == arr[i] )
