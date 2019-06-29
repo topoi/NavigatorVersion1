@@ -145,13 +145,14 @@ i++;
 }});
 }catch(e)
 {console.log(e)}
+
 key="persons_titles_"+sel_record;
 
 
 
 $.each(titles[2], function( index, value_title ) {
 try{
-arr=relationleft[key].right_id
+arr=relationright[key].left_id
 var i = 0;
 while(arr[i]) {
 if (value_title.id == arr[i] )
