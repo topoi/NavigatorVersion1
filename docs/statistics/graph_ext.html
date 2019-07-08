@@ -46,8 +46,8 @@
   <body>
 
 <!-- load the d3.js library -->	
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="js/jquery.js"></script>	
+<script src="libs/d3.v3.min.js"></script>
+<script src="libs/jquery.js"></script>	
 <script>
 
 function getValue(file){
@@ -220,7 +220,7 @@ function click(d) {
 }
 
 function dblclick(d) {
-  document.getElementById('main').setAttribute('src',"further/singleview_persons.html?ids="+d.ids+"&name="+d.name_trans)
+  document.getElementById('main1').setAttribute('src',"../further/singleview_persons.html?ids="+d.ids+"&name="+d.name_trans)
  
 }
 
@@ -232,5 +232,5 @@ function dblclick(d) {
 
 
   </body>
-  <iframe id="main" class="main" style="width: 100%; height: 500px;"></iframe>
+  <iframe id="main1" class="main1" style="width: 100%; height: 1500px;"></iframe>
 </html>
