@@ -263,7 +263,8 @@ var config = {
             { id: 'general3', text: '<p style="font-size:15px;color:gray">Statistics</p>', group: true, expanded: true, nodes: [
                 { id: 'grid6', text: 'Dating', img: 'icon-folder', selected: true },
                 { id: 'grid11', text: 'Tombs and Owner', img: 'icon-folder', selected: true },
-          { id: 'grid17', text: 'Tree', img: 'icon-folder', selected: true }
+                { id: 'grid17', text: 'Tree', img: 'icon-folder', selected: true }
+ 
             
             ]},       
              { id: 'general4', text: '<p style="font-size:15px;color:gray">Help</p>', group: true, expanded: true, nodes: [
@@ -331,8 +332,9 @@ var config = {
                     w2ui.layout.content('main', '<iframe class="Statistics" id="Statistics" src="statistics/dating.html" style="width: 100%; height: 100%"></iframe>');
                     break;
               case 'grid17':
-                    w2ui.layout.content('main', '<iframe class="Statistics" id="Statistics" src="statistics/graph_ext.html" style="width: 100%; height: 100%"></iframe>');
+                    w2ui.layout.content('main', '<iframe class="Statistics1" id="Statistics1" src="statistics/graph_ext.html" style="width: 100%; height: 100%"></iframe>');
                     break;
+
             }
         }
     },
