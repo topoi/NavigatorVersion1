@@ -91,7 +91,8 @@ $('<p class="pstyle"><b>Administrative Institution: </b> '+(titles_sel[sel_recor
          $('<p class="pstyle"><b>Profession: </b> '+(titles_sel[sel_record].field5).toString()+'</p>').appendTo('#Content');
 
        $.each(titles[2], function( index, value_title ) {
-       if (sel_title == value_title.titles_translat_eng){
+       //if ( sel_title == value_title.titles_translat_eng){
+         if (sel_title == value_title.titles_translit){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_titles.html?ids="+value_title.id+"&title="+value_title.title_translat_eng+"'>";
         sametitle.push({"ids":value_title.id,"title":value_title.titles_translit,"english":value_title.titles_translat_eng,"gender":value_title.field4,"key":value_title.id.toString()})
       
