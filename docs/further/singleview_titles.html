@@ -85,7 +85,7 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
          $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#Content');
          $('<p class="pstyle"><b>Gods and other Authorities: </b> '+(titles_sel[sel_record].gott_kult).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Toponyms: </b> '+(titles_sel[sel_record].region).toString()+'</p>').appendTo('#Content');
-$('<p class="pstyle"><b>Adminastrative Institution: </b> '+(titles_sel[sel_record].ad_sec).toString()+'</p>').appendTo('#Content');
+$('<p class="pstyle"><b>Administrative Institution: </b> '+(titles_sel[sel_record].ad_sec).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Field of Profession: </b> '+(titles_sel[sel_record].field2).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Professional Specialization: </b> '+(titles_sel[sel_record].field3).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Profession: </b> '+(titles_sel[sel_record].field5).toString()+'</p>').appendTo('#Content');
@@ -136,7 +136,7 @@ i++;
 if (persons_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Name (translit)</th><th class="pstyle">Gender</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
      string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
@@ -156,7 +156,7 @@ if (sametitle.length > 1) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Title translat. eng.</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Englisch</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(sametitle, function( index, p ) {

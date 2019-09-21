@@ -129,7 +129,7 @@ images=$.parseJSON(getValue('../data/Konkordanzliste.json'))
        $.each(objects[2], function( index, value_obj ) {
        if (sel_type == value_obj.object_type){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_objects.html?ids="+value_obj.id_objects+"&type="+value_obj.object_type+"'>";
-        sametype.push({"ids":value_obj.id_objects,"type":value_obj.object_type,"provenance":value_obj.object_provenance, "material":value_obj.object_material, "key":value_obj.id_objects.toString()})
+        sametype.push({"ids":value_obj.id_objects,"type":value_obj.object_type,"subtype": value_obj.object_subtype, "provenance":value_obj.object_provenance, "location":value_obj.object_location, "inventory": value_obj.inventory_no ,"key":value_obj.id_objects.toString()})
       
       };
          
@@ -215,7 +215,7 @@ i++;
 if (objects_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Provenance</th><th class="pstyle">Provenance (Detail)</th><th class="pstyle">Material</th><t class="pstyle"h>Description</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
@@ -223,10 +223,10 @@ string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a
    $tbody.append('<tr align="center" />').children('tr:last')
     .append(string+p.object_id+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_type+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_subtype+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance_detail+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_material+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_description+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_location+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory_no+"</td>")
 })
 
 $('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
@@ -239,7 +239,7 @@ $table.appendTo('#Content');
 if (persons_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Name (translit)</th><th class="pstyle">Gender</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
      string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
@@ -279,7 +279,7 @@ if (sametype.length > 0) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Provenance</th><th class="pstyle">Material</th>');
+.append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(sametype, function( index, p ) {
@@ -287,8 +287,10 @@ $.each(sametype, function( index, p ) {
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.material+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
 })
 $('<li><a href="#sameobjects" class="tocstyle">Objects of same type</li>').appendTo('#toc');
 $('<h2 id="sameobjects" class="h2style">OBJECTS OF SAME TYPE</h2>').appendTo('#Content');

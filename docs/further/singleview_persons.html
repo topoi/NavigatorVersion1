@@ -87,17 +87,13 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
        $.each(persons[2], function( index, value_pers ) {
        if (sel_name == value_pers.name_translit){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name_translit+"'>";
-        samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"no_ranke":value_pers.person_no_ranke, "key":value_pers.id_persons.toString()})
+        samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"englisch":value_pers.name_translit, "gender":value_pers.gender,"key":value_pers.id_persons.toString()})
       
       };
          
  });
 
          
-       
-         
-
-
 //########################################################################
 //                           Create JSON    
 //########################################################################
@@ -119,7 +115,7 @@ while(arr[i]) {
 
 if (value_obj.id_objects == arr[i] )
 {
-objects_arr.push({"object_id":value_obj.id_objects,"object_type":value_obj.object_type,"object_provenance":value_obj.object_provenance,"object_provenance_detail":value_obj.object_provenance_detail,"object_material":value_obj.object_material,"object_description":value_obj.object_description});
+objects_arr.push({"object_id":value_obj.id_objects,"type":value_obj.object_type,"provenance":value_obj.object_provenance,"subtype":value_obj.object_subtype,"location":value_obj.object_location,"inventory":value_obj.inventory_no});
 }
 i++;
 }
@@ -158,7 +154,7 @@ var i = 0;
 while(arr[i]) {
 if (value_title.id == arr[i] )
 {
-titles_arr.push({"title_id":value_title.id,"title_translat":value_title.titles_translat,"title_gott_kult":value_title.gott_kult});
+titles_arr.push({"title_id":value_title.id,"title": value_title.titles_translit ,"title_translat":value_title.titles_translat_eng,"gender":value_title.field4});
 }
 i++;
 }
@@ -179,18 +175,19 @@ i++;
 if (objects_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Provenance</th><th class="pstyle">Provenance (Detail)</th><th class="pstyle">Material</th><t class="pstyle"h>Description</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
 string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.object_id+"'>";
    $tbody.append('<tr align="center" />').children('tr:last')
     .append(string+p.object_id+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_type+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance_detail+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_material+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_description+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
+   
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
 })
 
 $('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
@@ -203,7 +200,7 @@ $table.appendTo('#Content');
 if (persons_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Name (translit)</th><th class="pstyle">Gender</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
      string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
@@ -222,7 +219,7 @@ $table.appendTo('#Content');
 if (titles_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Translat</th><th class="pstyle">Gottkult</th>');
+  .append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Title</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(titles_arr, function( index, p ) {
@@ -230,8 +227,9 @@ string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a
 
 $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.title_id+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_gott_kult+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 
 
 })
@@ -243,7 +241,7 @@ if (samename.length > 0) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Name no Ranke</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(samename, function( index, p ) {
@@ -251,8 +249,8 @@ $.each(samename, function( index, p ) {
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.name+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.no_ranke+"</td>")
-
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.englisch+"</td>")
+  .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
 $('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#Content');
