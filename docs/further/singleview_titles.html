@@ -93,7 +93,7 @@ $('<p class="pstyle"><b>Administrative Institution: </b> '+(titles_sel[sel_recor
        $.each(titles[2], function( index, value_title ) {
        if (sel_title == value_title.titles_translat_eng){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_titles.html?ids="+value_title.id+"&title="+value_title.title_translat_eng+"'>";
-        sametitle.push({"ids":value_title.id,"title":value_title.titles_translat_eng,"key":value_title.id.toString()})
+        sametitle.push({"ids":value_title.id,"title":value_title.titles_translit,"english":value_title.titles_translat_eng,"gender":value_title.field4,"key":value_title.id.toString()})
       
       };
          
@@ -156,7 +156,7 @@ if (sametitle.length > 1) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Englisch</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Title</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(sametitle, function( index, p ) {
@@ -164,11 +164,12 @@ $.each(sametitle, function( index, p ) {
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
     .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title+"</td>")
- 
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.english+"</td>")
+    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 
 })
 $('<li><a href="#sametitles" class="tocstyle">Titles with same name</li>').appendTo('#toc');
-$('<h2 id="sametitles" class="h2style">TITLES OF SAME NAME</h2>').appendTo('#Content');
+$('<h2 id="sametitles" class="h2style">TITLES WITH SAME NAME</h2>').appendTo('#Content');
 $table.appendTo('#Content');
 }
 
