@@ -91,8 +91,7 @@ images=$.parseJSON(getValue('../data/Konkordanzliste.json'))
            $('<p class="pstyle"><b>Length [cm]: </b> '+(objects_sel[sel_record].object_lenght).toString()+'</p>').appendTo('#Content');
            $('<p class="pstyle"><b>Width [cm]: </b> '+(objects_sel[sel_record].object_width).toString()+'</p>').appendTo('#Content');
            $('<p class="pstyle"><b>Height [cm]: </b> '+(objects_sel[sel_record].object_height).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Conservation status: </b> '+(objects_sel[sel_record].condition).toString()+'</p>').appendTo('#Content');
-      
+          
            $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
            $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
            key=relationleft["objects_dating_"+sel_record].right_id;
