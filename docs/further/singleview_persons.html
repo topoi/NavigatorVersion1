@@ -200,7 +200,7 @@ $table.appendTo('#Content');
 if (persons_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
      string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
@@ -219,7 +219,7 @@ $table.appendTo('#Content');
 if (titles_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Title</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
+  .append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Title</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(titles_arr, function( index, p ) {
@@ -241,7 +241,7 @@ if (samename.length > 0) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">Englisch</th><th class="pstyle">Gender</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(samename, function( index, p ) {
