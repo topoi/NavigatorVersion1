@@ -7,10 +7,12 @@
     
     <link rel="stylesheet" type="text/css" href="../css/w2ui.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+ 
 </head>
 <body>
 
 <div class="Content" id="Content" ></div>
+
 <div class="ContentSame" id="ContentSame" ></div>
 <div style="width:90%; margin-left:2px" id="myDiv1"></div>
 <div style="width:90%; margin-left:2px" id="myDiv2"></div>
@@ -24,7 +26,6 @@
  </div>
 
 <script type="text/javascript">
-
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -56,10 +57,9 @@ relationright=$.parseJSON(getValue('../data/relation_rightleftid.json'))
 relationleft=$.parseJSON(getValue('../data/relation_leftrightid.json'))  
 datings=$.parseJSON(getValue('../data/dating_selection.json'))  
 
- 
        var sel_record = parameters.ids;
-        var sel_name = parameters.name;
-        
+       var sel_name = parameters.name;
+      
         //loop 
          var i;
          $('<li><a href="#selected" class="tocstyle">Selected Person</li>').appendTo('#toc');
@@ -85,15 +85,14 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
            $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
 
        $.each(persons[2], function( index, value_pers ) {
-       if (sel_name == value_pers.name_translit){
-        string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name_translit+"'>";
+       if (sel_name == value_pers.name){
+        string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name+"'>";
         samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"englisch":value_pers.name_translit, "gender":value_pers.gender,"key":value_pers.id_persons.toString()})
       
       };
          
  });
 
-         
 //########################################################################
 //                           Create JSON    
 //########################################################################
@@ -128,7 +127,6 @@ i++;
 key="persons_persons_"+sel_record;
 try{
 arr1=relationright[key].left_id
-
 nametranslit=[]
 $.each(persons[2], function( index, value_pers ) {
 var i = 0;
@@ -141,11 +139,7 @@ i++;
 }});
 }catch(e)
 {console.log(e)}
-
 key="persons_titles_"+sel_record;
-
-
-
 $.each(titles[2], function( index, value_title ) {
 
 try{
@@ -162,9 +156,6 @@ i++;
 {}
 
 });
-
-
-
 
 //################################################
 //--------  Create JSON Visualize ----------------
@@ -203,7 +194,7 @@ $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
-     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
+     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
    
  $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
