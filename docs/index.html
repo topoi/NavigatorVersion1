@@ -8,11 +8,10 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
 <body>
-<!--<button id="backbutton" class="backbutton">Back to search Menu</button>-->
+<div id="but" class="but" style="width: 20%; height: 20px;"></div> 
 <div id="main" class="main" style="width: 100%; height: 1000px;"></div>
 
 <script type="text/javascript">
-
 function reload_cart() {
 
  //w2ui.layout.content('main', '<div id="Search" style="background: #c8d3ce; height: 100%; font-size:17px; font-family: Arial, Helvetica, sans-serif;"><h2>PERSONS</h2><h3>Name</h3><div id="dropdown1"><select id="dd1"></select></div><h3>Other name</h3><div id="dropdown2"><select id="dd2">Other name</select></div><h3>Name translat english</h3><div id="dropdown3"><select id="dd3">Name translat english</select></div><button id="bt1">Start Search</button></div>');
@@ -52,7 +51,7 @@ w2ui.layout.content('main', '<nav role="navigation"><ul class="dropdown"><li id=
                           w2ui.grid1.search(SearchArray, 'AND');
                           w2ui.grid1.save();
                           w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-                          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+w2ui.grid1.getCellValue(0, 0).toString()+"&name=test")
+                          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+w2ui.grid1.getCellValue(0, 0).toString()+"&name=")
                           
                           w2ui.layout.content('top', w2ui.grid1);
                           
@@ -92,26 +91,47 @@ $('#grid1').w2grid({
             toolbar: true,
             footer: true
         },
+
 multiSearch: true,
     searches: persons[0],
-        columns: persons[1],
-        records: persons[2],
-        onSearch: function (target, info) {
-	    var grid = this;
-            //console.log(grid)
-	    
-	},
-        onClick: function(event) {
+    columns: persons[1],
+    records: persons[2],
 
+        onSearch: function(event) {
         var grid = this;
+        },  
+        onClick: function(event) {
+        var grid = this;
+        //Anmerkung: das sind die Ids aus der onSearch Funktion davor!
+        //Beim nächsten Aufruf, werden die Search IDs ausgegeben
+        //Daher hier bei onClick die Methode '.last'
+         var plp= [];
+         $.each(grid.last.searchIds, function( index, value ) {
+
+             plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
+         
+        })
+
+     $(document).ready(function(){
+     var count = 0
+     $("p1").click(function(){
+          count=count+1
+          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+     });
+   
+     $("p0").click(function(){
+          count=count-1
+          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+     });
+      });
+      
         event.onComplete = function() {
         var sel_rec_ids = grid.getSelection();
         
         if (sel_rec_ids.length) {
-        //w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString())
+        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString())
        
 }
 }}
@@ -127,6 +147,7 @@ multiSearch: true,
     searches: objects[0],
         columns: objects[1],
         records: objects[2],
+        
         onSearch: function (target, info) {
 	    var grid = this;
 	    
@@ -134,10 +155,38 @@ multiSearch: true,
         onClick: function(event) {
 
         var grid = this;
+        var plo= [];
+         $.each(grid.last.searchIds, function( index, value ) {
+
+             plo.push({"id":grid.get(value).id_objects,"type":grid.get(value).object_type})
+         
+        })
+   
+
+      var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
+      //var button2 = $("<p2 >My Button</p2>");
+      
+      $("#but").append(button1).trigger('create');
+      //$("#but").append(button2).trigger('create');
+
+     $(document).ready(function(){
+     var count = 0
+     $("p1").click(function(){
+          count=count+1
+          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
+     });
+   
+     $("p0").click(function(){
+          count=count-1
+          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
+     });
+      });
+
         event.onComplete = function() {
         var sel_rec_ids = grid.getSelection();
         
         if (sel_rec_ids.length) {
+      
         //w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
@@ -146,7 +195,7 @@ multiSearch: true,
 }
 }}
 });
- 
+
 $('#grid3').w2grid({
     name    : 'grid3',
  show: { 
@@ -165,6 +214,29 @@ multiSearch: true,
         onClick: function(event) {
 
         var grid = this;
+
+        var plt= [];
+         $.each(grid.last.searchIds, function( index, value ) {
+
+             plt.push({"id":grid.get(value).id,"title":grid.get(value).titles_translat_eng})
+         
+        })
+   
+     $(document).ready(function(){
+     var count = 0
+     $("p1").click(function(){
+          count=count+1
+          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
+     });
+   
+     $("p0").click(function(){
+          count=count-1
+          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
+     });
+      });
+
+
+
         event.onComplete = function() {
         var sel_rec_ids = grid.getSelection();
         
@@ -380,7 +452,7 @@ $(function () {
     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
     // in memory initialization
     w2ui['grid1'].hideColumn('notes','to_do','link_bonner_totenbuch','link_trismegistos','link_tla','person_no_ranke')
-    w2ui['grid2'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
+    w2ui['grid2'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature', 'digital_resource')
     w2ui['grid3'].hideColumn('titles_index','titles_translat','region','gott_kult','ad_sec','field2','field3','field5','field6','titel_hierach','titel_kern','titel_spez_taetigkeit','titel_spez_gott_koenig_pers','titel_spez_epitheton','titel_spez_institution','titel_spez_toponym','old_ids')
     w2ui['grid12'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_location','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
 
