@@ -112,6 +112,8 @@ multiSearch: true,
          
         })
 
+       var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
+     $("#but").append(button1).trigger('create');
      $(document).ready(function(){
      var count = 0
      $("p1").click(function(){
@@ -164,12 +166,9 @@ multiSearch: true,
    
 
       var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
-      //var button2 = $("<p2 >My Button</p2>");
-      
-      $("#but").append(button1).trigger('create');
-      //$("#but").append(button2).trigger('create');
-
-     $(document).ready(function(){
+     $("#but").append(button1).trigger('create');
+     
+       $(document).ready(function(){
      var count = 0
      $("p1").click(function(){
           count=count+1
@@ -221,7 +220,8 @@ multiSearch: true,
              plt.push({"id":grid.get(value).id,"title":grid.get(value).titles_translat_eng})
          
         })
-   
+     var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
+     $("#but").append(button1).trigger('create');
      $(document).ready(function(){
      var count = 0
      $("p1").click(function(){
