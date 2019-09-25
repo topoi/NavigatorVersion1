@@ -8,8 +8,13 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
 <body>
-<div id="but" class="but" style="width: 20%; height: 20px;"></div> 
+<div id="but" class="center" style="width: 20%; height: 10px;"></div>
 <div id="main" class="main" style="width: 100%; height: 1000px;"></div>
+
+<div id="bgroup" class="btn-group">
+  <button id="p0"> << </button>
+  <button id="p1"> >> </button>
+</div> 
 
 <script type="text/javascript">
 function reload_cart() {
@@ -111,17 +116,19 @@ multiSearch: true,
              plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
          
         })
-
-       var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
-     $("#but").append(button1).trigger('create');
-     $(document).ready(function(){
-     var count = 0
-     $("p1").click(function(){
+       
+       $("#but").append(bgroup).trigger('create');
+       $(document).ready(function(){
+       var count = 0
+     
+      $("#p1").click(function(){
+          
           count=count+1
           document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
      });
    
-     $("p0").click(function(){
+     $("#p0").click(function(){
+       
           count=count-1
           document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
      });
@@ -164,10 +171,8 @@ multiSearch: true,
          
         })
    
-
-      var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
-     $("#but").append(button1).trigger('create');
-     
+       $("#but").append(bgroup).trigger('create');
+  
        $(document).ready(function(){
      var count = 0
      $("p1").click(function(){
@@ -220,8 +225,9 @@ multiSearch: true,
              plt.push({"id":grid.get(value).id,"title":grid.get(value).titles_translat_eng})
          
         })
-     var button1 = $("<p0>   <<  </p0> <p1>   >>  </p1>");
-     $("#but").append(button1).trigger('create');
+        
+    $("#but").append(bgroup).trigger('create');
+      
      $(document).ready(function(){
      var count = 0
      $("p1").click(function(){
@@ -250,34 +256,6 @@ multiSearch: true,
 }
 }}
 });
-
-$('#grid12').w2grid({
-        name: 'grid12',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: objects_with_image[0],
-        columns: objects_with_image[1],
-        records: objects_with_image[2],
-        onClick: function(event) {
-
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
-       
-}
-}}});
-
 
 var config = {
 
@@ -312,35 +290,20 @@ var config = {
                      ]
             },
       { id: 'general2', text: '<p style="font-size:15px;color:gray">SQL Selection</p>',  img: 'icon-folder', expanded: true, group: true,
-              nodes: [ { id: 'p2', text: 'Tables', img: 'icon-folder', count: 4,
+              nodes: [ { id: 'p2', text: 'Tables', img: 'icon-folder', count: 3,
                            nodes: [
                            { id: 'grid1', text: 'Persons', icon: 'fa-star-empty' },
                            { id: 'grid2', text: 'Objects', icon: 'fa-star-empty' },
                            { id: 'grid3', text: 'Titles', icon: 'fa-star-empty' }
-                           /*,
-                          { id: 'grid12', text: 'Objects with image', icon: 'fa-star-empty' }*/
+                        
 
                        ]}
-                          /*,
-                          { id: 'p3', text: 'Relations', img: 'icon-folder', count: 1,
-                           nodes: [
-                           { id: 'grid13', text: 'Object types', icon: 'fa-star-empty' }
-                         
-                       ]}*/
-
-,
+            
                     
                      ]
             },
 
-            /*
-            { id: 'general3', text: '<p style="font-size:15px;color:gray">Statistics</p>', group: true, expanded: true, nodes: [
-                { id: 'grid6', text: 'Dating', img: 'icon-folder', selected: true },
-                { id: 'grid11', text: 'Tombs and Owner', img: 'icon-folder', selected: true },
-                { id: 'grid17', text: 'Tree', img: 'icon-folder', selected: true }
- 
-            
-            ]},*/
+           
              { id: 'general4', text: '<p style="font-size:15px;color:gray">Help</p>', group: true, expanded: true, nodes: [
                 { id: 'grid10', text: 'Navigator', img: 'icon-folder', selected: true }
             
@@ -375,12 +338,7 @@ var config = {
                 case 'grid3':
                     w2ui.layout.content('main', w2ui.grid3);
                     break;
-                case 'grid12':
-                    w2ui.layout.content('main', w2ui.grid12);
-                    break;
-                case 'grid13':
-                    w2ui.layout.content('main', w2ui.grid13);
-                    break;
+               
                 case 'grid4':
                     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
                     break;
@@ -399,48 +357,10 @@ var config = {
               case 'grid10':
                     w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="further/instructions.html" style="width: 100%; height: 100%"></iframe>');
                     break;
-              case 'grid11':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="statistics/tombs.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid6':
-                    w2ui.layout.content('main', '<iframe class="Statistics" id="Statistics" src="statistics/dating.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid17':
-                    w2ui.layout.content('main', '<iframe class="Statistics1" id="Statistics1" src="statistics/graph_ext.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-
+              
             }
         }
-    },
-    
-    
-
- grid13: { 
-        name: 'grid13',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: selection[0],
-        columns: selection[1],
-        records: selection[2],
-        onClick: function(event) {
-
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.obj_id).toString());
-       
-}
-}}}
+    }
 };
 
 $(function () {
@@ -454,13 +374,12 @@ $(function () {
     w2ui['grid1'].hideColumn('notes','to_do','link_bonner_totenbuch','link_trismegistos','link_tla','person_no_ranke')
     w2ui['grid2'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature', 'digital_resource')
     w2ui['grid3'].hideColumn('titles_index','titles_translat','region','gott_kult','ad_sec','field2','field3','field5','field6','titel_hierach','titel_kern','titel_spez_taetigkeit','titel_spez_gott_koenig_pers','titel_spez_epitheton','titel_spez_institution','titel_spez_toponym','old_ids')
-    w2ui['grid12'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_location','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
+    
 
     $().w2grid(config.grid1);
     $().w2grid(config.grid2);
     $().w2grid(config.grid3);
-    $().w2grid(config.grid12);
-    $().w2grid(config.grid13);
+    
 });
 
 </script>
