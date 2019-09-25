@@ -1,5 +1,10 @@
 /* Create two equal columns that floats next to each other */
 
+/*.main {
+position:relative
+
+}*/
+
 left::after {
   content: "";
   background: url(Logo.png);
@@ -121,5 +126,39 @@ ul li ul li {
   width: 100%;
 }
 
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  bottom: -20px;
+  z-index: 10000;
+ 
+  }
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
 
 
+.center {
+  margin: auto;
+  width: 50%;
+  //border: 3px solid #73AD21;
+  padding: 10px;
+
+}
