@@ -11,80 +11,29 @@
 <!--<link href="dist/bootstrap-select-dropdown.css" rel="stylesheet" type="text/css">-->
 <link href="docs/bundle.css" rel="stylesheet" type="text/css">
 <style>
-<!--SIDEBAR-->
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 10000;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  opacity: 0.6;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-
-
-
-<!--SIDEBAR-->
-
-
-
-
 body { background-color: #A0CECB; }
 .container { margin-top: 150px; max-width: 450px; }
+
+#table {
+  background-color: lightblue;
+}
 </style>
 </head>
-
-<body>
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  
-  <a href="#">Help</a>
-  <a href="#" id="table">Show filter</a>
-  <a href="#" id="namepers">Show Results</a>
-  <a href="#" id="back">Back to Menu</a>
-  <a href="#" id="reset">Reset All</a>
- 
-</div>
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-
 <script>
 
 
+</script>
+<body>
+<!-- MAIN MENU -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Help</a>
+  <a href="#">Project</a>
+  <a href="#" onclick="kalauer()">Kalauer des Tages</a>
+</div>
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Project</span>
+<script>
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "300px";
@@ -95,6 +44,31 @@ function closeNav() {
 }
 </script>
 
+<script>
+function kalauer() {
+alert("Spielen zwei Blondinnen Schach. Fragt die Eine 'Hast du die Regel im Kopf?'... 'Wieso, blute ich aus der Nase?'")
+}
+</script>
+<!-- FILTER MENU -->
+
+<div id="myFilter" class="sidefilter">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeFilter()">&times;</a>
+  <a href="#" id="table">Show Filter</a>
+  <a href="#" id="namepers">Show Results</a>
+  <a href="#" id="back">Back to Menu</a>
+  <a href="#" id="reset">Reset All</a>
+</div>
+<span style="font-size:30px;cursor:pointer; position: absolute; top: 0; right: 0;" onclick="openFilter()">&#9776; Filter</span>
+<script>
+
+function openFilter() {
+   document.getElementById("myFilter").style.width = "300px";
+}
+
+function closeFilter() {
+  document.getElementById("myFilter").style.width = "0";
+}
+</script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -102,22 +76,15 @@ function closeNav() {
 <script src="dist/fuse.js"></script>
 <script src="dist/bootstrap-select-dropdown.js"></script>
 
-
 <title>Memphis Navigator</title>
 
 <script type="text/javascript" src="js/w2ui.js"></script>
 <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
 <link rel="stylesheet" type="text/css" href="css/index.css" />
-
 <div id="but" class="center" style="width: 20%; height: 2px;"></div>
-<!--<button id="table" class="form-control"> SHOW SELECTION MENU</button>
-<button id="back" class="form-control"> KLICK TO GO BACK TO MENU</button>
-<button id="namepers" class="form-control"> KLICK TO SHOW SELECTION RESULTS</button>
-<button id="nameobj" class="form-control"> KLICK TO SHOW SELECTION RESULTS</button>-->
 <div class="container">
 
-
- <div class="form-group" id="msall">
+<div class="form-group" id="msall">
     <h1> Memphis Navigator</h1>
     <h5> A tool designed for database navigation</h5>
     <br>
@@ -181,7 +148,7 @@ function closeNav() {
 <div id="main" class="main" style="width: 100%; height: 2000px;"></div>
 <script src="dist/bootstrap-select-dropdown.js"> </script>
 <script>
-
+openFilter()
 
 $("#pers_engl").hide();    
 $("#pers_orig").hide(); 
@@ -452,8 +419,9 @@ $('#ms_persons_orig').selectDropdown();
 $('#ms_objects_digi').selectDropdown(); 
 
 $('#table').click(function (event) {
-//$("#table").hide();
-//$("#back").hide();
+$("#namepers").css('background-color','lightblue')
+$("#table").css('background-color','transparent')
+
 
 if ($('#multiselectall').val() == "Persons")
 {$("#pers_engl").show(); $("#pers_orig").show();$("#digi").hide(); 
@@ -467,7 +435,7 @@ if ($('#multiselectall').val() == "Objects")
 $("#pers_engl").hide(); $("#pers_orig").hide();$("#digi").show(); 
 w2ui.layout.content('main', w2ui.grid2);
 $("#msall").hide();
-$("#namepers").hide();
+//$("#namepers").hide();
 $("#nameobj").show();
 }  
 //if ($('#multiselectall').val() == "Objects")
@@ -479,9 +447,11 @@ $("#nameobj").show();
 
 // SELECT PERSONS
 $('#namepers').click(function (event) {
-           
+           $("#namepers").css('background-color','transparent')
+           $("#table").css('background-color','transparent')
+           $("#back").css('background-color','lightblue')
            $("#back").show();
-           $("#namepers").hide();
+           //$("#namepers").hide();
            var values = $('#ms_persons_engl').val();
            var searchy=[]
            searchy.push({ field: 'name_translit', value: String(values[0]), operator: 'is'})
@@ -489,9 +459,12 @@ $('#namepers').click(function (event) {
         
           $( ".container" ).hide();
             $("#back").click(function(){
+               $("#namepers").css('background-color','lightblue')
+               $("#table").css('background-color','transparent')
+               $("#back").css('background-color','transparent')
                $("#bgroup").hide();
                $( ".container" ).show();
-               $("#back").hide();
+               //$("#back").hide();
                $("#table").show();
                $("#namepers").show();
                 w2ui['layout'].hide('main', window.instant)
@@ -515,7 +488,7 @@ $('#nameobj').click(function (event) {
             $("#back").click(function(){
                $("#bgroup").hide();
                $( ".container" ).show();
-               $("#back").hide();
+               //$("#back").hide();
                $("#table").show();
                $("#nameobj").show();
                 w2ui['layout'].hide('main', window.instant)
