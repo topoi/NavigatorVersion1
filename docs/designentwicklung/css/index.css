@@ -1,0 +1,182 @@
+/* Create two equal columns that floats next to each other */
+
+/*.main {
+position:relative
+
+}*/
+
+left::after {
+  content: "";
+  background: url(Logo.png);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.row {
+  float: left;
+  text-align: left;
+  background: linear-gradient(lightgrey);
+  //border-style: solid;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  border-style: none
+}
+
+.stylebox {
+  float: left;
+  text-align: left;
+  background: linear-gradient(lightgrey);
+  //border-style: solid;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  border-style: none
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+td {
+  padding: 3px 40px;
+}
+
+
+.backbutton {
+  top: 5%;
+  float: left;
+  background: #c8d3ce;
+  width: 20%;
+  height: 20%;
+  padding: 10px;
+  z-index:10;
+}
+
+
+
+a {
+  text-decoration: none;
+}
+
+nav {
+    font-family: monospace;
+}
+
+ul {
+  background: lightblue;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+li {
+    color: #fff;
+  background: lightblue;
+    display: block;
+    float: left;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+  transition-duration: 0.5s;
+}
+  
+li a {
+  color: #fff;
+}
+
+li:hover {
+    background: blue;
+    cursor: pointer;
+}
+
+ul li ul {
+    background: lightblue;
+    visibility: hidden;
+  opacity: 0.5;
+  min-width: 5rem;
+    position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+    left: 0;
+  display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+    clear: both;
+  width: 100%;
+}
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  bottom: -20px;
+  left: 5px;
+  z-index: 10000;
+ 
+  }
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+/*
+.center {
+  margin: auto;
+  width: 50%;
+  //border: 3px solid #73AD21;
+  padding: 10px;
+
+}
+*/
+
+.form-sidebar {
+  /*position: relative;*/
+  z-index: 10000;
+  ledt: 0;
+  display: block;
+  width: 25%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+}
