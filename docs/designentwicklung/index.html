@@ -33,7 +33,7 @@ body { background-color: #FFFFFF }
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
-<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:400px" id="back1" class="back2"><h4>&#9776; Back to Filter Menu</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:0" id="back1" class="back2"><h4>&#9776; Back to Filter Menu</h4></span>
 
 <script>
 
@@ -99,7 +99,7 @@ function closeFilter() {
       <option value="Objects">Objects</option>
       <option value="Titles">Titles</option>
     </select>
-    <span style="font-size:30px;cursor:pointer" id="table1" onclick="openFilter()"><h4>&#9776; Show Filter Menu</h4></span>
+    <span style="font-size:30px;cursor:pointer" id="table1"><h4>&#9776; Show Filter Menu</h4></span>
    
 </div>
 
@@ -457,7 +457,7 @@ $("#nameobj").show();
 
 // SELECT PERSONS
 $('#namepers1').click(function (event) {
-           openFilter()
+           
            $('span.back2').show();
            $("#namepers").css('background-color','lightblue')
            $("#table").css('background-color','transparent')
