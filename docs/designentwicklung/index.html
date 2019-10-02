@@ -100,8 +100,8 @@ function closeFilter() {
       <option value="Titles">Titles</option>
     </select>
     <span style="font-size:30px;cursor:pointer" id="table1"><h4>&#9776; Show Filter Menu</h4></span>
-   
-</div>
+    <span style="font-size:30px;cursor:pointer" id="more_options"><h4>&#9776; Select more?</h4></span>
+    </div>
 
   <div class="form-group" id="pers_engl">
     <h2>Persons</h2>
@@ -151,7 +151,8 @@ function closeFilter() {
   <button id="p0"> << </button>
   <button id="p1"> >> </button>
 </div> 
-	  <button id="more_options" class=btn-group"> More options</button>	  
+	 
+	  
 	  
 <div id="main" class="main" style="width: 100%; height: 2000px;"></div>
 <script src="dist/bootstrap-select-dropdown.js"> </script>
@@ -457,11 +458,18 @@ $("#nameobj").show();
 //}  
 });
 // TEST
+$( "#more_options" ).click(function() {
+  //alert( "TEST ERFOLGREICH" );
+  $("#bsd1-container").show()
+  $("#more_options").hide()
+  
+});
 	
 $( "#bsd1-container" ).click(function() {
-  alert( "TEST ERFOLGREICH" );
-  //$("#bsd1-container").hide()
+  //alert( "TEST ERFOLGREICH" );
+  $("#bsd1-container").hide()
   $("#more_options").show()
+  
 });
 	
 	
