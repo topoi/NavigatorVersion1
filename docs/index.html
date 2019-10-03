@@ -1,72 +1,145 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Memphis Navigator</title>
-    <script src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/w2ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<title>Select Names</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
+<!--<link href="dist/bootstrap-select-dropdown.css" rel="stylesheet" type="text/css">-->
+<link href="docs/bundle.css" rel="stylesheet" type="text/css">
+<style>
+body { background-color: #FFFFFF; overflow-y: hidden;  }
+.container { margin-top: 150px; max-width: 450px; }
+#table {
+  background-color: lightblue;
+}
+</style>
 </head>
+<script>
+
+
+</script>
 <body>
-<div id="but" class="center" style="width: 20%; height: 10px;"></div>
-<div id="main" class="main" style="width: 100%; height: 1000px;"></div>
+<!-- MAIN MENU -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Project</a>
+  <a href="#">Help</a>
+  <a href="#" onclick="kalauer()">Kalauer des Tages</a>
+</div>
 
-<div id="bgroup" class="btn-group">
-  <button id="p0"> << </button>
-  <button id="p1"> >> </button>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:20px; opacity:0" id="back"><h4>&#9776; Back to Filter</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
+<div style="opacity:0; top:0; right:50%; position:absolute" id="bgroup" >
+  <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
+  <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
 </div> 
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "300px";
+}
 
-<script type="text/javascript">
-function reload_cart() {
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+<script>
+function kalauer() {
+alert("Kommen zwei Flöhe aus dem Kino. Fragt der eine: 'gehen wir zu Fuss oder nehmen wir uns einen Hund?'")
+}
+</script>
+<script>
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="dist/fuse.js"></script>
+<script src="dist/bootstrap-select-dropdown.js"></script>
 
- //w2ui.layout.content('main', '<div id="Search" style="background: #c8d3ce; height: 100%; font-size:17px; font-family: Arial, Helvetica, sans-serif;"><h2>PERSONS</h2><h3>Name</h3><div id="dropdown1"><select id="dd1"></select></div><h3>Other name</h3><div id="dropdown2"><select id="dd2">Other name</select></div><h3>Name translat english</h3><div id="dropdown3"><select id="dd3">Name translat english</select></div><button id="bt1">Start Search</button></div>');
+<title>Memphis Navigator</title>
 
-w2ui.layout.content('main', '<nav role="navigation"><ul class="dropdown"><li id="dd1"><a href="#">Name</a><ul id="dropdown1"></ul></li><li><a href="#">Other name</a><ul id="dropdown2"></ul></li><li><a href="#">Name translit (englisch)</a><ul id="dropdown3"></ul></li></ul></nav>');
+<script type="text/javascript" src="js/w2ui.js"></script>
+<link rel="stylesheet" type="text/css" href="css/w2ui.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<div id="but" class="center" style="width: 20%; height: 2px;"></div>
+<div class="container">
 
+<div class="form-group" id="msall">
+    <h1> Memphis Navigator</h1>
+    <h5> A tool designed for database navigation</h5>
+    <br>
+    <br>
+    <span style="font-size:30px;cursor:pointer" id="sel_pers"><h4>&#9776; Persons</h4></span>
+    <span style="font-size:30px;cursor:pointer" id="sel_obj"><h4>&#9776; Objects</h4></span>
+    <span style="font-size:30px;cursor:pointer; opacity:0.12" id="sel_title"><h4>&#9776; Titles</h4></span>
+</div>
 
-                    $.each(persons[3][0], function( index, p ) {
-                             $('#dropdown1').append('<li><a href="#" value='+index+'>'+p+'</a></li>');
-                    });
-                    $.each(persons[3][1], function( index, p ) {
-                             $('#dropdown2').append('<li><a href="#"  value='+index+'>'+p+'</a></li>');
-                    });
-                    $.each(persons[3][2], function( index, p ) {
-                             $('#dropdown3').append('<li><a href="#"  value='+index+'>'+p+'</a></li>');
-                    });
-                             
-                    var var1=""; var var2=""; var var3="";
-                    SearchArray=[];
-                    $('#dd1').click(function(){ 
-                    
-                      var1= $('#dropdown1 t :selected').text();
-                      alert(var1) 
-                    });
-                      $('#dd2').click(function(){ 
-                      var2= $('#dd2 :selected').text();
-                      
-                      });
-                      $('#dd3').click(function(){ 
-                      var3= $('#dd3 :selected').text();
-                     
-                      });
-                      $('#bt1').click(function(){ 
-                          if (var1!="") {SearchArray.push({ field: 'name', value: var1, operator: 'is'})}
-                          if (var2!="") {SearchArray.push({ field: 'name_other', value: var2, operator: 'is'})}
-                          if (var3!="") {SearchArray.push({ field: 'name_translit', value: var3, operator: 'is'})}
-                          w2ui.grid1.search(SearchArray, 'AND');
-                          w2ui.grid1.save();
-                          w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-                          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+w2ui.grid1.getCellValue(0, 0).toString()+"&name=")
-                          
-                          w2ui.layout.content('top', w2ui.grid1);
-                          
-                          w2ui['layout'].hide('left', window.instant)
-                          w2ui['layout'].show('top', window.instant)
-                        
-                      });
-                     
-}; 
+<div class="form-group" id="pers_engl">
+    <h2>Persons</h2>
+    <h6 id="engl_name">select english name</h6>
+    <select id="ms_persons_engl" class="form-control" multiple>
+      <option value="Panehsi">Panehsi</option>
+      <option value="Baketmeret">Baketmeret</option>
+      <option value="Nayef">Nayef</option>
+      <option value="Maatnofret">Maatnofret</option>
+      <option value="Horemhebemnetjer">Horemhebemnetjer</option>
+      <option value="Nefertiti">Nefertiti</option>
+      <option value="Raaa">Raaa</option>
+      <option value="Yawaamen">Yawaamen</option>
+      <option value="Hornebuy">Hornebuy</option>
+      <option value="Ahmose">Ahmose</option>
+    </select>
+    
+  </div>
+  <div class="form-group" id="pers_orig">
+    <h6 id="orig_name">select original name</h6>
+    <select id="ms_persons_orig" class="form-control" multiple>
+      <option value="PtH-m-wj#">PtH-m-wj#</option>
+      <option value="Jmn-p#[-...]">Jmn-p#[-...]</option>
+      <option value="Mr.jjt-Jmn">Mr.jjt-Jmn</option>
+      <option value="v#Tj#">v#Tj#</option>
+      <option value="vtj">vtj</option>
+      <option value="Nb-Jwn.w">Nb-Jwn.w</option>
+      <option value="ctX-Hr-wnm=f">ctX-Hr-wnm=f</option>
+      <option value="V#.jjt">V#.jjt</option>
+      <option value="Nfr.t-jj.tj">Nfr.t-jj.tj</option>
+      <option value="JoH-ms">JoH-ms</option>
+      <option value="cXm.t-m-H#b">cXm.t-m-H#b</option>
+      <option value="P#-n.j-p#-t#">P#-n.j-p#-t#</option>
+    </select>
+    <span style="font-size:30px;cursor:pointer; opacity:0" id="namepers1"><h4>&#9776; Show Selection Result</h4></span>
 
+   
+  </div>
+ 
+<div class="form-group" id="digi">
+  <h2> Objects </h2>  
+  <h6>digital resource</h6>
+    <select id="ms_objects_digi" class="form-control" multiple>
+      <option value="True">True</option>
+      <option value="False">False</option>
+    </select>
+    <span style="font-size:30px;cursor:pointer; opacity:0" id="nameobj1"><h4>&#9776; Show Selection Result</h4></span>
+    
+  </div>
+ 
+ <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
+ 
+   
+
+</div>
+
+<div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; "></div>
+<script src="dist/bootstrap-select-dropdown.js"> </script>
+<script>
+
+$("#pers_engl").hide();    
+$("#pers_orig").hide(); 
+$("#digi").hide(); 
 
 function getValue(file){
    var value= $.ajax({ 
@@ -76,7 +149,7 @@ function getValue(file){
    return value;
 }
 
-var pstyle = 'background: #c8d3ce;';
+var pstyle = 'background: #ffffff;  overflow-y: hidden;';
 persons=$.parseJSON(getValue('data/persons.json'))
 persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
 objects=$.parseJSON(getValue('data/objects.json'))
@@ -89,7 +162,8 @@ dating=$.parseJSON(getValue('data/dating_selection.json'))
 objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
 selection=$.parseJSON(getValue('data/selection.json'))  
 
-//define nested layout
+//##################################   PERSONS  #########################################
+
 $('#grid1').w2grid({
     name    : 'grid1',
  show: { 
@@ -101,11 +175,12 @@ multiSearch: true,
     searches: persons[0],
     columns: persons[1],
     records: persons[2],
-
-        onSearch: function(event) {
+    
+    onSearch: function(event) {
         var grid = this;
         },  
         onClick: function(event) {
+        $("#bgroup").css("opacity", "1");
         var grid = this;
         //Anmerkung: das sind die Ids aus der onSearch Funktion davor!
         //Beim nächsten Aufruf, werden die Search IDs ausgegeben
@@ -117,17 +192,17 @@ multiSearch: true,
          
         })
        
-       $("#but").append(bgroup).trigger('create');
+       
        $(document).ready(function(){
        var count = 0
      
-      $("#p1").click(function(){
-          
+       $("#p1").click(function(){
+        
           count=count+1
           document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
      });
    
-     $("#p0").click(function(){
+      $("#p0").click(function(){
        
           count=count-1
           document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
@@ -146,41 +221,48 @@ multiSearch: true,
 }}
 });
 
+
+
+//##################################   OBJECTS  #########################################
+
 $('#grid2').w2grid({
     name    : 'grid2',
- show: { 
+    show: { 
             toolbar: true,
             footer: true
         },
-multiSearch: true,
+
+    multiSearch: true,
     searches: objects[0],
         columns: objects[1],
         records: objects[2],
-        
         onSearch: function (target, info) {
 	    var grid = this;
 	    
 	},
         onClick: function(event) {
-
+        
+        $("#bgroup").css("opacity","1");
+        
         var grid = this;
         var plo= [];
-         $.each(grid.last.searchIds, function( index, value ) {
+        $.each(grid.last.searchIds, function( index, value ) {
 
              plo.push({"id":grid.get(value).id_objects,"type":grid.get(value).object_type})
          
         })
    
-       $("#but").append(bgroup).trigger('create');
+       
   
        $(document).ready(function(){
-     var count = 0
-     $("p1").click(function(){
+       var count = 0
+       $("#p1").click(function(){
+         
           count=count+1
           document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
      });
    
-     $("p0").click(function(){
+     $("#p0").click(function(){
           count=count-1
           document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
      });
@@ -200,6 +282,8 @@ multiSearch: true,
 }}
 });
 
+//##################################   TITLES  #########################################
+
 $('#grid3').w2grid({
     name    : 'grid3',
  show: { 
@@ -216,7 +300,7 @@ multiSearch: true,
 	    
 	},
         onClick: function(event) {
-
+       $("#bgroup").css("opacity", "1");
         var grid = this;
 
         var plt= [];
@@ -226,16 +310,16 @@ multiSearch: true,
          
         })
         
-    $("#but").append(bgroup).trigger('create');
+    
       
      $(document).ready(function(){
      var count = 0
-     $("p1").click(function(){
+     $("#p1").click(function(){
           count=count+1
           document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
    
-     $("p0").click(function(){
+     $("#p0").click(function(){
           count=count-1
           document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
@@ -257,119 +341,32 @@ multiSearch: true,
 }}
 });
 
+
 var config = {
 
  layout:{
         name: 'layout',
         padding: 0,
         panels: [
-            { type: 'top', size: 250, resizable: true, minSize: 250, style: pstyle},
-            { type: 'left', size: 200, resizable: true, minSize: 120, style: pstyle},
-            { type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
+            //{ type: 'top', size: 250, resizable: true, minSize: 250, style: pstyle},
+            //{ type: 'left', size: 400, resizable: true, minSize: 120, style: pstyle},
+            //{ type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
             { type: 'main', resizable: true, overflow: 'hidden', style: pstyle }
  
         ]
-    },
-    sidebar: {
-        name: 'sidebar',
-        topHTML    : '<div style="background-color: #eee; padding: 10px 5px; border-top: 1px solid silver; font-size:22px;color:gray">Memphis Navigator</div>',
-       
-        nodes: [ 
-       { id: 'general1', text: '<p align="center" style="font-size:15px;color:gray">General</p>', img: 'icon-folder', expanded: true, group: true,
-              nodes: [ { id: 'p1', text: 'Project information', img: 'icon-folder', count: 5,
-                           nodes: [
-                           { id: 'grid4', text: 'Project', icon: 'fa-star-empty' },
-                           { id: 'grid5', text: 'Project description', icon: 'fa-star-empty' },
-                           { id: 'grid7', text: 'Database', icon: 'fa-star-empty' },
-                           { id: 'grid8', text: 'Museums and Archives', icon: 'fa-star-empty' },
-                           { id: 'grid9', text: 'Relevant Bibliography', icon: 'fa-star-empty' },
-                          
-
-                       ]},
-                    
-                     ]
-            },
-      { id: 'general2', text: '<p style="font-size:15px;color:gray">SQL Selection</p>',  img: 'icon-folder', expanded: true, group: true,
-              nodes: [ { id: 'p2', text: 'Tables', img: 'icon-folder', count: 3,
-                           nodes: [
-                           { id: 'grid1', text: 'Persons', icon: 'fa-star-empty' },
-                           { id: 'grid2', text: 'Objects', icon: 'fa-star-empty' },
-                           { id: 'grid3', text: 'Titles', icon: 'fa-star-empty' }
-                        
-
-                       ]}
-            
-                    
-                     ]
-            },
-
-           
-             { id: 'general4', text: '<p style="font-size:15px;color:gray">Help</p>', group: true, expanded: true, nodes: [
-                { id: 'grid10', text: 'Navigator', img: 'icon-folder', selected: true }
-            
-            ]}     
-        ],
-        onClick: function (event) {
-            $('#sidebar').css('width', (event.goFlat ? '35px' : '200px'));
-            switch (event.target) {
-                case 'grid1':
-                    /*
-                     $(document).ready(function() {
-                       reload_cart();
-                      })//end ready function
-                      
-                            $('#backbutton').click(function(){ 
-                            w2ui['layout'].show('left', window.instant)
-                            w2ui['layout'].hide('top', window.instant)
-                            reload_cart();
-                            //w2ui.layout.destroy('left');
-                            //$('#main').w2layout(config.layout);
-                            //w2ui.layout.set('left', { size: 50 });
-                            //w2ui.layout.content('left', $().w2sidebar(config.sidebar));
-                      });
-                    */
-                    w2ui.layout.content('main', w2ui.grid1);
-                    break;
-                    //w2ui['layout'].hide('right', window.instant)
-                    //break;
-                case 'grid2':
-                    w2ui.layout.content('main', w2ui.grid2);
-                    break;
-                case 'grid3':
-                    w2ui.layout.content('main', w2ui.grid3);
-                    break;
-               
-                case 'grid4':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-                case 'grid5':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/project_description.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-               case 'grid7':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/database.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid8':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/museums_and_archives.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid9':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/relevant_bibliography.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid10':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="further/instructions.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              
-            }
-        }
     }
+
 };
 
 $(function () {
     // initialization
-    $('#main').w2layout(config.layout);
-    w2ui['layout'].hide('right', window.instant)
-    w2ui['layout'].hide('top', window.instant)
-    w2ui.layout.content('left', $().w2sidebar(config.sidebar));
-    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
+    $('#main1').w2layout(config.layout);
+    w2ui.layout.content('left', '<iframe class="sidebar" id="sidebar" src="sidebar.html" style="width: 100%; height: 100%"></iframe>');
+    //w2ui['layout'].show('right', window.instant)
+    
+    w2ui['layout'].hide('main', window.instant)
+    //w2ui.layout.content('left', '<iframe class="sidebar" id="sidebar" src="sidebar.html" style="width: 100%; height: 100%"></iframe>');
+    //w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="index.html" style="width: 100%; height: 100%"></iframe>');
     // in memory initialization
     w2ui['grid1'].hideColumn('notes','to_do','link_bonner_totenbuch','link_trismegistos','link_tla','person_no_ranke')
     w2ui['grid2'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature', 'digital_resource')
@@ -382,6 +379,147 @@ $(function () {
     
 });
 
+</script>
+
+<script>
+
+
+$(document).ready(function(){
+
+$('#ms_persons_engl').selectDropdown();    
+$('#ms_persons_orig').selectDropdown(); 
+$('#ms_objects_digi').selectDropdown(); 
+
+$("#back").click(function() {
+$("#reset").css("opacity", "1");
+$("#back").css("opacity", "0");
+$("#bgroup").css("opacity", "0");
+w2ui['layout'].hide('main', window.instant)
+$( ".container" ).show();
+})
+
+$( "#moreoptions" ).click(function() {
+  $("#bsd1-container").css("opacity","1")
+  $("#bsd2-container").css("opacity","1")
+  $("#bsd3-container").css("opacity","1")
+  $("#engl_name").css("opacity","1")
+  $("#orig_name").css("opacity","1")
+  $("#moreoptions").css("opacity", "0")
+  $("#namepers1").css("opacity", "0.3")
+  
+});
+
+$( "#sel_pers" ).click(function() {
+  $(".form-group#pers_engl").show()
+  $(".form-group#pers_orig").show()
+  $("#msall").hide()
+  $("#namepers1").css("opacity", "0.3")
+  $("#moreoptions").css("opacity", "0")
+  w2ui.layout.content('main', w2ui.grid1);
+});
+
+$( "#sel_obj" ).click(function() {
+  $(".form-group#digi").show()
+  $("#msall").hide()
+  $("#nameobj1").css("opacity", "0.3")
+  $("#moreoptions").css("opacity", "0")
+  w2ui.layout.content('main', w2ui.grid2);
+  
+});
+
+
+$( "#bsd1-container .dropdown-item" ).click(function() {
+ 
+  $("#bsd1-container").css("opacity","0.12")
+  $("#bsd2-container").css("opacity","0.12")
+  $("#bsd3-container").css("opacity","0.12")
+  $("#engl_name").css("opacity","0.12")
+  $("#orig_name").css("opacity","0.12")
+  $("#namepers1").css("opacity", "1")
+  $("#moreoptions").css("opacity", "1")
+  
+});
+
+$( "#bsd2-container .dropdown-item" ).click(function() {
+  
+  $("#bsd1-container").css("opacity","0.12")
+  $("#bsd2-container").css("opacity","0.12")
+  $("#bsd3-container").css("opacity","0.12")
+  $("#engl_name").css("opacity","0.12")
+  $("#orig_name").css("opacity","0.12")
+  $("#namepers1").css("opacity", "1")
+  $("#moreoptions").css("opacity", "1")
+  
+});
+
+$( "#bsd3-container .dropdown-item" ).click(function() {
+  
+  $("#bsd1-container").css("opacity","0.12")
+  $("#bsd2-container").css("opacity","0.12")
+  $("#bsd3-container").css("opacity","0.12")
+  $("#orig_name").css("opacity","0.12")
+  $("#namepers1").css("opacity", "1")
+  $("#nameobj1").css("opacity", "1")
+  $("#moreoptions").css("opacity", "1")
+  
+});
+
+// SELECT PERSONS
+$('#namepers1').click(function (event) {
+           $("#back").css("opacity", "1")
+           var values = $('#ms_persons_engl').val();
+           if (values.length >0) {
+           var searchy=[]
+           searchy.push({ field: 'name_translit', value: String(values[0]), operator: 'is'})
+           searchy.push({ field: 'name_translit', value: String(values[1]), operator: 'is'})
+           $( ".container" ).hide();
+           w2ui['layout'].show('main', window.instant)
+           w2ui['grid1'].search(searchy, 'OR');
+           }
+           
+           var values = $('#ms_persons_orig').val();
+           if (values.length >0) {
+           var searchz=[]
+           searchz.push({ field: 'name', value: String(values[0]), operator: 'is'})
+           searchz.push({ field: 'name', value: String(values[1]), operator: 'is'})
+           $( ".container" ).hide();
+          
+           w2ui['layout'].show('main', window.instant)
+           w2ui['grid1'].search(searchz, 'OR');
+           }
+});
+
+// SELECT OBJECTS
+$('#nameobj1').click(function (event) {
+           $("#back").css("opacity", "1")
+           var values = $('#ms_objects_digi').val();
+           var searchy1=[]
+           searchy1.push({ field: 'digital_resource', value: String(values[0]), operator: 'is'})
+           $( ".container" ).hide();
+           w2ui['layout'].show('main', window.instant)
+           w2ui['grid2'].search(searchy1, 'OR');
+       });
+});
+
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script>
+$("#reset").click(function(){
+window.location.reload(true);
+})
 </script>
 </body>
 </html>
