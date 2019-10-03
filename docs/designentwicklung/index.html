@@ -466,6 +466,7 @@ $( "#bsd3-container .dropdown-item" ).click(function() {
 
 // SELECT PERSONS
 $('#namepers1').click(function (event) {
+           $("#reset").css("opacity", "0")
            $("#back").css("opacity", "1")
            var values = $('#ms_persons_engl').val();
            if (values.length >0) {
@@ -491,6 +492,7 @@ $('#namepers1').click(function (event) {
 
 // SELECT OBJECTS
 $('#nameobj1').click(function (event) {
+           $("#reset").css("opacity", "0")
            $("#back").css("opacity", "1")
            var values = $('#ms_objects_digi').val();
            var searchy1=[]
