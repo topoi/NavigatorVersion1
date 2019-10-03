@@ -10,14 +10,10 @@
 </head>
 <body>
 
-<div class="Content" id="Content" ></div>
-<div class="ContentSame" id="ContentSame" ></div>
-<div style="width:90%; margin-left:2px" id="myDiv1"></div>
-<div style="width:90%; margin-left:2px" id="myDiv2"></div>
-<div style="width:90%; margin-left:2px" id="myDiv3"></div>
-<div style="width:90%; margin-left:2px" id="myDiv4"></div>
-<div style="width:90%; margin-left:2px" id="myDiv5"></div>
-<div id="toc">
+<div class="Content" id="Content"  style="overflow-y: hidden; top:0" ></div>
+<div class="ContentSame" id="ContentSame" style="height:0px; overflow-x: visible"></div>
+
+<div id="toc" style="top:0;">
     <ul class="jump">
    
 </ul>
@@ -326,53 +322,6 @@ $('<li><a href="#statistics" class="tocstyle">Statistics:</li>').appendTo('#toc'
 $('<h2 id="statistics" class="h2style">STATISTICS for objects with same type</h2>').appendTo('#Content');
 $('<h3 class="h3style">Appearance of '+objects_sel[sel_record].object_type+ ' in Database: '+sametype.length+' ('+sametype.length/objects[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
 
-dist=[persons_name]
-label=["person name"]
-divelements1=['myDiv1','myDiv2', 'myDiv3', 'myDiv4', 'myDiv5']
-divelements2=['#myDiv1','#myDiv2', '#myDiv3', '#myDiv4', '#myDiv5']
-index1=["#1", "#2", "#3", "#4", "#5"]
-index2=["1", "2", "3", "4", "5"]
-
-$.each(dist, function( index, p ) {
-var y = p;
-
-var data = [
-  {
-    histfunc: "count",
-    autobiny: true,
-    y: y,
-    offset: 0.5,
-    type: "histogram",
-marker: {
-    color: 'darkgray',
-	},
-    name: "count"
-  }
-]
-var layout = {
-  paper_bgcolor:'rgba(0,0,0,0)',
-  plot_bgcolor:'rgba(0,0,0,0)',
- margin:{
-    l: 300
-  },
-  width: 1000,
-  height: 1200,
-  bargap: 0.15, 
-  bargroupgap: 0.2, 
-  barmode: "overlay", 
-  title: label[index]+" distribution for "+objects_sel[sel_record].object_type, 
-  xaxis: {title: "Count"}, 
-  yaxis: {title: ""} 
- };
-
-
-Plotly.newPlot(divelements1[index], data, layout, filename="bar-direct-labels", {showSendToCloud: true});
-$('<li><a href='+index1[index]+' style="color:#fff; font-size:16px; text-decoration: none; margin-left: 10%">'+label[index]+'</li>').appendTo('#toc');
-$('<h3 id='+index2[index]+' class="h3style"></h3>').appendTo('#Content');
-
-$(divelements2[index]).appendTo('#Content')
-})
-}
 
 });
 */
