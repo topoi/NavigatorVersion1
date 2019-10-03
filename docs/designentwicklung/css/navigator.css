@@ -7,7 +7,7 @@ body {
   top: 5%;
   float: left;
   position: absolute;
-  background: #c8d3ce;
+  background: #ffffff;
  
   //border-style: solid;
   
@@ -21,7 +21,7 @@ body {
   margin-bottom: 2%;
   float: left;
   //position: absolute;
-  background: #c8d3ce;
+  background: #ffffff;
   width: 95%;
   height: 110px;
   padding: 10px;
@@ -76,6 +76,7 @@ list-style-type:none;
 }
 
 .h2style {
+    
      color:#2874b2;
      font-size:17px; 
      font-family: Arial, Helvetica, sans-serif;
@@ -97,8 +98,10 @@ list-style-type:none;
 
 .tocstyle {
     color:#fff; 
+    width: 95%;
     font-size:20px; 
     text-decoration: none;
+    overflow-x: visible;
 }
 
 input.MyButton {

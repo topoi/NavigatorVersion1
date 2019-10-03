@@ -20,7 +20,7 @@ left::after {
 .row {
   float: left;
   text-align: left;
-  background: linear-gradient(lightgrey);
+  background: #ffffff;
   //border-style: solid;
   width: 100%;
   overflow: hidden;
@@ -31,7 +31,7 @@ left::after {
 .stylebox {
   float: left;
   text-align: left;
-  background: linear-gradient(lightgrey);
+  background: #ffffff;
   //border-style: solid;
   width: 100%;
   overflow: hidden;
@@ -58,7 +58,7 @@ td {
 .backbutton {
   top: 5%;
   float: left;
-  background: #c8d3ce;
+  background: #ffffff;
   width: 20%;
   height: 20%;
   padding: 10px;
