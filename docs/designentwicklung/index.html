@@ -13,9 +13,7 @@
 <style>
 body { background-color: #FFFFFF; overflow-y: hidden;  }
 .container { margin-top: 150px; max-width: 450px; }
-#table {
-  background-color: lightblue;
-}
+
 </style>
 </head>
 <script>
@@ -31,12 +29,14 @@ body { background-color: #FFFFFF; overflow-y: hidden;  }
   <a href="#" onclick="kalauer()">Kalauer des Tages</a>
 </div>
 
-<span style="font-size:30px;cursor:pointer" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
+<div id="upper">
+<span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
 <span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:30px; opacity:0" id="back"><h4>&#9776; Back to current Menu</h4></span>
 <span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
 <div style="opacity:0; top:0; right:50%; position:absolute" id="bgroup" >
   <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
   <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
+</div>
 </div> 
 <script>
 function openNav() {
@@ -79,7 +79,7 @@ alert("Kommen zwei Flöhe aus dem Kino. Fragt der eine: 'gehen wir zu Fuss oder 
 </div>
 
 <div class="form-group" id="pers_engl">
-    <h2>Persons</h2>
+    <h2 >Persons</h2>
     <h6 id="engl_name">select english name</h6>
     <select id="ms_persons_engl" class="form-control" multiple>
       <option value="Panehsi">Panehsi</option>
@@ -111,31 +111,36 @@ alert("Kommen zwei Flöhe aus dem Kino. Fragt der eine: 'gehen wir zu Fuss oder 
       <option value="cXm.t-m-H#b">cXm.t-m-H#b</option>
       <option value="P#-n.j-p#-t#">P#-n.j-p#-t#</option>
     </select>
-    <span style="font-size:30px;cursor:pointer; opacity:0" id="namepers1"><h4>&#9776; Show Selection Result</h4></span>
-
-   
+    
+   <span style="font-size:30px;cursor:pointer; opacity:0" id="namepers1"><h4>&#9776; Show Selection Result</h4></span>
+   <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
   </div>
  
-<div class="form-group" id="digi">
+ 
+ <div class="form-group" id="digi">
   <h2> Objects </h2>  
-  <h6>digital resource</h6>
+  <h6 id="digi_res">digital resource</h6>
     <select id="ms_objects_digi" class="form-control" multiple>
       <option value="True">True</option>
       <option value="False">False</option>
     </select>
     <span style="font-size:30px;cursor:pointer; opacity:0" id="nameobj1"><h4>&#9776; Show Selection Result</h4></span>
+    <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions1"><h4>&#9776; Select more?</h4></span>
     
   </div>
  
- <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
  
    
 
 </div>
 
-<div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; "></div>
+<div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
 <script src="dist/bootstrap-select-dropdown.js"> </script>
 <script>
+$("html, body").css({
+    overflow: 'hidden',
+    height: '100%'
+});
 
 $("#pers_engl").hide();    
 $("#pers_orig").hide(); 
@@ -180,6 +185,8 @@ multiSearch: true,
         var grid = this;
         },  
         onClick: function(event) {
+        $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
+        
         $("#bgroup").css("opacity", "1");
         var grid = this;
         //Anmerkung: das sind die Ids aus der onSearch Funktion davor!
@@ -214,7 +221,7 @@ multiSearch: true,
         
         if (sel_rec_ids.length) {
         var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%;overflow-y: hidden"></iframe>' )
         document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString())
        
 }
@@ -241,7 +248,7 @@ $('#grid2').w2grid({
 	    
 	},
         onClick: function(event) {
-        
+        $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
         $("#bgroup").css("opacity","1");
         
         var grid = this;
@@ -275,7 +282,7 @@ $('#grid2').w2grid({
       
         //w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
         document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString())
        
 }
@@ -300,7 +307,8 @@ multiSearch: true,
 	    
 	},
         onClick: function(event) {
-       $("#bgroup").css("opacity", "1");
+        $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
+        $("#bgroup").css("opacity", "1");
         var grid = this;
 
         var plt= [];
@@ -333,7 +341,7 @@ multiSearch: true,
         if (sel_rec_ids.length) {
         //w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
+        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
         document.getElementById('Content2').setAttribute('src',"further/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
       
        
@@ -398,12 +406,12 @@ w2ui['layout'].hide('main', window.instant)
 $( ".container" ).show();
 })
 
-$( "#moreoptions" ).click(function() {
+$( "#moreoptions", "moreoptions1" ).click(function() {
   $("#bsd1-container").css("opacity","1")
   $("#bsd2-container").css("opacity","1")
   $("#bsd3-container").css("opacity","1")
-  $("#engl_name").css("opacity","1")
-  $("#orig_name").css("opacity","1")
+  $("#pers_engl").css("opacity","1")
+  $("#digi").css("opacity","1")
   $("#moreoptions").css("opacity", "0")
   $("#namepers1").css("opacity", "0.3")
   
@@ -422,45 +430,40 @@ $( "#sel_obj" ).click(function() {
   $(".form-group#digi").show()
   $("#msall").hide()
   $("#nameobj1").css("opacity", "0.3")
-  $("#moreoptions").css("opacity", "0")
+  $("#moreoptions1").css("opacity", "0")
   w2ui.layout.content('main', w2ui.grid2);
   
 });
 
 
 $( "#bsd1-container .dropdown-item" ).click(function() {
- 
   $("#bsd1-container").css("opacity","0.12")
   $("#bsd2-container").css("opacity","0.12")
   $("#bsd3-container").css("opacity","0.12")
-  $("#engl_name").css("opacity","0.12")
-  $("#orig_name").css("opacity","0.12")
+  $("#pers_engl").css("opacity","0.12")
   $("#namepers1").css("opacity", "1")
   $("#moreoptions").css("opacity", "1")
   
 });
 
 $( "#bsd2-container .dropdown-item" ).click(function() {
-  
+  $("#pers_engl").css("opacity","0.12")
   $("#bsd1-container").css("opacity","0.12")
   $("#bsd2-container").css("opacity","0.12")
   $("#bsd3-container").css("opacity","0.12")
-  $("#engl_name").css("opacity","0.12")
-  $("#orig_name").css("opacity","0.12")
   $("#namepers1").css("opacity", "1")
   $("#moreoptions").css("opacity", "1")
   
 });
 
 $( "#bsd3-container .dropdown-item" ).click(function() {
-  
+  //$("#digi").css("opacity","0.12")
   $("#bsd1-container").css("opacity","0.12")
   $("#bsd2-container").css("opacity","0.12")
   $("#bsd3-container").css("opacity","0.12")
-  $("#orig_name").css("opacity","0.12")
   $("#namepers1").css("opacity", "1")
   $("#nameobj1").css("opacity", "1")
-  $("#moreoptions").css("opacity", "1")
+  $("#moreoptions1").css("opacity", "1")
   
 });
 
