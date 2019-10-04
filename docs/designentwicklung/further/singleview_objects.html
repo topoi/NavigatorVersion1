@@ -9,18 +9,21 @@
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
 </head>
 <body>
-
-<div class="Content" id="Content"  style="overflow-y: hidden; top:0" ></div>
-<div class="ContentSame" id="ContentSame" style="height:0px; overflow-x: visible"></div>
-
-<div id="toc" style="top:0;">
+<div class="Content" id="Content" style="overflow-y: hidden; top:0; left:10px width:95%; height: 200%"></div>
+<div id="toc" style="top:0;float:right;">
     <ul class="jump">
    
 </ul>
  </div>
+<div class="ContentSame" id="ContentSame" style="height:0px; overflow-x: visible"></div>
+
+
 
 <script type="text/javascript">
-
+$("html, body").css({
+    overflow: 'hidden',
+    height: '100%'
+});
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");

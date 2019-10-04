@@ -9,9 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
 </head>
 <body>
-
-<div class="Content" id="Content" ></div>
-<div style="width:90%; margin-left:2px" id="myDiv1"></div>
+<div class="Content" id="Content" style="overflow-y: hidden; top:0; left:10px width:95%; height: 200%"></div>
 <div style="width:90%; margin-left:2px" id="myDiv2"></div>
 <div style="width:90%; margin-left:2px" id="myDiv3"></div>
 <div style="width:90%; margin-left:2px" id="myDiv4"></div>
@@ -23,7 +21,10 @@
  </div>
 
 <script type="text/javascript">
-
+$("html, body").css({
+    overflow: 'hidden',
+    height: '100%'
+});
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
