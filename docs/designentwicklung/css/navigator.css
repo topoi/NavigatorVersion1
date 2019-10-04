@@ -7,21 +7,21 @@ body {
   top: 5%;
   float: left;
   position: absolute;
-  background: #D3D3D3;
- 
+  //background: #D3D3D3;
+  background: #ffffff;
   //border-style: solid;
-  
-  width: 100%;
+  //left:2%;
+  width: 95%;
   height: 100%;
   padding: 10px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .ContentSame {
   margin-bottom: 2%;
   float: left;
   //position: absolute;
-  background: #D3D3D3;
+  background: #ffffff;
   width: 95%;
   height: 110px;
   padding: 10px;
@@ -76,13 +76,14 @@ list-style-type:none;
 }
 
 .h2style {
-    
+     
      color:#2874b2;
      font-size:17px; 
      font-family: Arial, Helvetica, sans-serif;
 }
 
 .h3style {
+     
      color:black;
      //text-shadow: 0.3px 0.3px darkgray;
      font-size:15px; 
