@@ -17,7 +17,8 @@
     </ul>
 </div>
 </div>
-<div class="ContentSame" id="ContentSame" style="height:0px; overflow-x: hidden"></div>
+
+<div class="ContentSame" id="ContentSame" style="height:0px;"></div>
 
 <script type="text/javascript">
 $("html, body").css({
@@ -245,7 +246,7 @@ $.each(samename, function( index, p ) {
 $('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
 $('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#Content');
 
-$("#ContentSame").css("height","150px")
+$("#ContentSame").css({"height":"150px" })
 $table.appendTo('#ContentSame');
 $('#ContentSame').appendTo('#Content')
 }
