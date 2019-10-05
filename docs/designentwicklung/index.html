@@ -49,7 +49,7 @@ function closeNav() {
 </script>
 <script>
 function kalauer() {
-alert("Kommen zwei Flöhe aus dem Kino. Fragt der eine: 'gehen wir zu Fuss oder nehmen wir uns einen Hund?'")
+alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 }
 </script>
 <script>
@@ -65,7 +65,6 @@ function getParameters()
     return parameters;
 }
 var parameters = getParameters();
-
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -208,7 +207,7 @@ multiSearch: true,
          var plp= [];
          $.each(grid.last.searchIds, function( index, value ) {
 
-             plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
+             plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name})
          
         })
        
@@ -362,7 +361,6 @@ multiSearch: true,
 }}
 });
 
-
 var config = {
 
  layout:{
@@ -397,16 +395,16 @@ $(function () {
     $().w2grid(config.grid1);
     $().w2grid(config.grid2);
     $().w2grid(config.grid3);
-    w2ui.layout.content('main', w2ui.grid1);
+    //w2ui.layout.content('main', w2ui.grid1);
+
 });
 
 </script>
 
 <script>
-
-
+alert("test11")
 $(document).ready(function(){
-
+alert("test1")
 $('#ms_persons_engl').selectDropdown();    
 $('#ms_persons_orig').selectDropdown(); 
 $('#ms_objects_digi').selectDropdown(); 
@@ -485,32 +483,25 @@ $( "#bsd3-container .dropdown-item" ).click(function() {
 
 if (parameters.persons == "true") {
 
-//var values=parameters.english
-//var searchy=[]
-//searchy.push({ field: 'name_translit', value: values, operator: 'is'})
-$( ".container" ).hide();
-w2ui['layout'].show('main', window.instant)
-//w2ui['grid1'].search(searchy, 'OR');
-////w2ui['grid1'].reload();
-//w2ui['grid1'].stateSave();
-
 var values=parameters.id
+var searchy=[]
+searchy.push({ field: 'id_persons', value: values, operator: 'is'})
+$( ".container" ).hide();
+//w2ui['layout'].show('main', window.instant)
+//w2ui['grid1'].search(searchy, 'OR');
+//w2ui['grid1'].stateSave()
+alert(persons[2].length)
+
 $.each(persons[2], function( index, value_pers ) {
       if (values == value_pers.id_persons){
-        name=value_pers.name
-       }
-      });
+        alert(value_pers.name)
+      
+      };
+
 w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
-w2ui['layout'].show('main', window.instant)
-document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+values+"&name="+name)
+//document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+values+"&name="+record.name)
 
-
-
-
-};
-
-
-
+}
 
 
 // FROM MENU
@@ -527,7 +518,7 @@ $('#namepers1').click(function (event) {
            
            w2ui['layout'].show('main', window.instant)
            w2ui['grid1'].search(searchy, 'OR');
-           }
+           };
            
            var values = $('#ms_persons_orig').val();
            if (values.length >0) {
