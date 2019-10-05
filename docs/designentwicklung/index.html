@@ -53,6 +53,18 @@ alert("Kommen zwei Flöhe aus dem Kino. Fragt der eine: 'gehen wir zu Fuss oder 
 }
 </script>
 <script>
+function getParameters()
+{
+    var parameterFragments = location.search.substr(1).split("&");
+    var parameters = {}
+    for(var i = 0; i < parameterFragments.length; i++)
+    {
+        var splittedParameter = parameterFragments[i].split("=");
+        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
+    }
+    return parameters;
+}
+var parameters = getParameters();
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -115,8 +127,7 @@ alert("Kommen zwei Flöhe aus dem Kino. Fragt der eine: 'gehen wir zu Fuss oder 
    <span style="font-size:30px;cursor:pointer; opacity:0" id="namepers1"><h4>&#9776; Show Selection Result</h4></span>
    <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
   </div>
- 
- 
+
  <div class="form-group" id="digi">
   <h2> Objects </h2>  
   <h6 id="digi_res">digital resource</h6>
@@ -168,6 +179,7 @@ objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))
 selection=$.parseJSON(getValue('data/selection.json'))  
 
 //##################################   PERSONS  #########################################
+
 
 $('#grid1').w2grid({
     name    : 'grid1',
@@ -384,7 +396,7 @@ $(function () {
     $().w2grid(config.grid1);
     $().w2grid(config.grid2);
     $().w2grid(config.grid3);
-    
+    w2ui.layout.content('main', w2ui.grid1);
 });
 
 </script>
@@ -468,15 +480,32 @@ $( "#bsd3-container .dropdown-item" ).click(function() {
 });
 
 // SELECT PERSONS
+// FROM LINK
+
+if (parameters.persons == "true") {
+var values=parameters.english
+var searchy=[]
+searchy.push({ field: 'name_translit', value: values, operator: 'is'})
+$( ".container" ).hide();
+w2ui['layout'].show('main', window.instant)
+w2ui['grid1'].search(searchy, 'OR');
+//w2ui['grid1'].reload();
+w2ui['grid1'].stateSave();
+}
+
+
+// FROM MENU
 $('#namepers1').click(function (event) {
            $("#reset").css("opacity", "0")
            $("#back").css("opacity", "1")
+           $("#upper").addClass(".mt-2 mb-3")
            var values = $('#ms_persons_engl').val();
            if (values.length >0) {
            var searchy=[]
            searchy.push({ field: 'name_translit', value: String(values[0]), operator: 'is'})
            searchy.push({ field: 'name_translit', value: String(values[1]), operator: 'is'})
            $( ".container" ).hide();
+           
            w2ui['layout'].show('main', window.instant)
            w2ui['grid1'].search(searchy, 'OR');
            }
@@ -487,7 +516,6 @@ $('#namepers1').click(function (event) {
            searchz.push({ field: 'name', value: String(values[0]), operator: 'is'})
            searchz.push({ field: 'name', value: String(values[1]), operator: 'is'})
            $( ".container" ).hide();
-          
            w2ui['layout'].show('main', window.instant)
            w2ui['grid1'].search(searchz, 'OR');
            }
