@@ -4,23 +4,25 @@
     <title>Memphis Navigator</title>
     <script src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/w2ui.js"></script>
-    
     <link rel="stylesheet" type="text/css" href="../css/w2ui.css" />
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
- 
+
 </head>
 <body>
 
-<div class="Content" id="Content" style="overflow-y: hidden; top:0; left:10px width:110%; height: 200%;">
+<div id="container1"></div>
+<div id="container2"></div>
+
+<div class="Content" id="Content" style="overflow-y:hidden; top:0; left:10px;"></div>
+</div>
+<div class="ContentSame" id="ContentSame" style="height:0px;"></div>
 <div id="toc" style="top:0; float:right">
     <ul class="jump" style="width:95%">
     </ul>
 </div>
-</div>
-
-<div class="ContentSame" id="ContentSame" style="height:0px;"></div>
 
 <script type="text/javascript">
+
 $("html, body").css({
     overflow: 'hidden',
     height: '100%'
@@ -39,7 +41,6 @@ function getParameters()
 }
 
 var parameters = getParameters();
-
 function getValue(file){
    var value= $.ajax({ 
       url: file, 
@@ -47,6 +48,7 @@ function getValue(file){
    }).responseText;
    return value;
 }
+
 persons=$.parseJSON(getValue('../data/persons.json'))
 persons_sel=persons[4]
 objects=$.parseJSON(getValue('../data/objects.json'))
@@ -62,27 +64,27 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
       
         //loop 
          var i;
-         $('<li><a href="#selected" class="tocstyle">Selected Person</li>').appendTo('#toc');
-	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#Content');
+         $('<li><a href="#selected" class="tocstyle">&#9776; General Information</li>').appendTo('#toc');
+	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#container2');
 
        var samename= [];
        
-           $('<p class="pstyle"><b>ID: </b> '+(persons_sel[sel_record].id_persons).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Name: </b> '+(persons_sel[sel_record].name).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>English: </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Additional name: </b> '+(persons_sel[sel_record].other_name).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Gender: </b> '+(persons_sel[sel_record].gender).toString()+'</p>').appendTo('#Content');
+           $('<p class="pstyle"><b>ID: </b> '+(persons_sel[sel_record].id_persons).toString()+'</p>').appendTo('#container2');
+           $('<p class="pstyle"><b>Name: </b> '+(persons_sel[sel_record].name).toString()+'</p>').appendTo('#container2');
+           $('<p class="pstyle"><b>English: </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#container2');
+           $('<p class="pstyle"><b>Additional name: </b> '+(persons_sel[sel_record].other_name).toString()+'</p>').appendTo('#container2');
+           $('<p class="pstyle"><b>Gender: </b> '+(persons_sel[sel_record].gender).toString()+'</p>').appendTo('#container2');
 
-           $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
-	   $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#Content');
-           $('<p class="pstyle"><b>Reference: </b> '+(persons_sel[sel_record].person_no_ranke).toString()+'</p>').appendTo('#Content');
+           $('<li><a href="#additionalinformation" class="tocstyle">&#9776; Additional Information</li>').appendTo('#toc');
+	   $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#container2');
+           $('<p class="pstyle"><b>Reference: </b> '+(persons_sel[sel_record].person_no_ranke).toString()+'</p>').appendTo('#container2');
           
-           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
-	   $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
+           $('<li><a href="#dating" class="tocstyle">&#9776; Dating</li>').appendTo('#toc');
+	   $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#container2');
            key=relationleft["persons_dating_"+sel_record].right_id;
-	   $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
+	   $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#container2');
+           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#container2');
+           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#container2');
 
        $.each(persons[2], function( index, value_pers ) {
        if (sel_name == value_pers.name){
@@ -170,20 +172,20 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
-string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.object_id+"'>";
+string="<td class='tdstyle'><a href='singleview_objects.html?ids="+p.object_id+"'>";
    $tbody.append('<tr align="center" />').children('tr:last')
     .append(string+p.object_id+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
+    .append("<td class='tdstyle'>"+p.type+"</td>")
+    .append("<td class='tdstyle'>"+p.subtype+"</td>")
+    .append("<td class='tdstyle'>"+p.provenance+"</td>")
    
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
+    .append("<td class='tdstyle'>"+p.location+"</td>")
+    .append("<td class='tdstyle'>"+p.inventory+"</td>")
 })
 
-$('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
-$('<h2 id="relatedobjects" class="h2style">RELATED OBJECT(S)</h2>').appendTo('#Content');
-$table.appendTo('#Content');
+$('<li><a href="#relatedobjects" class="tocstyle">&#9776; Related Object(s)</li>').appendTo('#toc');
+$('<h2 id="relatedobjects" class="h2style">RELATED OBJECT(S)</h2>').appendTo('#container2');
+$table.appendTo('#container2');
 }
 
 //###########################################################################################################
@@ -194,17 +196,17 @@ $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
-     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
+     string="<td class='tdstyle'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
    
  $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+    .append("<td class='tdstyle'>"+p.person_name+"</td>")
+    .append("<td class='tdstyle'>"+p.person_name_translit+"</td>")
+    .append("<td class='tdstyle'>"+p.gender+"</td>")
 })
-$('<li><a href="#relatedpersons" class="tocstyle">Related Person(s)</li>').appendTo('#toc');
-$('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#Content');
-$table.appendTo('#Content');
+$('<li><a href="#relatedpersons" class="tocstyle">&#9776; Related Person(s)</li>').appendTo('#toc');
+$('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#container2');
+$table.appendTo('#container2');
 }
 //###########################################################################################################
 if (titles_arr.length > 0) {
@@ -214,19 +216,19 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(titles_arr, function( index, p ) {
-string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_titles.html?ids="+p.title_id+"'>";
+string="<td class='tdstyle'><a href='singleview_titles.html?ids="+p.title_id+"'>";
 
 $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.title_id+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+    .append("<td class='tdstyle'>"+p.title+"</td>")
+    .append("<td class='tdstyle'>"+p.title_translat+"</td>")
+    .append("<td class='tdstyle'>"+p.gender+"</td>")
 
 
 })
-$('<li><a href="#relatedtitles" style="color:#fff; font-size:20px; text-decoration: none">Related Title(s)</li>').appendTo('#toc');
-$('<h2 id="relatedtitles" class="h2style">RELATED TITLE(S)</h2>').appendTo('#Content');
-$table.appendTo('#Content');
+$('<li><a href="#relatedtitles" style="color:#fff; font-size:20px; text-decoration: none">&#9776; Related Title(s)</li>').appendTo('#toc');
+$('<h2 id="relatedtitles" class="h2style">RELATED TITLE(S)</h2>').appendTo('#container2');
+$table.appendTo('#container2');
 }
 if (samename.length > 0) {
 
@@ -236,73 +238,29 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(samename, function( index, p ) {
-  string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.ids+"&name="+p.name+"'>";
+  string="<td class='tdstyle'><a href='singleview_persons.html?ids="+p.ids+"&name="+p.name+"'>";
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.name+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.englisch+"</td>")
-  .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+    .append("<td class='tdstyle'>"+p.name+"</td>")
+    .append("<td class='tdstyle'>"+p.englisch+"</td>")
+  .append("<td class='tdstyle'>"+p.gender+"</td>")
 })
-$('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
-$('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#Content');
+$('<li><a href="#samepersons" class="tocstyle">&#9776; Persons with same name</li>').appendTo('#toc');
+$('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#container2');
 
-$("#ContentSame").css({"height":"150px" })
+$("#ContentSame").css({"height":"70px" })
 $table.appendTo('#ContentSame');
-$('#ContentSame').appendTo('#Content')
+$('#ContentSame').appendTo('#container2')
 }
 
-/*
-$.getScript( "../js/plotly.js", function( data, textStatus, jqxhr ) {
-
-object_type=[]
-object_provenance=[]
-object_material=[]
-titles_gott_kult=[]
-titles_name=[]
-$.each(samename, function( index, p ) {
-try{
-kobj=relationright['persons_objects_'+p.key].right_id
-i=0;
-while(kobj[i])
-{
-object_type.push(objects_sel[kobj[i]].object_type)
-object_provenance.push(objects_sel[kobj[i]].object_provenance)
-object_material.push(objects_sel[kobj[i]].object_material)
-i++;
-}
-} catch(e)
-{}
-try{
-ktit=relationright['persons_titles_'+p.key].right_id
-i=0;
-while(ktit[i])
-{
-titles_gott_kult.push(titles_sel[ktit[i]].gott_kult)
-titles_name.push(titles_sel[ktit[i]].titles_translat_eng)
-i++;
-}
-} catch(e)
-{}
-});
-
-if (samename.length > 1)
-{
-$('<li><a href="#statistics" class="tocstyle">Statistics:</li>').appendTo('#toc');
-$('<h2 id="statistics" class="h2style">STATISTICS for persons with same name</h2>').appendTo('#Content');
-$('<h3 class="h3style">Appearance of '+persons_sel[sel_record].name_translit+ ' in Database: '+samename.length+' ('+samename.length/persons[2].length*100+'% of all persons in Database)</h3>').appendTo('#Content');
-
-  
-});
-*/
-   
- $('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
-  $('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#Content');
-  $('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#Content');
-  $('<p class="pstyle"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#Content');
-  $('<p class="pstyle" ><b>Date: </b>07.06.2019</p>').appendTo('#Content');
-  $('<p class="pstyle"><b>Comment: </b>Verteilung der Personen</p>').appendTo('#Content'); 
+$('<li><a href="#metadata" class="tocstyle">&#9776; Metadata</li>').appendTo('#toc');
+$('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#container2');
+$('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#container2');
+$('<p class="pstyle"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#container2');
+$('<p class="pstyle" ><b>Date: </b>07.06.2019</p>').appendTo('#container2');
+$('<p class="pstyle"><b>Comment: </b>Verteilung der Personen</p>').appendTo('#container2'); 
      
-
+$("#container2").appendTo("#container1"); 
 $('a[href*="#"]').on('click',function(e) {
                 
 		e.preventDefault();
@@ -317,5 +275,7 @@ $('a[href*="#"]').on('click',function(e) {
 		});
 	});
 </script>
+
+
 </body>
 </html>
