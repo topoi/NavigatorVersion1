@@ -6,15 +6,14 @@ body {
 .Content {
   top: 5%;
   float: left;
-  position: absolute;
+  position: relative;
   //background: #D3D3D3;
   background: #ffffff;
   //border-style: solid;
   //left:2%;
   width: 95%;
-  height: 100%;
+  height: 200%;
   padding: 10px;
-  overflow: hidden;
 }
 
 .ContentSame {
@@ -76,14 +75,14 @@ list-style-type:none;
 }
 
 .h2style {
-     
+     padding-left: 20px;
      color:#2874b2;
      font-size:17px; 
      font-family: Arial, Helvetica, sans-serif;
 }
 
 .h3style {
-     
+     padding-left: 25px;
      color:black;
      //text-shadow: 0.3px 0.3px darkgray;
      font-size:15px; 
@@ -92,9 +91,16 @@ list-style-type:none;
 }
 
 .pstyle {
+   padding-left: 20px;
    color:black;
    font-size:13px; 
    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tdstyle {
+font-size:12px; 
+font-family: Arial, Helvetica, sans-serif;
+padding-left: 60px;
 }
 
 .tocstyle {
@@ -126,3 +132,17 @@ color: #ffff00;
 background: #000;
 border: 1px solid #fff;
 }
+#container1{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#container2{
+    left: 10px;
+    width: 110%;
+    height: 40%;
+    overflow: auto;
+    padding-right: 15px;
+}
+
