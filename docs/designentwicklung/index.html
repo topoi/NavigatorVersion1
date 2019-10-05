@@ -65,6 +65,7 @@ function getParameters()
     return parameters;
 }
 var parameters = getParameters();
+
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -483,15 +484,33 @@ $( "#bsd3-container .dropdown-item" ).click(function() {
 // FROM LINK
 
 if (parameters.persons == "true") {
-var values=parameters.english
-var searchy=[]
-searchy.push({ field: 'name_translit', value: values, operator: 'is'})
+
+//var values=parameters.english
+//var searchy=[]
+//searchy.push({ field: 'name_translit', value: values, operator: 'is'})
 $( ".container" ).hide();
 w2ui['layout'].show('main', window.instant)
-w2ui['grid1'].search(searchy, 'OR');
-//w2ui['grid1'].reload();
-w2ui['grid1'].stateSave();
-}
+//w2ui['grid1'].search(searchy, 'OR');
+////w2ui['grid1'].reload();
+//w2ui['grid1'].stateSave();
+
+var values=parameters.id
+$.each(persons[2], function( index, value_pers ) {
+      if (values == value_pers.id_persons){
+        name=value_pers.name
+       }
+      });
+w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
+w2ui['layout'].show('main', window.instant)
+document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+values+"&name="+name)
+
+
+
+
+};
+
+
+
 
 
 // FROM MENU
