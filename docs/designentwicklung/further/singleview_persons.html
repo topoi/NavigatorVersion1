@@ -10,8 +10,14 @@
 </head>
 <body>
 
+<!--<nav class="main-nav">
+  <a href="#top">Top</a>
+</nav>
+-->
+
 <div id="container1"></div>
 <div id="container2"></div>
+
 
 <div class="Content" id="Content" style="overflow-y:hidden; top:0; left:10px;"></div>
 </div>
@@ -21,6 +27,8 @@
     </ul>
 </div>
 
+<span id="buttonup" style="top: -2%; left: 50%; position: fixed;"><h4 style="font-size:30px;cursor:pointer; opacity:0.3">&#x2227;</h4></span> 
+<span id="buttondown" style="top: 40%; left: 47%; position: fixed;"><h4 style="font-size:30px;cursor:pointer; opacity:0.3">&#x2228;</h4></span>
 <script type="text/javascript">
 
 $("html, body").css({
@@ -28,8 +36,22 @@ $("html, body").css({
     height: '100%'
 });
 
+$(document).ready(function() {
+   
+    $('#buttondown').click(function(){
+        $('html, body').animate({scrollTop:1500}, 'slow');
+        return false;
+    });
+
+   $('#buttonup').click(function(){
+        $('html, body').animate({scrollTop:0}, 'slow');
+        return false;
+    });
+
+});
+
 function getParameters()
-{
+ {
     var parameterFragments = location.search.substr(1).split("&");
     var parameters = {}
     for(var i = 0; i < parameterFragments.length; i++)
@@ -64,7 +86,8 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
       
         //loop 
          var i;
-         $('<li><a href="#selected" class="tocstyle">&#9776; General Information</li>').appendTo('#toc');
+         
+         $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
 	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#container2');
 
        var samename= [];
@@ -75,11 +98,11 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
            $('<p class="pstyle"><b>Additional name: </b> '+(persons_sel[sel_record].other_name).toString()+'</p>').appendTo('#container2');
            $('<p class="pstyle"><b>Gender: </b> '+(persons_sel[sel_record].gender).toString()+'</p>').appendTo('#container2');
 
-           $('<li><a href="#additionalinformation" class="tocstyle">&#9776; Additional Information</li>').appendTo('#toc');
+           $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
 	   $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#container2');
            $('<p class="pstyle"><b>Reference: </b> '+(persons_sel[sel_record].person_no_ranke).toString()+'</p>').appendTo('#container2');
           
-           $('<li><a href="#dating" class="tocstyle">&#9776; Dating</li>').appendTo('#toc');
+           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
 	   $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#container2');
            key=relationleft["persons_dating_"+sel_record].right_id;
 	   $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#container2');
@@ -183,7 +206,7 @@ string="<td class='tdstyle'><a href='singleview_objects.html?ids="+p.object_id+"
     .append("<td class='tdstyle'>"+p.inventory+"</td>")
 })
 
-$('<li><a href="#relatedobjects" class="tocstyle">&#9776; Related Object(s)</li>').appendTo('#toc');
+$('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
 $('<h2 id="relatedobjects" class="h2style">RELATED OBJECT(S)</h2>').appendTo('#container2');
 $table.appendTo('#container2');
 }
@@ -204,7 +227,7 @@ $.each(persons_arr, function( index, p ) {
     .append("<td class='tdstyle'>"+p.person_name_translit+"</td>")
     .append("<td class='tdstyle'>"+p.gender+"</td>")
 })
-$('<li><a href="#relatedpersons" class="tocstyle">&#9776; Related Person(s)</li>').appendTo('#toc');
+$('<li><a href="#relatedpersons" class="tocstyle">Related Person(s)</li>').appendTo('#toc');
 $('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#container2');
 $table.appendTo('#container2');
 }
@@ -226,7 +249,7 @@ $tbody.append('<tr align="center"/>').children('tr:last')
 
 
 })
-$('<li><a href="#relatedtitles" style="color:#fff; font-size:20px; text-decoration: none">&#9776; Related Title(s)</li>').appendTo('#toc');
+$('<li><a href="#relatedtitles" style="color:#fff; font-size:20px; text-decoration: none">Related Title(s)</li>').appendTo('#toc');
 $('<h2 id="relatedtitles" class="h2style">RELATED TITLE(S)</h2>').appendTo('#container2');
 $table.appendTo('#container2');
 }
@@ -245,7 +268,7 @@ $.each(samename, function( index, p ) {
     .append("<td class='tdstyle'>"+p.englisch+"</td>")
   .append("<td class='tdstyle'>"+p.gender+"</td>")
 })
-$('<li><a href="#samepersons" class="tocstyle">&#9776; Persons with same name</li>').appendTo('#toc');
+$('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
 $('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#container2');
 
 $("#ContentSame").css({"height":"70px" })
@@ -253,7 +276,7 @@ $table.appendTo('#ContentSame');
 $('#ContentSame').appendTo('#container2')
 }
 
-$('<li><a href="#metadata" class="tocstyle">&#9776; Metadata</li>').appendTo('#toc');
+$('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
 $('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#container2');
 $('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#container2');
 $('<p class="pstyle"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#container2');
