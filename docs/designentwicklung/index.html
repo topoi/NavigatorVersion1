@@ -52,7 +52,7 @@ function kalauer() {
 alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 }
 </script>
-<script>
+<script src="https://code.jquery.com/jquery-3.4.1.js">
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -66,7 +66,31 @@ function getParameters()
 }
 var parameters = getParameters();
 
+  //data import
+   function getValue(file){
+   var value= $.ajax({ 
+      url: file, 
+      async: false
+   }).responseText;
+   return value;
+}
+
+var pstyle = 'background: #ffffff;  overflow-y: hidden;';
+persons=$.parseJSON(getValue('data/persons.json'))
+persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
+objects=$.parseJSON(getValue('data/objects.json'))
+objects_sel=$.parseJSON(getValue('data/objects_selection.json'))
+titles=$.parseJSON(getValue('data/titles.json'))
+titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
+relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
+relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
+dating=$.parseJSON(getValue('data/dating_selection.json'))  
+objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
+selection=$.parseJSON(getValue('data/selection.json'))  
+
+  
 </script>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -79,7 +103,7 @@ var parameters = getParameters();
 <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <div id="but" class="center" style="width: 20%; height: 2px;"></div>
-<div class="container">
+<div class="container" id="container">
 
 <div class="form-group" id="msall">
     <h1> Memphis Navigator</h1>
@@ -90,25 +114,34 @@ var parameters = getParameters();
     <span style="font-size:30px;cursor:pointer" id="sel_obj"><h4>&#9776; Objects</h4></span>
     <span style="font-size:30px;cursor:pointer; opacity:0.12" id="sel_title"><h4>&#9776; Titles</h4></span>
 </div>
+<!-- define selection menu (start)-->
 
-<div class="form-group" id="pers_engl">
-    <h2 >Persons</h2>
-    <h6 id="engl_name">select english name</h6>
-    <select id="ms_persons_engl" class="form-control" multiple>
-      <option value="Panehsi">Panehsi</option>
-      <option value="Baketmeret">Baketmeret</option>
-      <option value="Nayef">Nayef</option>
-      <option value="Maatnofret">Maatnofret</option>
-      <option value="Horemhebemnetjer">Horemhebemnetjer</option>
-      <option value="Nefertiti">Nefertiti</option>
-      <option value="Raaa">Raaa</option>
-      <option value="Yawaamen">Yawaamen</option>
-      <option value="Hornebuy">Hornebuy</option>
-      <option value="Ahmose">Ahmose</option>
-    </select>
-    
-  </div>
-  <div class="form-group" id="pers_orig">
+
+<h2 id="pers" style="opacity:0">Persons</h2>
+<script>
+  vars=[["pers_engl", "pers", "engl_name", "select english name", "ms_persons_engl"], ["pers_orig", "pers", "orig_name", "select original name", "ms_persons_orig"] ];
+  for (var i = 0; i <2; i++) {
+  c=$("<div class=\"form-group\" id="+vars[i][0]+"><div id="+vars[i][1]+"><h6 id="+vars[i][2]+"></h6></div></div>")
+  // Create selection menu
+  //var numbersString=persons_sel[0].name_translit.toString()
+  var names = "Baketmeret,Nayef,Maatnofret,Horemhebemnet,Nefertiti,Raaa,Yawaamen,Hornebuy,Ahmose";
+  var data = names.split(',');
+  var s = $("<select id="+vars[i][4]+" class=\"form-control\" multiple/>");
+  for(var val in data) {
+  $("<option />", {value: data[val], text: data[val]}).appendTo(s);
+ 
+      c.appendTo("#container")
+      s.appendTo("#pers");
+  }
+  }
+</script>
+
+<span style="font-size:30px;cursor:pointer; opacity:0" id="namepers1"><h4>&#9776; Show Selection Result</h4></span><span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
+
+<!--</div>-->
+<!-- Define selection menu (end)  -->
+<!--
+<div class="form-group" id="pers_orig">
     <h6 id="orig_name">select original name</h6>
     <select id="ms_persons_orig" class="form-control" multiple>
       <option value="PtH-m-wj#">PtH-m-wj#</option>
@@ -140,10 +173,48 @@ var parameters = getParameters();
     <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions1"><h4>&#9776; Select more?</h4></span>
     
   </div>
+ -->
+ 
 </div>
+
 <div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
 <script src="dist/bootstrap-select-dropdown.js"> </script>
+
+
+
 <script>
+function getParameters()
+{
+    var parameterFragments = location.search.substr(1).split("&");
+    var parameters = {}
+    for(var i = 0; i < parameterFragments.length; i++)
+    {
+        var splittedParameter = parameterFragments[i].split("=");
+        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
+    }
+    return parameters;
+}
+var parameters = getParameters();
+  
+function getValue(file){
+   var value= $.ajax({ 
+      url: file, 
+      async: false
+   }).responseText;
+   return value;
+}
+  var pstyle = 'background: #ffffff;  overflow-y: hidden;';
+persons=$.parseJSON(getValue('data/persons.json'))
+persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
+  objects=$.parseJSON(getValue('data/objects.json'))
+objects_sel=$.parseJSON(getValue('data/objects_selection.json'))
+titles=$.parseJSON(getValue('data/titles.json'))
+titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
+relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
+relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
+dating=$.parseJSON(getValue('data/dating_selection.json'))  
+objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
+selection=$.parseJSON(getValue('data/selection.json'))  
 $("html, body").css({
     overflow: 'hidden',
     height: '100%'
@@ -153,29 +224,7 @@ $("#pers_engl").hide();
 $("#pers_orig").hide(); 
 $("#digi").hide(); 
 
-function getValue(file){
-   var value= $.ajax({ 
-      url: file, 
-      async: false
-   }).responseText;
-   return value;
-}
-
-var pstyle = 'background: #ffffff;  overflow-y: hidden;';
-persons=$.parseJSON(getValue('data/persons.json'))
-persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
-objects=$.parseJSON(getValue('data/objects.json'))
-objects_sel=$.parseJSON(getValue('data/objects_selection.json'))
-titles=$.parseJSON(getValue('data/titles.json'))
-titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
-relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
-relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
-dating=$.parseJSON(getValue('data/dating_selection.json'))  
-objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
-selection=$.parseJSON(getValue('data/selection.json'))  
-
 //##################################   PERSONS  #########################################
-
 
 $('#grid1').w2grid({
     name    : 'grid1',
@@ -214,7 +263,6 @@ multiSearch: true,
        $("#p1").click(function(){
         
           count=count+1
-          
           document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
      });
    
@@ -231,7 +279,6 @@ multiSearch: true,
         if (sel_rec_ids.length) {
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%;overflow-y: hidden"></iframe>' )
-        
         document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString())
        
 }
@@ -431,6 +478,7 @@ $( "#sel_pers" ).click(function() {
   $(".form-group#pers_engl").show()
   $(".form-group#pers_orig").show()
   $("#msall").hide()
+  $("#pers").css("opacity", "1")
   $("#namepers1").css("opacity", "0.3")
   $("#moreoptions").css("opacity", "0")
   w2ui.layout.content('main', w2ui.grid1);
@@ -516,6 +564,7 @@ $('#namepers1').click(function (event) {
            $("#back").css("opacity", "1")
            $("#upper").addClass(".mt-2 mb-3")
            var values = $('#ms_persons_engl').val();
+    
            if (values.length >0) {
            var searchy=[]
            searchy.push({ field: 'name_translit', value: String(values[0]), operator: 'is'})
@@ -572,3 +621,4 @@ window.location.reload(true);
 </script>
 </body>
 </html>
+
