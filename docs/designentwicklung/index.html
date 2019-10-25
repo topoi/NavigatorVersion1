@@ -111,31 +111,34 @@ var parameters = getParameters();
    }).responseText;
    return value;
 }
-
-
   var pstyle = 'background: #ffffff;  overflow-y: hidden;';
   persons=$.parseJSON(getValue('data/persons.json')) 
   persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
   objects=$.parseJSON(getValue('data/objects.json'))
   objects_sel=$.parseJSON(getValue('data/objects_selection.json'))
   titles=$.parseJSON(getValue('data/titles.json'))
- titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
-relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
-relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
-dating=$.parseJSON(getValue('data/dating_selection.json'))  
-objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
-selection=$.parseJSON(getValue('data/selection.json')) 
+  titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
+  relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
+  relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
+  dating=$.parseJSON(getValue('data/dating_selection.json'))  
+  objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
+  selection=$.parseJSON(getValue('data/selection.json')) 
 
-  vars=[["pers_engl", "pers", "engl_name", "select english name", "ms_persons_engl"], ["pers_orig", "pers", "orig_name", "select original name", "ms_persons_orig"] ];
-
-  for (var i = 0; i <2; i++) {
-  console.log(persons[3][1])  
+  //persons[3].english[0]
+  //persons[3].ID[0]
+  vars=[["pers_engl", "pers", "engl_name", "select english name", "ms_persons_engl", ["Ahmose","Raaa"], "#ms_persons_engl", "bsd1-container"],
+	["pers_orig", "pers", "orig_name", "select original name", "ms_persons_orig", persons[3].name[0], "#ms_persons_orig", "bsd2-container"],
+	["pers_gender", "pers", "gender", "select gender", "ms_persons_gender", persons[3].gender,"#ms_persons_gender", "bsd3-container"],
+	["pers_id", "pers", "id", "select id", "ms_persons_id", [1,2,3,4], "#ms_persons_id", "bsd4-container"]];
+  var keys = [];
+  for (var k in persons[3]) keys.push(k);
+  //alert(persons[3].ID[0])
+ 
+  for (var i = 0; i<4; i++) {
   c=$("<div class=\"form-group\" id="+vars[i][0]+"><div id="+vars[i][1]+"><h6 id="+vars[i][2]+"></h6></div></div>")
   console.log("<div class=\"form-group\" id="+vars[i][0]+"><div id="+vars[i][1]+"><h6 id="+vars[i][2]+"></h6></div></div>")
-  // Create selection menu
-  //var numbersString=persons_sel[0].name_translit.toString()
-  var names = "Baketmeret,Nayef,Maatnofret,Horemhebemnet,Nefertiti,Raaa,Yawaamen,Hornebuy,Ahmose";
-  var data = names.split(',');
+
+  var data = vars[i][5]
   var s = $("<select id="+vars[i][4]+" class=\"form-control\" multiple/>");
   for(var val in data) {
   $("<option />", {value: data[val], text: data[val]}).appendTo(s);
@@ -148,11 +151,10 @@ $("html, body").css({
     overflow: 'hidden',
     height: '100%'
 });
-
-$("#pers_engl").hide();    
-$("#pers_orig").hide(); 
-$("#digi").hide(); 
-
+for (var i = 0; i<4; i++) {
+$(vars[i][0]).hide();     
+}
+  
 //##################################   PERSONS  #########################################
 
 $('#grid1').w2grid({
@@ -311,7 +313,8 @@ multiSearch: true,
           count=count-1
           document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
-      });
+ });
+	    
        event.onComplete = function() {
         var sel_rec_ids = grid.getSelection();
       if (sel_rec_ids.length) {
@@ -356,11 +359,11 @@ $(function () {
 });
 
 $(document).ready(function(){
-$.getScript( "dist/bootstrap-select-dropdown.js", function() { 
-$('#ms_persons_engl').selectDropdown();    
-$('#ms_persons_orig').selectDropdown(); 
-$('#ms_objects_digi').selectDropdown(); 
-});
+    $.getScript( "dist/bootstrap-select-dropdown.js", function() {
+	for (var i = 0; i<4; i++) {
+        $(vars[i][6]).selectDropdown();    
+	}
+//});
 
 
 $("#back").click(function() {
@@ -371,27 +374,25 @@ w2ui['layout'].hide('main', window.instant)
 $( ".container" ).show();
 })
 
-
-//$("#moreoptions,#moreoptions1").click(function() {
-  $("#moreoptions").click(function() {
-  //alert("test")
-  //$( "div" ).text( title );
-  $("#bsd1-container").css("opacity","1")
-  $("#bsd2-container").css("opacity","1")
-  $("#bsd3-container").css("opacity","1")
-  $("#pers_engl").css("opacity","1")
-  $("#pers_sel").css("opacity","1")
-  $("#digi").css("opacity","1")
+$("#moreoptions,#moreoptions1").click(function() {
+//  $("#moreoptions").click(function() {
+for (var i = 0; i<4; i++) {
+    $(vars[i][7]).css("opacity","1")
+    $(vars[i][0]).css("opacity","1")
+}
+ 
   $("#moreoptions").css("opacity", "0")
   $("#namepers1").css("opacity", "0.3")
   
 });
 
-$( "#sel_pers" ).click(function() {
-  $("#bsd1-container .input-group .form-control").attr("placeholder","select englisch name")
-  $("#bsd2-container .input-group .form-control").attr("placeholder","select original name")
-  $(".form-group#pers_engl").show()
-  $(".form-group#pers_orig").show()
+  $( "#sel_pers" ).click(function() {
+
+    for (var i = 0; i<4; i++) {
+	    $(vars[i][7]+".input-group .form-control").attr("placeholder","select english name")
+            $(".form-group#"+vars[i][0]).show()
+	}
+  
   $("#msall").hide()
   $("#pers").css("opacity", "1")
   $("#namepers1").css("opacity", "0.3")
@@ -410,9 +411,11 @@ $( "#sel_obj" ).click(function() {
 
 
 $( "#bsd1-container .dropdown-item" ).click(function() {
+    
   $("#bsd1-container").css("opacity","0.12")
   $("#bsd2-container").css("opacity","0.12")
   $("#bsd3-container").css("opacity","0.12")
+  $("#bsd4-container").css("opacity","0.12")
   $("#pers_engl").css("opacity","0.12")
   $("#namepers1").css("opacity", "1")
   $("#moreoptions").css("opacity", "1")
@@ -424,6 +427,7 @@ $( "#bsd2-container .dropdown-item" ).click(function() {
   $("#bsd1-container").css("opacity","0.12")
   $("#bsd2-container").css("opacity","0.12")
   $("#bsd3-container").css("opacity","0.12")
+  $("#bsd4-container").css("opacity","0.12")
   $("#namepers1").css("opacity", "1")
   $("#moreoptions").css("opacity", "1")
   
@@ -433,12 +437,25 @@ $( "#bsd3-container .dropdown-item" ).click(function() {
   //$("#digi").css("opacity","0.12")
   $("#bsd1-container").css("opacity","0.12")
   $("#bsd2-container").css("opacity","0.12")
-  $("#bsd3-container").css("opacity","0.12")
+    $("#bsd3-container").css("opacity","0.12")
+    $("#bsd4-container").css("opacity","0.12")
   $("#namepers1").css("opacity", "1")
   $("#nameobj1").css("opacity", "1")
   $("#moreoptions1").css("opacity", "1")
   
 });
+$( "#bsd4-container .dropdown-item" ).click(function() {
+  //$("#digi").css("opacity","0.12")
+  $("#bsd1-container").css("opacity","0.12")
+  $("#bsd2-container").css("opacity","0.12")
+    $("#bsd3-container").css("opacity","0.12")
+    $("#bsd4-container").css("opacity","0.12")
+  $("#namepers1").css("opacity", "1")
+  $("#nameobj1").css("opacity", "1")
+  $("#moreoptions1").css("opacity", "1")
+  
+});
+
 // SELECT PERSONS
 // FROM LINK
 
@@ -504,6 +521,7 @@ $('#nameobj1').click(function (event) {
        });
 });
 
+  });
 </script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
