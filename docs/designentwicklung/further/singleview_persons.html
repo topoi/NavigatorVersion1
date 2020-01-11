@@ -37,7 +37,7 @@ $("html, body").css({
 });
 
 $(document).ready(function() {
-   
+    
     $('#buttondown').click(function(){
         $('html, body').animate({scrollTop:1500}, 'slow');
         return false;
@@ -65,7 +65,8 @@ function getParameters()
 var parameters = getParameters();
 function getValue(file){
    var value= $.ajax({ 
-      url: file, 
+       url: file,
+       dataType: 'json',
       async: false
    }).responseText;
    return value;

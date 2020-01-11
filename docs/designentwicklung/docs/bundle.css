@@ -2243,9 +2243,9 @@ input[type="button"].btn-block {
     margin-left: 0; }
 
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: relative;
+  top: 10%;
+  left: 220px;
   z-index: 1000;
   display: none;
   float: left;
@@ -2266,6 +2266,7 @@ input[type="button"].btn-block {
   left: 0; }
 
 .dropdown-menu-right {
+  left: 220px;
   right: 0;
   left: auto; }
 

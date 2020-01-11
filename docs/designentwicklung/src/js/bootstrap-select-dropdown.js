@@ -136,7 +136,9 @@ let SelectDropdownIndex = 1
     */
 
   class SelectDropdown {
-    constructor(element, config) {
+
+      
+      constructor(element, config) {
       this._multiselect = this._isMultiselect(element)
       this._config  = this._getConfig(config)
       this._element = element
