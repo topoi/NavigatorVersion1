@@ -204,16 +204,47 @@ function DropdownMenu(var1, var2, par1)
 
     selvalues = new Object()
     var currentAlpha="";
-
+    
     function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
 	//$("[id*=-container]").find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-255px","position":"absolute"})
+	
+	$( "<p id='personen' style='opacity:0'>Persons:</p>" ).appendTo("#selectedvalues")
+	$( "<p id='genders' style='opacity:0'>Gender:</p>" ).appendTo("#selectedvalues")
+
+
+	 	
+	$("<div class='personality'></div>")
+        $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
 	$("#container" ).on("click", ".dropdown-item", function () {
-	   
-	    $("#selectionresult").css("opacity", "1")
-	    $( ".mt-2.mb-3" ).appendTo("#selectedvalues")
+
+	    
 	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
+	    $("#selectionresult").css("opacity", "1")
+	    var myarray = [];
+	    myarray.push("Amenmose");
+	    myarray.push("Amenia");
+	    
+	    d=$( ".mt-2.mb-3" ).find('span').text()
+	    f=d.split('[X]')
+	    alert(f[0])
+	    if(jQuery.inArray(f[0], myarray)) {
+	    
+	    alert(f[0])
+	    $("#personen").css("opacity", "1")
+	    $( ".mt-2.mb-3" ).appendTo("#personen")
+	
+		
+		
+	    }
+	    if (temp=="bsd20-container") {
+		$("#genders").css("opacity", "1")
+		//$( ".mt-2.mb-3" ).appendTo("#genders")
+		$( ".mt-2.mb-3" ).find('span').appendTo("#genders")
+		$('.mt-2.mb-3').find('span').remove()
+	     }
+
 	    
 	    var sel=$( ".dropdown-item.active" ).last().text()
 	    var key=""
@@ -254,7 +285,6 @@ $("#selectionresult").on("click",  function () {
 //      PERSONS       #
 //#####################
 
-
 $("[id^=Alpha]").css("background-color","white")
     $("#main_content").on("click", "[id^=alpha]", function () {
 	
@@ -273,8 +303,6 @@ $("[id^=Alpha]").css("background-color","white")
 	
 	$("#main_content").show();
 	$(obj[$(this).text()][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-255px","position":"absolute"}).show();
-	
-	
     });
 
 $( "#sel_pers" ).on("click", function () {
@@ -322,7 +350,7 @@ $( "#sel_pers" ).on("click", function () {
     $("#container").on("click","#bsd20-container", function() {
 	$("#main_content").hide();
 	$("[id*=-container]").find(".dropdown-menu.dropdown-menu-right").hide();
-
+	
 	$("#bsd20-container").css({position: 'relative'});
       	$("#bsd20-container").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
 	$("#bsd20-container").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
@@ -375,7 +403,7 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
 // SEARCH GRID 
 
 function select(values="",par1="") {
-  
+    
     $("#reset").css("opacity", "0")
     $("#back").css("opacity", "1")
     $("#upper").addClass(".mt-2 mb-3")
@@ -384,7 +412,7 @@ function select(values="",par1="") {
 	   {
 	       search_pers.push({ field: values[index], value: String(index), operator: 'is'})
 	   });
-    console.log(search_pers)
+    
     $( ".container" ).hide();
     w2ui['layout'].show('main', window.instant)
     w2ui[par1].search(search_pers, 'OR');
