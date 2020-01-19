@@ -228,15 +228,14 @@ function DropdownMenu(var1, var2, par1)
 	    
 	    d=$( ".mt-2.mb-3" ).find('span').text()
 	    f=d.split('[X]')
-	    alert(f[0])
+	   
 	    if(jQuery.inArray(f[0], myarray)) {
 	    
-	    alert(f[0])
+	    
 	    $("#personen").css("opacity", "1")
-	    $( ".mt-2.mb-3" ).appendTo("#personen")
-	
-		
-		
+	    
+		$( "#personen" ).append( "<strong>  "+f[0]+", </strong>" );
+		$( ".mt-2.mb-3" ).remove()
 	    }
 	    if (temp=="bsd20-container") {
 		$("#genders").css("opacity", "1")
