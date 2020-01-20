@@ -217,26 +217,46 @@ function DropdownMenu(var1, var2, par1)
 	 	
 	$("<div class='personality'></div>")
         $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
+        
 	$("#container" ).on("click", ".dropdown-item", function () {
-
+		       
 	    
-	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
+            var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
+		       
 	    $("#selectionresult").css("opacity", "1")
-	    var myarray = [];
-	    myarray.push("Amenmose");
-	    myarray.push("Amenia");
-	    
-	    d=$( ".mt-2.mb-3" ).find('span').text()
+	    var myarray_pers = [];
+	    myarray_pers.push("Amenmose");
+            myarray_pers.push("Amenia");
+		       
+            var myarray_gender = [];
+	    myarray_gender.push("male");
+            myarray_gender.push("female");
+
+            d=$( ".mt-2.mb-3" ).find('span').text()
+            
 	    f=d.split('[X]')
-	   
-	    if(jQuery.inArray(f[0], myarray)) {
+            $( "#personen" ).empty()
+            $( "<p id='personen' style='opacity:0'>Persons:</p>" ).appendTo("#selectedvalues")
+            
+		       $.each(f, function(index) {
+		       
+	    if($.inArray(f[index], myarray_pers) != -1) {
 	    
+		$("#personen").css("opacity", "1")
+	       	$( "#personen" ).append( "<strong>  "+f[index]+"     </strong>" );
+		
+		       }
+            if($.inArray(f[index], myarray_gender) != -1) {
 	    
-	    $("#personen").css("opacity", "1")
+		$("#genders").css("opacity", "1")
+	       	$( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
+		
+		       }
+		       
+
+		       })
 	    
-		$( "#personen" ).append( "<strong>  "+f[0]+", </strong>" );
-		$( ".mt-2.mb-3" ).remove()
-	    }
+		       
 	    if (temp=="bsd20-container") {
 		$("#genders").css("opacity", "1")
 		//$( ".mt-2.mb-3" ).appendTo("#genders")
@@ -245,14 +265,16 @@ function DropdownMenu(var1, var2, par1)
 	     }
 
 	    
-	    var sel=$( ".dropdown-item.active" ).last().text()
+            var sel=$( ".dropdown-item.active" ).last().text()
+		       
 	    var key=""
 	    $.each(obj, function(index) {
 		if (obj[index][7] == "#"+temp) {
 		    key=obj[index][8];
 		    return;
 		}
-	    });
+		       });
+		      
 	    if (currentAlpha !="") {
 		selvalues[sel]=obj[currentAlpha][8];}
 	    if (currentAlpha == "") {
@@ -289,7 +311,8 @@ $("[id^=Alpha]").css("background-color","white")
 	
 	$("[id^=alpha]").css("color","black")
 	$("[id^=alpha]").css("font-size","15px")
-	currentAlpha=$(this).attr("id").replace('alpha','');
+        currentAlpha=$(this).attr("id").replace('alpha','');
+		       
 	$("#"+$(this).attr("id")).css("color","#007bff")
 	$("#"+$(this).attr("id")).css("font-size","18px")
 	var data=[persons[3].english[$(this).text()][0]];
@@ -301,12 +324,15 @@ $("[id^=Alpha]").css("background-color","white")
 	$("#main_content").prependTo(obj[$(this).text()][7])
 	
 	$("#main_content").show();
-	$(obj[$(this).text()][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-255px","position":"absolute"}).show();
+		       $(obj[$(this).text()][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-255px","position":"absolute"}).show();
+		       return currentAlpha;
     });
 
 $( "#sel_pers" ).on("click", function () {
     $("#persname").css("opacity","1")
-    var myObject = new Object();
+		       var myObject = new Object();
+
+		       console.log(persons[3].english)
     $.each(alphabet, function(index) {
 	
 	myObject[alphabet[index]] = [persons[3].english[alphabet[index]], "pers_engl", "pers", "engl_name", "Select English Name beginning with "+alphabet[index],alphabet[index] , "#"+alphabet[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
