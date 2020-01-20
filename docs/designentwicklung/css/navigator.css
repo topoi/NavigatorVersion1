@@ -146,3 +146,41 @@ border: 1px solid #fff;
     padding-right: 15px;
 }
 
+@font-face { 
+    font-family: "aegypt1";
+    src: url("fonts/UMSCH_IB.TTF"); 
+}
+
+@font-face { 
+    font-family: "aegypt2";
+    src: url("fonts/UMSCH_I.TTF"); 
+}
+@font-face { 
+    font-family: "aegypt3";
+    src: url("fonts/UMSCH_SB.TTF"); 
+}
+@font-face { 
+    font-family: "aegypt4";
+    src: url("fonts/UMSCH_S.TTF"); 
+}
+
+.aegypt1 {
+   color:red;
+   font-size:19px; 
+   font-family: aegypt1;
+}
+.aegypt2 {
+   color:red;
+   font-size:19px; 
+   font-family: aegypt2;
+}
+.aegypt3 {
+   color:red;
+   font-size:19px; 
+   font-family: aegypt3;
+}
+.aegypt4 {
+   color:red;
+   font-size:19px; 
+   font-family: aegypt4;
+}
