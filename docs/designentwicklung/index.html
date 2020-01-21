@@ -259,12 +259,14 @@ function DropdownMenu(var1, var2, par1)
 		    return;
 		}
 		       });
-		      
+
+	    
+	    
 	    if (currentAlpha !="") {
 		selvalues[sel]=obj[currentAlpha][8];}
 	    if (currentAlpha == "") {
 		selvalues[sel]=key;}
-	    
+	    console.log(selvalues)
 	});
 	currentAlpha=""
  };
@@ -417,17 +419,22 @@ function select(values="",par1="") {
     $("#reset").css("opacity", "0")
     $("#back").css("opacity", "1")
     $("#upper").addClass(".mt-2 mb-3")
-    var search_pers=[]
+    var search_name=[]
+    var search_gender=[]
+    console.log(values)
     $.each(values, function(index)
 	   {
-	       search_pers.push({ field: values[index], value: String(index), operator: 'is'})
+	       if (values[index]=="name_translit") {
+		   search_name.push({ field: values[index], value: String(index), operator: 'is'}) }
+	       if (values[index]=="gender") {
+		   search_gender.push({ field: values[index], value: String(index), operator: 'is'}) }
+	       
 	   });
     
     $( ".container" ).hide();
     w2ui['layout'].show('main', window.instant)
-    w2ui[par1].search(search_pers, 'OR');
+    w2ui[par1].search(search_name, 'OR');
     
-
 }
 });
 
