@@ -220,51 +220,36 @@ function DropdownMenu(var1, var2, par1)
         
 	$("#container" ).on("click", ".dropdown-item", function () {
 		       
-	    
-            var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
+	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
 		       
 	    $("#selectionresult").css("opacity", "1")
-	    var myarray_pers = [];
-	    myarray_pers.push("Amenmose");
-            myarray_pers.push("Amenia");
-		       
-            var myarray_gender = [];
-	    myarray_gender.push("male");
-            myarray_gender.push("female");
-
+	  
             d=$( ".mt-2.mb-3" ).find('span').text()
             
 	    f=d.split('[X]')
-            $( "#personen" ).empty()
-            $( "<p id='personen' style='opacity:0'>Persons:</p>" ).appendTo("#selectedvalues")
-            
-		       $.each(f, function(index) {
+            $( ".mt-2.mb-3" ).hide()  
+            $( "#personen" ).find('strong').remove()
+            $( "#genders" ).find('strong').remove()
 		       
-	    if($.inArray(f[index], myarray_pers) != -1) {
-	    
-		$("#personen").css("opacity", "1")
-	       	$( "#personen" ).append( "<strong>  "+f[index]+"     </strong>" );
+         $.each(f, function(index) {
 		
-		       }
-            if($.inArray(f[index], myarray_gender) != -1) {
-	    
+		    
+         if($.inArray(f[index].replace(/ /g, ''), persons[3].english["A"]) != -1) {
+	       
+		$("#personen").css("opacity", "1")
+		$( "#personen" ).append( "<strong>  "+f[index]+"     </strong>" );
+		
+         }
+	 if($.inArray(f[index].replace(/ /g, ''), persons[3].gender) != -1)
+		       
+             {
+	        $( ".mt-2.mb-3" ).hide()  
 		$("#genders").css("opacity", "1")
 	       	$( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
-		
-		       }
-		       
-
-		       })
+				       }
+	    })
 	    
-		       
-	    if (temp=="bsd20-container") {
-		$("#genders").css("opacity", "1")
-		//$( ".mt-2.mb-3" ).appendTo("#genders")
-		$( ".mt-2.mb-3" ).find('span').appendTo("#genders")
-		$('.mt-2.mb-3').find('span').remove()
-	     }
-
-	    
+	
             var sel=$( ".dropdown-item.active" ).last().text()
 		       
 	    var key=""
