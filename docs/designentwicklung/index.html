@@ -35,6 +35,14 @@ a {display: block;}
 
 <div id="upper">
 <span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
+<p class="radio" id="searchfield" style="display:inline; font-size:20px;cursor:pointer; top:0; left:40%; opacity:0">Text Search: <input type="text" id="searchfields" value=""></p>
+<br>
+<a class="radio" style="display:inline; top:7%; left:40%; opacity:0"><input type="radio" name="query" value="is" >is</input></a>
+<a class="radio" style="display:inline; top:7%; margin-left:10px; opacity:0"><input type="radio" name="query" value="begins"> begins  </input></a>
+<a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
+<a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
+<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>
+
 <span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:30px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
 <span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
 <div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
@@ -92,7 +100,8 @@ alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 <h2 id="obj" style="opacity:0">Objects</h2>
 <h2 id="title" style="opacity:0">Titles</h2>
 
-<span style="font-size:30px;cursor:pointer; opacity:0" id="selectionresult"><h4>&#9776; Show Selection Result</h4></span>
+<span style="font-size:30px;cursor:pointer; opacity:0" id="selectionresult"><h4>&#128269;</h4></span>
+
 <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
 </div>
 <div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
@@ -196,7 +205,7 @@ function DropdownMenu(var1, var2, par1)
 	    
 	    $("#msall").hide()
 	    $(var1).css("opacity", "1")
-	    $("#selectionresult").appendTo("#selectedvalues")
+	    //$("#selectionresult").appendTo("#selectedvalues")
 	    $("#moreoptions").css("opacity", "0")
 	    w2ui.layout.content('main', var2);
    
@@ -208,50 +217,29 @@ function DropdownMenu(var1, var2, par1)
     function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
-	//$("[id*=-container]").find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-255px","position":"absolute"})
+	
+	
 	
 	$( "<p id='personen' style='opacity:0'>Persons:</p>" ).appendTo("#selectedvalues")
 	$( "<p id='genders' style='opacity:0'>Gender:</p>" ).appendTo("#selectedvalues")
-
-
-	 	
+	$("#selectionresult").appendTo("#selectedvalues")
 	$("<div class='personality'></div>")
         $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
         
 	$("#container" ).on("click", ".dropdown-item", function () {
-		       
+            if (currentAlpha == "") {
+		currentAlpha="A"
+	    }
 	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
-		       
+	    $("#selectedvalues").css("opacity","1")
 	    $("#selectionresult").css("opacity", "1")
-	  
-            d=$( ".mt-2.mb-3" ).find('span').text()
+	    d=$( ".mt-2.mb-3" ).find('span').text()
             
 	    f=d.split('[X]')
             $( ".mt-2.mb-3" ).hide()  
-            $( "#personen" ).find('strong').remove()
-            $( "#genders" ).find('strong').remove()
-		       
-         $.each(f, function(index) {
-		
-		    
-         if($.inArray(f[index].replace(/ /g, ''), persons[3].english["A"]) != -1) {
-	       
-		$("#personen").css("opacity", "1")
-		$( "#personen" ).append( "<strong>  "+f[index]+"     </strong>" );
-		
-         }
-	 if($.inArray(f[index].replace(/ /g, ''), persons[3].gender) != -1)
-		       
-             {
-	        $( ".mt-2.mb-3" ).hide()  
-		$("#genders").css("opacity", "1")
-	       	$( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
-				       }
-	    })
 	    
 	
             var sel=$( ".dropdown-item.active" ).last().text()
-		       
 	    var key=""
 	    $.each(obj, function(index) {
 		if (obj[index][7] == "#"+temp) {
@@ -261,12 +249,36 @@ function DropdownMenu(var1, var2, par1)
 		       });
 
 	    
-	    
-	    if (currentAlpha !="") {
-		selvalues[sel]=obj[currentAlpha][8];}
-	    if (currentAlpha == "") {
+            $.each(f, function(index) {
+	
+	    if($.inArray($.trim(f[index]), persons[3].english[currentAlpha]) != -1) {
+	     
+		$("#personen").css("opacity", "1")
+		$("#personen").append( "<strong>  "+f[index]+"     </strong>" );
+
+		 var seen = {};
+		 $('#personen').find('strong').each(function() {
+		     var txt = $(this).text();
+		     if (seen[txt])
+			 $(this).remove();
+		     else
+			 seen[txt] = true;
+		 });
+		selvalues[sel]=obj[currentAlpha][8];
+         }
+
+	   if($.inArray($.trim(f[index]), persons[3].gender) != -1)
+		       
+             {
+   
+		$( ".mt-2.mb-3" ).hide()  
+		$("#genders").css("opacity", "1")
+	       	$( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
+	     
+
 		selvalues[sel]=key;}
-	    console.log(selvalues)
+	    })
+	   
 	});
 	currentAlpha=""
  };
@@ -293,12 +305,15 @@ $("#selectionresult").on("click",  function () {
 //      PERSONS       #
 //#####################
 
-$("[id^=Alpha]").css("background-color","white")
+    $("[id^=Alpha]").css("background-color","white")
+    currentAlpha="A";
+    
     $("#main_content").on("click", "[id^=alpha]", function () {
 	
 	$("[id^=alpha]").css("color","black")
 	$("[id^=alpha]").css("font-size","15px")
         currentAlpha=$(this).attr("id").replace('alpha','');
+	
 		       
 	$("#"+$(this).attr("id")).css("color","#007bff")
 	$("#"+$(this).attr("id")).css("font-size","18px")
@@ -317,9 +332,10 @@ $("[id^=Alpha]").css("background-color","white")
 
 $( "#sel_pers" ).on("click", function () {
     $("#persname").css("opacity","1")
-		       var myObject = new Object();
+    $(".radio").css("opacity","1")
+    var myObject = new Object();
 
-		       console.log(persons[3].english)
+    console.log(persons[3].english)
     $.each(alphabet, function(index) {
 	
 	myObject[alphabet[index]] = [persons[3].english[alphabet[index]], "pers_engl", "pers", "engl_name", "Select English Name beginning with "+alphabet[index],alphabet[index] , "#"+alphabet[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
@@ -412,30 +428,58 @@ w2ui['layout'].show('main', window.instant)
 document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+values+"&name="+name)
 };
 
-// SEARCH GRID 
-
-function select(values="",par1="") {
+    // SEARCH TEXT FIELD
     
+    $("#textfieldsearch").on("click",  function () {
+	$("#back").css("opacity", "1")
+	v=$("#searchfields").val()
+	g=w2ui["grid1"].getSearch()
+	fieldsearch= [];
+	$.each(g, function(index) {
+	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
+	})
+	w2ui["grid1"].search(fieldsearch, 'OR');
+	$( ".container" ).hide();
+	w2ui['layout'].show('main', window.instant)
+    })
+    // SEARCH GRID 
+    function select(values="",par1="") {
+
     $("#reset").css("opacity", "0")
     $("#back").css("opacity", "1")
     $("#upper").addClass(".mt-2 mb-3")
     var search_name=[]
     var search_gender=[]
+    console.log("in select function")
     console.log(values)
+    //$('input:radio[name=query]:checked').val()})
     $.each(values, function(index)
 	   {
 	       if (values[index]=="name_translit") {
-		   search_name.push({ field: values[index], value: String(index), operator: 'is'}) }
+		   search_name.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="gender") {
-		   search_gender.push({ field: values[index], value: String(index), operator: 'is'}) }
+		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
 	       
 	   });
     
     $( ".container" ).hide();
     w2ui['layout'].show('main', window.instant)
-    w2ui[par1].search(search_name, 'OR');
     
-}
+    if (search_name.length>0) { 
+    w2ui[par1].search(search_name, 'OR');
+    w2ui[par1].save();
+    var last=w2ui[par1].last.searchIds;
+    var tempresult = [];
+    $.each(last, function(index) {
+	tempresult.push(w2ui[par1].get(last[index])); 
+   
+    });
+    w2ui[par1].clear();
+	w2ui[par1].add(tempresult);}
+    if (search_gender.length>0) { 
+    w2ui[par1].search(search_gender, 'OR');
+    }
+  }
 });
 
 </script>
