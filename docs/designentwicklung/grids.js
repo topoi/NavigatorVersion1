@@ -25,7 +25,7 @@ multiSearch: true,
         //Beim nächsten Aufruf, werden die Search IDs ausgegeben
         //Daher hier bei onClick die Methode '.last'
          var plp= [];
-         $.each(grid.last.searchIds, function( index, value ) {
+         $.each(currentIds, function( index, value ) {
 
              plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
          
