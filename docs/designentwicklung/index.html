@@ -144,8 +144,12 @@ $("html, body").css({
       height: '100%'
 });
 
-//##############################################  
-  //Call function allTables defined in grids.js
+		 //##########################################
+		       //Call function allTables defined in grids.js
+
+
+
+		       
   currentIds=(1,2,3,4,5,6)
   allTables()
 //#############################################
@@ -197,7 +201,9 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     
 function DropdownMenu(var1, var2, par1)
 	{
-	    obj=par1;
+            obj=par1;
+            console.log(par2)
+	    console.log(var2)
 	    $(" .dropdown-menu-right" ).css({"margin-left":"1150px", "position":"fixed", "margin-top":"0px"})
 	    $.each(alphabet, function( index) {
 		$(obj[alphabet[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet[index]][4])
@@ -240,34 +246,27 @@ function DropdownMenu(var1, var2, par1)
 	    $("#selectedvalues").css("opacity","1")
 	    $("#selectionresult").css("opacity", "1")
 	    d=$( ".mt-2.mb-3" ).find('span').text()
-            
-		       f=d.split('[X]')
-		       console.log("split")
-		       console.log(f)
-            $( ".mt-2.mb-3" ).hide()  
+            f=d.split('[X]').filter(function(v){return v!==''});
+	  
+	    $( ".mt-2.mb-3" ).hide()  
 	    //var sel=$( ".dropdown-item.active" ).last().text()
             //var sel=$( ".dropdown-item.active" ).text()
             //alert(sel)
 
-            var key=""
-	    $.each(obj, function(index) {
-		if (obj[index][7] == "#"+temp) {
-		    key=obj[index][8];
-		    return;
-		}
-		       });
+           
 
             selvalues = new Object()
             $("#personen").find('strong').remove()
             $("#genders").find('strong').remove()
 
-		     
-           	       
-	     $.each(f, function(index) {
+		      
+            $.each(f, function(index) {
 
 	      if($.inArray($.trim(f[index]), uniquepersonlist.flat()) != -1)
-		{
-	     
+		       {
+		       
+	      
+		       
 		$("#personen").css("opacity", "1")
 		$("#personen").append( "<strong>  "+f[index]+"     </strong>" );
 
@@ -280,17 +279,19 @@ function DropdownMenu(var1, var2, par1)
 			 seen[txt] = true;
 		       });
 		 
-		 selvalues[$.trim(f[index])]=obj[currentAlpha][8];
+		 selvalues[$.trim(f[index])]="name_translit";
             }
 
 	   if($.inArray($.trim(f[index]), persons[3].gender) != -1)
 		       
              {
-   
+		      
+
 		$( ".mt-2.mb-3" ).hide()  
 		$("#genders").css("opacity", "1")
 	       	$( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
-		selvalues[$.trim(f[index])]=key;}
+		       
+		selvalues[$.trim(f[index])]="gender"}
 	    })
 		       
 	});
@@ -349,7 +350,7 @@ $( "#sel_pers" ).on("click", function () {
     $(".radio").css("opacity","1")
     var myObject = new Object();
 
-    console.log(persons[3].english)
+    
     $.each(alphabet, function(index) {
 	
 	myObject[alphabet[index]] = [persons[3].english[alphabet[index]], "pers_engl", "pers", "engl_name", "Select English Name beginning with "+alphabet[index],alphabet[index] , "#"+alphabet[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
@@ -463,10 +464,17 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
 	currentIds=w2ui["grid1"].last.searchIds;
 	$( ".container" ).hide();
 	w2ui['layout'].show('main', window.instant)
-    })
-    // SEARCH GRID 
+		       })
+		       
+    // SEARCH GRID
+
     function select(values="",par1="") {
 
+		      
+    w2ui.layout.content('main',w2ui['grid1'])
+		      
+    allTables()
+		       
     $("#reset").css("opacity", "0")
     $("#back").css("opacity", "1")
     $("#upper").addClass(".mt-2 mb-3")
@@ -485,26 +493,34 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
 	   });
     
     $( ".container" ).hide();
+    console.log("") 
     w2ui['layout'].show('main', window.instant)
-    if (search_name.length>0) { 
+    if (search_name.length>0) {
+    console.log("searchname")
+    console.log(search_name)
     w2ui[par1].search(search_name, 'OR');
     w2ui[par1].save();
-	currentIds=w2ui[par1].last.searchIds;
+
+    currentIds=w2ui[par1].last.searchIds;
 	
-	var tempresult = [];
-	$.each(currentIds, function(index) {
-	    tempresult.push(w2ui[par1].get(currentIds[index])); 
-   
+    var tempresult = [];
+    $.each(currentIds, function(index) {
+    tempresult.push(w2ui[par1].get(currentIds[index])); 
+    
     });
     w2ui[par1].clear();
     w2ui[par1].add(tempresult);
     }
 
 
-    if (search_gender.length>0) { 
+    if (search_gender.length>0) {
+    console.log("gender")
+    console.log(search_gender)
+    
     w2ui[par1].search(search_gender, 'OR');
+    console.log("test1")
     w2ui[par1].save();
-
+    console.log("test2")
     /*currentIds=w2ui[par1].last.searchIds;
 	
     var tempresult = [];
@@ -515,9 +531,6 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
     w2ui[par1].clear();
     w2ui[par1].add(tempresult);
     w2ui[par1].save();*/
-
-    
-
     }
   }
 });

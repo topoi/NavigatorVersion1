@@ -100,3 +100,16 @@ list-style-type:none;
     font-size:20px; 
     text-decoration: none;
 }
+
+@font-face { 
+    font-family: "aegypt";
+    src: url("UMSCH_IB.TTF"); 
+}
+
+
+
+.aegypt {
+   color:red;
+   font-size:13px; 
+   font-family: aegypt;
+}

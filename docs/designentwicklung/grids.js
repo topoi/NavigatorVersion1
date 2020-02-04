@@ -1,5 +1,14 @@
 function allTables()
 {
+    
+   
+    
+    if (w2ui['grid1'] != null) {
+	w2ui['grid1'].reset();
+	w2ui['grid1'].destroy();
+    }
+   
+    
 $('#grid1').w2grid({
     name    : 'grid1',
  show: { 
@@ -14,7 +23,8 @@ multiSearch: true,
     
     onSearch: function(event) {
         var grid = this;
-        },  
+    },
+    
     onClick: function(event) {
 	
         $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
@@ -61,7 +71,11 @@ multiSearch: true,
 });
 
 //##################################   OBJECTS  #########################################
-
+if (w2ui['grid2'] != null) {
+	w2ui['grid2'].reset();
+	w2ui['grid2'].destroy();
+    }
+   
 $('#grid2').w2grid({
     name    : 'grid2',
     show: { 
@@ -118,7 +132,11 @@ $(document).ready(function(){
 });
 
 //##################################   TITLES  #########################################
-
+if (w2ui['grid3'] != null) {
+	w2ui['grid3'].reset();
+	w2ui['grid3'].destroy();
+    }
+   
 $('#grid3').w2grid({
     name    : 'grid3',
  show: { 
@@ -170,6 +188,7 @@ multiSearch: true,
 }
 }}
 });
+    
 var config = {
  layout:{
         name: 'layout',
