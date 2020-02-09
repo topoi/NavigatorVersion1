@@ -1,4 +1,4 @@
-function allTables()
+function allTables(var1="")
 {
     
    
@@ -11,7 +11,9 @@ function allTables()
     
 $('#grid1').w2grid({
     name    : 'grid1',
- show: { 
+   
+
+    show: { 
             toolbar: true,
             footer: true
         },
@@ -188,15 +190,18 @@ multiSearch: true,
 }
 }}
 });
-    
+
+
+    if(w2ui.hasOwnProperty('layout')){
+	$().w2destroy('layout');
+        }
+
+ 
 var config = {
  layout:{
-        name: 'layout',
+        name: "layout",
         padding: 0,
         panels: [
-            //{ type: 'top', size: 250, resizable: true, minSize: 250, style: pstyle},
-            //{ type: 'left', size: 400, resizable: true, minSize: 120, style: pstyle},
-            //{ type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
             { type: 'main', resizable: true, overflow: 'hidden', style: pstyle }
          ]
     }
@@ -205,6 +210,7 @@ var config = {
 $(function () {
     // initialization
     $('#main1').w2layout(config.layout);
+   
     w2ui.layout.content('left', '<iframe class="sidebar" id="sidebar" src="sidebar.html" style="width: 100%; height: 100%"></iframe>');
     //w2ui['layout'].show('right', window.instant)
     
@@ -218,6 +224,9 @@ $(function () {
     $().w2grid(config.grid1);
     $().w2grid(config.grid2);
     $().w2grid(config.grid3);
+    
+    
+
     w2ui.layout.content('main', w2ui.grid1);
 });
 }

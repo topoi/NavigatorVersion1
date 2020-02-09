@@ -37,14 +37,15 @@ a {display: block;}
 <span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
 <p class="radio" id="searchfield" style="display:inline; font-size:20px;cursor:pointer; top:0; left:40%; opacity:0">Text Search: <input type="text" id="searchfields" value=""></p>
 <br>
-<a class="radio" style="display:inline; top:7%; left:40%; opacity:0"><input type="radio" name="query" value="is" checked="checked" >is</input></a>
+<a class="radio" style="display:inline; top:7%; left:40%; opacity:0"><input type="radio" name="query" value="is" checked="checked" >is  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px; opacity:0"><input type="radio" name="query" value="begins"> begins  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
 <span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>
 
-<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:30px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
-<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
+
+<span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
 <div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
   <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
   <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
@@ -135,23 +136,23 @@ var parameters = getParameters();
   objects=$.parseJSON(getValue('data/objects.json'))
   titles=$.parseJSON(getValue('data/titles.json'))
 
-  /*alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  numbers=['1-100', '101-200', '201-300', '301-400', '401-500', '501-600', '601-700', '701-800', '801-900', '901-1000', '1001-1100', '1101-1200', '1201-1300', '1301-1400', '1401-1500', '1501-1600', '1601-1700', '1701-1800', '1801-1900', '1901-2000', '2001-2100', '2101-2200', '2201-2300', '2301-2340']
-*/
+ 
+
+numbers=['1-100', '101-200', '201-300', '301-400', '401-500', '501-600', '601-700', '701-800', '801-900', '901-1000', '1001-1100', '1101-1200', '1201-1300', '1301-1400', '1401-1500', '1501-1600', '1601-1700', '1701-1800', '1801-1900', '1901-2000', '2001-2100', '2101-2200', '2201-2300', '2301-2340']
 
 $("html, body").css({
       overflow: 'hidden',
       height: '100%'
 });
 
-		 //##########################################
-		       //Call function allTables defined in grids.js
 
 
+//##########################################
+//Call function allTables defined in grids.js
 
-		       
   currentIds=(1,2,3,4,5,6)
   allTables()
+
 //#############################################
 
 $(document).ready(function(){
@@ -160,7 +161,7 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
     $("#back").click(function() {
 	$("#reset").css("opacity", "1");
-	$("#back").css("opacity", "0");
+	$("#back").css("opacity", "1");
 	$("#bgroup").css("opacity", "0");
 	w2ui['layout'].hide('main', window.instant)
 	$( ".container" ).show();
@@ -169,13 +170,19 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
     var collection=[]
     alphabet = 'ABDEGHIKMNOPQRSTUWY'.split('');
+    alphabet_orig = ['B', 'C', 'E', 'G', 'J', 'K', 'M', 'N', 'O', 'P', 'R', 'V', 'W']
     $.each(alphabet, function(index) {
 	$("#main_content ul").append('<li id="Alpha'+alphabet[index]+'" class="limenu"><a id="alpha'+alphabet[index]+'" href="#" style="color:black; font-size:15px">'+alphabet[index]+'</a></li>');
     })
+    $.each(alphabet_orig, function(index) {
+	$("#main_content ul").append('<li id="Beta'+alphabet_orig[index]+'" class="limenu"><a id="beta'+alphabet_orig[index]+'" href="#" style="color:black; font-size:15px">'+alphabet_orig[index]+'</a></li>');
+    })
     
-function BasicMenu(var1, par1="", par2="", par3="") {
+    function BasicMenu(var1, par1="", par2="", par3="", par4="") {
     
     obj=par1;
+    obj_orig=par4;
+    // NAME ENGLISH
     $.each(alphabet, function(index) {
 	
 	c=$("<div class=\"form-group\" id="+obj[alphabet[index]][1]+"><div id="+obj[alphabet[index]][2]+"><h6 id="+obj[alphabet[index]][3]+"></h6></div></div>")
@@ -187,7 +194,9 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	c.appendTo("#container")
 	s.appendTo(var1);
     });
+
     
+    // GENDER
     c=$("<div class=\"form-group\" id="+obj["gender"][1]+"><div id="+obj["gender"][2]+"><h6 id="+obj["gender"][3]+"></h6></div></div>")
     var data=obj["gender"][0];
     var s = $("<select id="+obj["gender"][5]+" class=\"form-control\" multiple/>");
@@ -196,19 +205,35 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     }
     c.appendTo("#container")
     s.appendTo(var1);
-    
+   
+    // NAME ORIGINAL
+    $.each(alphabet_orig, function(index) {
+	    
+	c=$("<div class=\"form-group\" id="+obj_orig[alphabet_orig[index]][1]+"><div id="+obj_orig[alphabet_orig[index]][2]+"><h6 id="+obj_orig[alphabet_orig[index]][3]+"></h6></div></div>")
+	var data=obj_orig[alphabet_orig[index]][0];
+	var s = $("<select id="+obj_orig[alphabet_orig[index]][5]+" class=\"form-control\" multiple/>");
+	for(var val in data) {
+	    $("<option/>", {value: data[val], text: data[val]}).appendTo(s);
+	 }
+	 c.appendTo("#container")
+	 s.appendTo(var1);
+    });
 };
     
-function DropdownMenu(var1, var2, par1)
+    function DropdownMenu(var1, var2, par1, par2)
 	{
             obj=par1;
-            console.log(par2)
-	    console.log(var2)
+            obj_orig=par2
 	    $(" .dropdown-menu-right" ).css({"margin-left":"1150px", "position":"fixed", "margin-top":"0px"})
 	    $.each(alphabet, function( index) {
 		$(obj[alphabet[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet[index]][4])
 		$(".form-group#"+obj[alphabet[index]][1]).show()
 	    });
+	    $.each(alphabet_orig, function( index) {
+		$(obj_orig[alphabet_orig[index]][7]+" .input-group .form-control").attr("placeholder", obj_orig[alphabet_orig[index]][4])
+		$(".form-group#"+obj_orig[alphabet_orig[index]][1]).show()
+	    });
+
 	    
 	    $("#msall").hide()
 	    $(var1).css("opacity", "1")
@@ -224,8 +249,11 @@ function DropdownMenu(var1, var2, par1)
     function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
-	$( "<p id='personen' style='opacity:0'>Persons:</p>" ).appendTo("#selectedvalues")
-	$( "<p id='genders' style='opacity:0'>Gender:</p>" ).appendTo("#selectedvalues")
+	
+	$( "<p style='display:inline; font-size:20px;'><br><br>Current Selection<br><br><br></p>" ).appendTo("#selectedvalues")
+	$( "<p id='personen' style='opacity:0.3'>Persons:</p>" ).appendTo("#selectedvalues")
+	$('<div id="selectrules" style="opacity:0.3"><a class="radio" style="display:inline;  opacity:1"><input type="radio" name="query1" value="AND" checked="checked">and</input></a><a class="radio" style="display:inline;  opacity:1"><input type="radio" name="query1" value="OR">or</input></a><a class="radio" style="display:inline;  opacity:0"><input type="radio" name="query1" value="NOT">not</input></a></div>').appendTo('#selectedvalues')
+	$( "<p id='genders' style='opacity:0.3'><br>Gender:</p>" ).appendTo("#selectedvalues")
 	$("#selectionresult").appendTo("#selectedvalues")
 	$("<div class='personality'></div>")
         $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
@@ -249,11 +277,6 @@ function DropdownMenu(var1, var2, par1)
             f=d.split('[X]').filter(function(v){return v!==''});
 	  
 	    $( ".mt-2.mb-3" ).hide()  
-	    //var sel=$( ".dropdown-item.active" ).last().text()
-            //var sel=$( ".dropdown-item.active" ).text()
-            //alert(sel)
-
-           
 
             selvalues = new Object()
             $("#personen").find('strong').remove()
@@ -285,8 +308,8 @@ function DropdownMenu(var1, var2, par1)
 	   if($.inArray($.trim(f[index]), persons[3].gender) != -1)
 		       
              {
-		      
-
+		$( "#selectrules" ).css("opacity","1")
+	
 		$( ".mt-2.mb-3" ).hide()  
 		$("#genders").css("opacity", "1")
 	       	$( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
@@ -302,7 +325,8 @@ function DropdownMenu(var1, var2, par1)
 // SHOW SELECTION RESULT #
 //########################
 
-$("#selectionresult").on("click",  function () {
+    $("#selectionresult").on("click",  function () {
+
     $.fn.ignore = function(sel){
 	return this.clone().find(sel||">*").remove().end();
     };
@@ -311,8 +335,11 @@ $("#selectionresult").on("click",  function () {
     
     $("#w2ui-grid-box").css("height","70%")
     $("#layout_layout_panel_main").css("height","100%")
-		       $(".w2ui-scroll-wrapper").css("width","95%")
-    select(values=selvalues,par1="grid1")
+	$(".w2ui-scroll-wrapper").css("width","95%")
+	
+	select(values=selvalues,par1="grid1")
+	
+    
     
 })
 
@@ -349,18 +376,21 @@ $( "#sel_pers" ).on("click", function () {
     $("#persname").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
-
+    var myObject_orig = new Object();
     
     $.each(alphabet, function(index) {
-	
-	myObject[alphabet[index]] = [persons[3].english[alphabet[index]], "pers_engl", "pers", "engl_name", "Select English Name beginning with "+alphabet[index],alphabet[index] , "#"+alphabet[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
+	myObject[alphabet[index]] = [persons[3].english[alphabet[index]], "pers_engl", "pers", "engl_name", "Select english name beginning with "+alphabet[index],alphabet[index] , "#"+alphabet[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
     })
     var i=Object.keys(myObject).length
     myObject["gender"]=[persons[3].gender, "pers_gender", "pers", "gender", "Select Gender", "gender","#gender", "#bsd"+(i+1)+"-container", "gender","gender"]
-    // TO DO: original names, id
+    $.each(alphabet_orig, function(index) {
+	myObject_orig[alphabet_orig[index]]=[persons[3].name[alphabet_orig[index]], "pers_name", "pers", "orig_name", "Select original name beginning with "+alphabet_orig[index], alphabet_orig[index], "#"+alphabet_orig[index], "#bsd"+String(index+i+2)+"-container", "name","original"];})
+    
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
-   
+    var vars_orig = JSON.stringify(myObject_orig);
+    var obj_orig = jQuery.parseJSON( vars_orig );
+    
     $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
 	$.each(alphabet, function(index) {
 	    $(obj[alphabet[index]][6]).selectDropdown();
@@ -375,11 +405,20 @@ $( "#sel_pers" ).on("click", function () {
 	$(obj["gender"][7]+" .input-group .form-control").attr("placeholder", obj["gender"][4]);
 	$(obj["gender"][7]).find('.dropdown-menu').css("z-index","12000")
 	$(obj["gender"][7]).css("margin-bottom","22px")
-
+	
+	$.each(alphabet_orig, function(index) {
+	    $(obj_orig[alphabet_orig[index]][6]).selectDropdown();
+	    $(obj_orig[alphabet_orig[index]][7]+" .input-group .form-control").attr("placeholder", obj_orig[alphabet_orig[index]][4]);
+	    $(obj_orig[alphabet_orig[index]][7]).find('.dropdown-menu').css("z-index","12000")
+	    $(obj_orig[alphabet_orig[index]][7]).css("margin-bottom","22px")
+	    if (index==0){$(obj_orig[alphabet_orig[index]][7]).show()}
+	    else {$(obj_orig[alphabet_orig[index]][7]).hide()}
+	});
     });
-    BasicMenu("#pers", par1=obj, par2=0, par3="");
-    DropdownMenu("#pers", w2ui.grid1, par1=obj);
-    SelectionMenu("#pers", par1=obj, "grid1");
+    
+    BasicMenu("#pers", par1=obj, par2=0, par3="", par4=obj_orig);
+    DropdownMenu("#pers", w2ui.grid1, par1=obj, par2=obj_orig);
+    SelectionMenu("#pers", par1=obj, "grid1", par2=obj_orig);
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
 
@@ -397,7 +436,6 @@ $( "#sel_pers" ).on("click", function () {
 	})
  
         $("#button").on("click","#bsd20-button", function() {
-		       
 	$("#main_content").hide();
 	$("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
 	
@@ -438,6 +476,8 @@ if (parameters.persons == "true") {
 $( ".container" ).hide();
 w2ui['layout'].show('main', window.instant)
 
+    
+    
 var values=parameters.id
 $.each(persons[2], function( index, value_pers ) {
       if (values == value_pers.id_persons){
@@ -445,6 +485,7 @@ $.each(persons[2], function( index, value_pers ) {
        }
       });
 
+   
 w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
 w2ui['layout'].show('main', window.instant)
 document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+values+"&name="+name)
@@ -467,23 +508,31 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
 		       })
 		       
     // SEARCH GRID
+    // initalize grid
+    initdata=[]
+    $.each(persons[2], function( index, value_pers ) {
+	initdata.push(parseInt(value_pers.recid))
+            
+    });
 
+    initlist=[]
+	$.each(initdata, function(index) {
+	    initlist.push(w2ui['grid1'].get(initdata[index])); 
+    })
+
+    
     function select(values="",par1="") {
 
-		      
-    w2ui.layout.content('main',w2ui['grid1'])
-		      
-    allTables()
-		       
-    $("#reset").css("opacity", "0")
-    $("#back").css("opacity", "1")
-    $("#upper").addClass(".mt-2 mb-3")
-    var search_name=[]
-    var search_gender=[]
-    console.log("in select function")
-    console.log(values)
-    //$('input:radio[name=query]:checked').val()})
-    $.each(values, function(index)
+	w2ui[par1].clear();
+	w2ui[par1].add(initlist);
+	
+	$("#reset").css("opacity", "1")
+	$("#back").css("opacity", "1")
+	$("#upper").addClass(".mt-2 mb-3")
+	var search_name=[]
+	var search_gender=[]
+   
+	$.each(values, function(index)
 	   {
 	       if (values[index]=="name_translit") {
 		   search_name.push({ field: values[index], value: String(index), operator: "is"  })}
@@ -492,47 +541,66 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
 	       
 	   });
     
-    $( ".container" ).hide();
-    console.log("") 
-    w2ui['layout'].show('main', window.instant)
-    if (search_name.length>0) {
-    console.log("searchname")
-    console.log(search_name)
-    w2ui[par1].search(search_name, 'OR');
-    w2ui[par1].save();
+	$( ".container" ).hide();
+  
+	w2ui['layout'].show('main', window.instant)
 
-    currentIds=w2ui[par1].last.searchIds;
+	var currentIds1=[]
+	var currentIds2=[]
+
+	if (search_name.length>0) {
+	 
+	w2ui[par1].search(search_name, 'OR');
+	    currentIds1=w2ui[par1].last.searchIds;
+	    console.log(currentIds1)
+	}
+	else {
+	    currentIds1=initdata
+	}
+	if (search_gender.length>0) {
+	w2ui[par1].search(search_gender, 'OR');
+	currentIds2=w2ui[par1].last.searchIds;
+	}
+		else {
+		    currentIds2=initdata
+		    console.log(currentIds2)
+	}
+
 	
-    var tempresult = [];
-    $.each(currentIds, function(index) {
-    tempresult.push(w2ui[par1].get(currentIds[index])); 
-    
-    });
-    w2ui[par1].clear();
-    w2ui[par1].add(tempresult);
-    }
-
-
-    if (search_gender.length>0) {
-    console.log("gender")
-    console.log(search_gender)
-    
-    w2ui[par1].search(search_gender, 'OR');
-    console.log("test1")
-    w2ui[par1].save();
-    console.log("test2")
-    /*currentIds=w2ui[par1].last.searchIds;
+	// AND SELECTION
 	
-    var tempresult = [];
-    $.each(currentIds, function(index) {
-    tempresult.push(w2ui[par1].get(currentIds[index])); 
-    
-    });
-    w2ui[par1].clear();
-    w2ui[par1].add(tempresult);
-    w2ui[par1].save();*/
+	var common=""
+	if ($('input:radio[name=query1]:checked').val() == "AND") {
+	common = $.grep(currentIds1, function(element) {
+	    return $.inArray(element, currentIds2 ) !== -1;
+	});
+	};
+	if ($('input:radio[name=query1]:checked').val() == "OR")
+	{
+	    common=$.extend(currentIds1,currentIds2)
+	};
+	if ($('input:radio[name=query1]:checked').val() == "NOT")
+	{
+	  
+	    var temp=[]
+	    $.grep(currentIds1, function(el) {
+		if ($.inArray(el, currentIds2) == -1)
+		{temp.push(el)}
+	    });
+	    common=temp
+	};
+
+	
+	var tempresult = [];
+	    $.each(common, function(index) {
+	    tempresult.push(w2ui[par1].get(common[index])); 
+	});
+
+	currentIds=common; //for onClick in grid.js!!
+	console.log(tempresult)
+	w2ui[par1].clear();
+	w2ui[par1].add(tempresult);
     }
-  }
 });
 
 </script>
