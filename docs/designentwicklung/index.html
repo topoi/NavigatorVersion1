@@ -632,7 +632,7 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
 		   search_name.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="gender") {
 		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
-	       if (values[index]=="ID") {
+	       if (values[index]=="id_persons") {
 		   search_id.push({ field: values[index], value: String(index), operator: "is"})}
 	   });
     
@@ -681,13 +681,13 @@ document.getElementById('Content2').setAttribute('src',"further/singleview_perso
     temp = $.grep(currentIds1, function(element) {
     return $.inArray(element, currentIds2 ) !== -1;
     });
-   
-    common = $.grep(temp, function(element) {
-    return $.inArray(element, currentIds3 ) !== -1;
+    console.log(temp)
+    console.log(currentIds3) 
+    common = $.grep(currentIds3, function(element) {
+    return $.inArray(element, temp ) !== -1;
     });
     console.log(common) 
-      
-	};
+       };
 	if ($('input:radio[name=query1]:checked').val() == "OR" && $('input:radio[name=query2]:checked').val() == "OR")
 	{
 	    common=$.extend(currentIds1,currentIds2, currentIds3)
