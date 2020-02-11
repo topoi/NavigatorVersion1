@@ -50,13 +50,13 @@ multiSearch: true,
        $("#p1").click(function(){
         
           count=count+1
-          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
      });
    
       $("#p0").click(function(){
        
           count=count-1
-          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
      });
       });
       
@@ -66,7 +66,7 @@ multiSearch: true,
         if (sel_rec_ids.length) {
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%;overflow-y: hidden"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString())
+        document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString())
        
 }
 }}
@@ -110,12 +110,12 @@ $(document).ready(function(){
        $("#p1").click(function(){
          
           count=count+1
-          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
      });
    
      $("#p0").click(function(){
           count=count-1
-          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
      });
       });
 
@@ -127,7 +127,7 @@ $(document).ready(function(){
         //w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString())
+        document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString())
        
 }
 }}
@@ -170,12 +170,12 @@ multiSearch: true,
      var count = 0
      $("#p1").click(function(){
           count=count+1
-          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
    
      $("#p0").click(function(){
           count=count-1
-          document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
  });
 	    
@@ -185,7 +185,7 @@ multiSearch: true,
         //w2ui['layout'].show('right', window.instant)
         var sel_record = grid.get(sel_rec_ids[0]);
         w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
+        document.getElementById('Content2').setAttribute('src',"detail/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
       
 }
 }}
