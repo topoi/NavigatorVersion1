@@ -77,13 +77,11 @@ var currentBeta="";
     function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
-	
-	$( "<p id='currentselection' style='display:inline; font-size:20px;'>Current Selection:<br><br></p>" ).appendTo("#header")
+	$("#selectionresult").appendTo("#header")
 	$( "<p id='personen' style='opacity:0.3; font-size:18px;'>Persons (english):<br></p>" ).appendTo("#header")
 	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><br>Gender:<br></p>" ).appendTo("#header")
-	
 	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><br>Persons (original):<br></p>" ).appendTo("#header")
-
+	$("#selectionresult").css("opacity", "1")
 	$("#selectionresult").appendTo("#currentselection")
 	$("<div class='personality'></div>")
         $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
@@ -262,7 +260,7 @@ function getDropdownTitles()
 	return currentBeta;
     });
     
-    $("#persname").css("opacity","1")
+    $("#title").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
     
