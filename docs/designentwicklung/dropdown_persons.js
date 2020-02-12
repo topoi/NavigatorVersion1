@@ -33,7 +33,7 @@
 	var data=obj[alphabet_orig[index]][0];
 	var s = $("<select id="+obj[alphabet_orig[index]][5]+" class=\"form-control\" multiple/>");
 	for(var val in data) {
-	    $("<option/>", {value: data[val], text: data[val]}).appendTo(s);
+	    $("<option class='aegypt'/>", {value: data[val], text: data[val]}).appendTo(s);
 	}
 	c.appendTo("#container")
 	s.appendTo(var1);
