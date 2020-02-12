@@ -1,5 +1,8 @@
    
- function BasicMenu(var1, par1="", par2="", par3="") {
+ 
+
+		       
+function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
     
     // NAME ENGLISH
@@ -205,7 +208,7 @@ var currentBeta="";
 function getDropdownPersons()
 {
 
-    $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>').appendTo("#upper")
+       
     //Personenanzeige (englisch)
     $("[id^=Alpha]").css("background-color","white")
     
@@ -360,20 +363,5 @@ function getDropdownPersons()
 		}
 		
 	    });
-
-    $("#textfieldsearch").on("click",  function () {
-	$("#back").css("opacity", "1")
-	v=$("#searchfields").val()
-	g=w2ui["grid1"].getSearch()
-	fieldsearch= [];
-	$.each(g, function(index) {
-	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
-	})
-	w2ui["grid1"].search(fieldsearch, 'OR');
-	currentIds=w2ui["grid1"].last.searchIds;
-	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-    })
-    
-}
+			  }
     

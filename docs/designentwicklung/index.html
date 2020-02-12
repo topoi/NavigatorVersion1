@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="css/listnav.css">-->
 <script src="grids.js"></script>
 <script src="dropdown_persons.js"></script>
+<script src="dropdown_objects.js"></script>
+<script src="dropdown_titles.js"></script>
 <style>
 body { background-color: #FFFFFF; overflow-y: hidden;  }
 .container { margin-top: 150px; max-width: 450px; }
@@ -23,22 +25,10 @@ a {display: block;}
 .text-white {background-color: black; display:inline;}
 .badge.badge-dark.mr-1.mb-1{background-color:white; color:black;font-size:15px; display:inline;}
 
-#inside{
-     margin:auto;
-     width:760px;
-}
-#main_content{
-     position:absolute;
-     top:   350px;
-     right: 30%;
-     width: 90px;
-     overflow-y: scroll; 
-     height: 350px;
-}
-
 .dropdown-menu.dropdown-menu-right.show{
      position:absolute;
      top: -330px;
+     right: -400px;
      opacity: 0.8;
      width: 120px;
 }
@@ -63,7 +53,7 @@ a {display: block;}
 <a class="radio" style="display:inline; top:7%; margin-left:10px; opacity:0"><input type="radio" name="query" value="begins"> begins  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
-<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>
+<!--<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>-->
 
 
 <span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
@@ -129,11 +119,10 @@ alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
 </div>
 <div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
-<div id="main_content" class="main_content">
+
 </div>
-<div id="main_content_engl" style="background-color:white;margin-bottom:40px; width:30px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
-<div id="main_content_id" style="background-color:white; margin-bottom:40px; width:30px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
-<div id="main_content_orig" style="background-color:white; margin-bottom:40px; width:30px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
+<div id="main_content_engl" style="background-color:white;margin-bottom:40px; width:330px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
+<div id="main_content_orig" style="background-color:white; margin-bottom:40px; width:330px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
 <script>
 
 function getParameters()
@@ -187,7 +176,7 @@ $(document).ready(function(){
 $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
     
-    $(".dropdown-menu.dropdown-menu-right.show").appendTo("#main_content")
+    $(".dropdown-menu.dropdown-menu-right.show").appendTo("#container")
     $("#back").click(function() {
 	$("#reset").css("opacity", "1");
 	$("#back").css("opacity", "1");
@@ -198,17 +187,13 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 })
 
     var collection=[]
-    numbers=['1-100', '101-200', '201-300', '301-400', '401-500', '501-600', '601-700', '701-800', '801-900', '901-1000', '1001-1100', '1101-1200', '1201-1300', '1301-1400', '1401-1500', '1501-1600', '1601-1700', '1701-1800', '1801-1900', '1901-2000', '2001-2100', '2101-2200', '2201-2300', '2301-2340']
+   
     alphabet_engl = ['A1', 'B1', 'D1', 'E1', 'G1', 'H1', 'I1', 'K1', 'M1', 'N1', 'O1', 'P1','Q1','R1','S1','T1', 'U1', 'W1', 'Y1' ]
     alphabet_orig = ['B2', 'C2', 'E2', 'G2', 'J2', 'K2', 'M2', 'N2', 'O2', 'P2', 'R2', 'V2', 'W2']
     $.each(alphabet_engl, function(index) {
 	$("#main_content_engl ul").append('<li id="Alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" class="limenu"><a id="alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:15px">'+alphabet_engl[index].replace(/\d+/g, '')+'</a></li>');
     })
 
-    $.each(numbers, function(index) {
-	$("#main_content_id ul").append('<li id="Number'+numbers[index]+'" class="limenu" style="margin-right:10px"><a id="number'+numbers[index]+'" href="#" style="color:black; font-size:13px">'+numbers[index]+'</a></li>');
-    })
-    
     $.each(alphabet_orig, function(index) {
 	$("#main_content_orig ul").append('<li id="Beta'+alphabet_orig[index].replace(/\d+/g, '')+'" class="limenu" style="margin-right:30px"><a id="beta'+alphabet_orig[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:15px">'+alphabet_orig[index].replace(/\d+/g, '')+'</a></li>');
 	
@@ -247,10 +232,7 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 //#####################
 
 $( "#sel_obj" ).click(function() {
-    document.getElementById("pers").innerHTML = "";
-    defineBasicMenu("#obj", par1=vars);
-    getDropdownMenu("#obj", w2ui.grid2,par1=vars)
-    selectionMenu("#obj", par1=vars)
+    getDropdownObjects();
 });
     
 //#################
@@ -258,11 +240,7 @@ $( "#sel_obj" ).click(function() {
 //#################
     
 $( "#sel_title" ).click(function() {
-    document.getElementById("pers").innerHTML = "";
-    document.getElementById("obj").innerHTML = "";
-    defineBasicMenu("#title", par1=vars);
-    getDropdownMenu("#title", w2ui.grid3,par1=vars)
-    selectionMenu("#title", par1=vars)
+ getDropdownTitles();
 });
 
     
@@ -288,19 +266,7 @@ $.each(persons[2], function( index, value_pers ) {
 
     // SEARCH TEXT FIELD
     //!!! Tabellenköpfe!
-    $("#textfieldsearch").on("click",  function () {
-	$("#back").css("opacity", "1")
-	v=$("#searchfields").val()
-	g=w2ui["grid1"].getSearch()
-	fieldsearch= [];
-	$.each(g, function(index) {
-	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
-	})
-	w2ui["grid1"].search(fieldsearch, 'OR');
-	currentIds=w2ui["grid1"].last.searchIds;
-	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-		       })
+
 		       
     // SEARCH GRID
     // initalize grid
@@ -325,7 +291,6 @@ $.each(persons[2], function( index, value_pers ) {
 	$("#upper").addClass(".mt-2 mb-3")
 	var search_name_engl=[]
 	var search_gender=[]
-        var search_id=[]
 	var search_name_orig=[]
 	
         $.each(values, function(index)
@@ -334,8 +299,7 @@ $.each(persons[2], function( index, value_pers ) {
 		   search_name_engl.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="gender") {
 		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
-	       if (values[index]=="id_persons") {
-		   search_id.push({ field: values[index], value: String(index), operator: "is"})}
+	      
 	       if (values[index]=="name") {
 		   search_name_orig.push({ field: values[index], value: String(index), operator: "is"})}
 	       
@@ -347,7 +311,7 @@ $.each(persons[2], function( index, value_pers ) {
 	var currentIds1=[]
 	var currentIds2=[]
         var currentIds3=[]
-	var currentIds4=[]
+	
 	
 	if (search_name_engl.length>0) {
 	 
@@ -365,19 +329,13 @@ $.each(persons[2], function( index, value_pers ) {
 	else {
 	    currentIds2=initdata
 	}
-	if (search_id.length>0) {
-            w2ui[par1].search(search_id, 'OR');
+	
+	if (search_name_orig.length>0) {
+            w2ui[par1].search(search_name_orig, 'OR');
 	    currentIds3=w2ui[par1].last.searchIds;
 	}
 	else {
 	    currentIds3=initdata
-	}
-	if (search_name_orig.length>0) {
-            w2ui[par1].search(search_name_orig, 'OR');
-	    currentIds4=w2ui[par1].last.searchIds;
-	}
-	else {
-	    currentIds4=initdata
 	}
   
 	// AND SELECTION
@@ -388,13 +346,10 @@ $.each(persons[2], function( index, value_pers ) {
 	    return $.inArray(element, currentIds2 ) !== -1;
 	});
 
-	temp1 = $.grep(currentIds3, function(element) {
+	common = $.grep(currentIds3, function(element) {
 	    return $.inArray(element, temp ) !== -1;
 	});
 
-	common = $.grep(currentIds4, function(element) {
-	    return $.inArray(element, temp1 ) !== -1;
-	});
 	
    // };
 

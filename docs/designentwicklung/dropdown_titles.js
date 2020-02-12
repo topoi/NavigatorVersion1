@@ -1,5 +1,8 @@
    
- function BasicMenu(var1, par1="", par2="", par3="") {
+ 
+
+		       
+function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
     
     // NAME ENGLISH
@@ -202,10 +205,10 @@ var currentBeta="";
 	currentBeta=""
  };
 
-function getDropdownPersons()
+function getDropdownTitles()
 {
-
     $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>').appendTo("#upper")
+       
     //Personenanzeige (englisch)
     $("[id^=Alpha]").css("background-color","white")
     
@@ -312,8 +315,8 @@ function getDropdownPersons()
     });
     
     BasicMenu("#pers", par1=obj, par2=0, par3="");
-    DropdownMenu("#pers", w2ui.grid1, par1=obj);
-    SelectionMenu("#pers", par1=obj, "grid1");
+    DropdownMenu("#pers", w2ui.grid3, par1=obj);
+    SelectionMenu("#pers", par1=obj, "grid3");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
     
@@ -361,19 +364,19 @@ function getDropdownPersons()
 		
 	    });
 
-    $("#textfieldsearch").on("click",  function () {
+ $("#textfieldsearch").on("click",  function () {
 	$("#back").css("opacity", "1")
 	v=$("#searchfields").val()
-	g=w2ui["grid1"].getSearch()
+	g=w2ui["grid3"].getSearch()
 	fieldsearch= [];
 	$.each(g, function(index) {
 	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
 	})
-	w2ui["grid1"].search(fieldsearch, 'OR');
-	currentIds=w2ui["grid1"].last.searchIds;
+	w2ui["grid3"].search(fieldsearch, 'OR');
+	currentIds=w2ui["grid3"].last.searchIds;
 	$( ".container" ).hide();
 	w2ui['layout'].show('main', window.instant)
     })
-    
+
 }
     
