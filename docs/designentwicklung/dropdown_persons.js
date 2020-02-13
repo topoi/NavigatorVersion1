@@ -205,7 +205,7 @@ var currentBeta="";
 function getDropdownPersons()
 {
 
-    $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary dropdown-toggle">Show results</button></h4></span>').appendTo("#upper")
+    $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary dropdown" style="font-size:0.75rem;">Show results</button></h4></span>').appendTo("#upper")
     //Personenanzeige (englisch)
     $("[id^=Alpha]").css("background-color","white")
     
