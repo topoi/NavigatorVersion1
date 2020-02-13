@@ -1,5 +1,5 @@
    
- function BasicMenu(var1, par1="", par2="", par3="") {
+ function BasicMenu1(var1, par1="", par2="", par3="") {
     obj=par1;
     
     // NAME ENGLISH
@@ -43,7 +43,7 @@
 
 };
     
-    function DropdownMenu(var1, var2, par1)
+    function DropdownMenu1(var1, var2, par1)
 	{
             obj=par1;
 	    
@@ -71,7 +71,7 @@
 var currentAlpha="";
 var currentBeta="";
 
-    function SelectionMenu(var1,par1,par2)
+    function SelectionMenu1(var1,par1,par2)
     {
 	obj=par1;
 	
@@ -311,9 +311,9 @@ function getDropdownPersons()
 
     });
     
-    BasicMenu("#pers", par1=obj, par2=0, par3="");
-    DropdownMenu("#pers", w2ui.grid1, par1=obj);
-    SelectionMenu("#pers", par1=obj, "grid1");
+    BasicMenu1("#pers", par1=obj, par2=0, par3="");
+    DropdownMenu1("#pers", w2ui.grid1, par1=obj);
+    SelectionMenu1("#pers", par1=obj, "grid1");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
     
@@ -374,6 +374,123 @@ function getDropdownPersons()
 	$( ".container" ).hide();
 	w2ui['layout'].show('main', window.instant)
     })
+
+
+   
+    // SEARCH GRID
+    // initalize grid
+    initdata=[]
+    $.each(persons[2], function( index, value_pers ) {
+	initdata.push(parseInt(value_pers.recid))
+    });
+
+    initlist=[]
+    $.each(initdata, function(index) {
+	    initlist.push(w2ui['grid1'].get(initdata[index])); 
+    })
+
+    
+function select(values="",par1="") {
+
+	w2ui[par1].clear();
+	w2ui[par1].add(initlist);
+	console.log(values)
+	
+	$("#back").css("opacity", "1")
+	$("#upper").addClass(".mt-2 mb-3")
+	var search_name_engl=[]
+	var search_gender=[]
+	var search_name_orig=[]
+	
+        $.each(values, function(index)
+	   {
+	       if (values[index]=="name_translit") {
+		   search_name_engl.push({ field: values[index], value: String(index), operator: "is"  })}
+	       if (values[index]=="gender") {
+		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
+	      
+	       if (values[index]=="name") {
+		   search_name_orig.push({ field: values[index], value: String(index), operator: "is"})}
+	       
+	   });
+    
+	$( ".container" ).hide();
+	w2ui['layout'].show('main', window.instant)
+
+	var currentIds1=[]
+	var currentIds2=[]
+        var currentIds3=[]
+	
+	
+	if (search_name_engl.length>0) {
+	 
+	    w2ui[par1].search(search_name_engl, 'OR');
+	    currentIds1=w2ui[par1].last.searchIds;
+	    
+	}
+	else {
+	    currentIds1=initdata
+	}
+	if (search_gender.length>0) {
+	w2ui[par1].search(search_gender, 'OR');
+	currentIds2=w2ui[par1].last.searchIds;
+	}
+	else {
+	    currentIds2=initdata
+	}
+	
+	if (search_name_orig.length>0) {
+            w2ui[par1].search(search_name_orig, 'OR');
+	    currentIds3=w2ui[par1].last.searchIds;
+	}
+	else {
+	    currentIds3=initdata
+	}
+  
+	// AND SELECTION
+	
+	var common=""
+    
+	temp = $.grep(currentIds1, function(element) {
+	    return $.inArray(element, currentIds2 ) !== -1;
+	});
+
+	common = $.grep(currentIds3, function(element) {
+	    return $.inArray(element, temp ) !== -1;
+	});
+
+	
+   // };
+
+        var tempresult = [];
+	$.each(common, function(index) {
+	    tempresult.push(w2ui[par1].get(common[index])); 
+	});
+
+        currentIds=common; //for onClick in grid.js!!
+	w2ui[par1].clear();
+	w2ui[par1].add(tempresult);
+
+}
+
+    //########################
+    // SHOW SELECTION RESULT #
+    //########################
+    
+    $("#selectionresult").on("click",  function () {
+
+    $.fn.ignore = function(sel){
+	return this.clone().find(sel||">*").remove().end();
+    };
+    file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
+    collection = file.split(' ');
+    
+    $("#w2ui-grid-box").css("height","70%")
+    $("#layout_layout_panel_main").css("height","100%")
+    $(".w2ui-scroll-wrapper").css("width","95%")
+    select(values=selvalues,par1="grid1")
+	
+})
     
 }
     

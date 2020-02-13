@@ -1,370 +1,149 @@
-   
- 
-
-		       
-function BasicMenu(var1, par1="", par2="", par3="") {
-    obj=par1;
+function BasicMenu2(var1, par1="", par2="", par3="") {
+    obj_data=par1;
     
-    // NAME ENGLISH
-    $.each(alphabet_engl, function(index) {
-	
-	c=$("<div class=\"form-group\" id="+obj[alphabet_engl[index]][1]+"><div id="+obj[alphabet_engl[index]][2]+"><h6 id="+obj[alphabet_engl[index]][3]+"></h6></div></div>")
-	var data=obj[alphabet_engl[index]][0];
-	var s = $("<select id="+obj[alphabet_engl[index]][5]+" class=\"form-control\" multiple/>");
-	for(var val in data) {
-	    $("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-	}
-	c.appendTo("#container")
-	s.appendTo(var1);
-    });
-
-    
-    // GENDER
-    c=$("<div class=\"form-group\" id="+obj["gender"][1]+"><div id="+obj["gender"][2]+"><h6 id="+obj["gender"][3]+"></h6></div></div>")
-    var data=obj["gender"][0];
-    var s = $("<select id="+obj["gender"][5]+" class=\"form-control\" multiple/>");
+    // OBJECT TYPE
+    c=$("<div class=\"form-group\" id="+obj_data["object_type"][1]+"><div id="+obj_data["object_type"][2]+"><h6 id="+obj_data["object_type"][3]+"></h6></div></div>")
+    var data=obj_data["object_type"][0];
+    var s = $("<select id="+obj_data["object_type"][5]+" class=\"form-control\" multiple/>");
     for(var val in data) {
 	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
     }
     c.appendTo("#container")
     s.appendTo(var1);
-
-    // NAME ORIGINAL
-    $.each(alphabet_orig, function(index) {
-	
-	c=$("<div class=\"form-group\" id="+obj[alphabet_orig[index]][1]+"><div id="+obj[alphabet_orig[index]][2]+"><h6 id="+obj[alphabet_orig[index]][3]+"></h6></div></div>")
-	var data=obj[alphabet_orig[index]][0];
-	var s = $("<select id="+obj[alphabet_orig[index]][5]+" class=\"form-control\" multiple/>");
-	for(var val in data) {
-	    $("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-	}
-	c.appendTo("#container")
-	s.appendTo(var1);
-    });      
-   
-  
-
+    
+    // OBJECT SUBTYPE
+    c=$("<div class=\"form-group\" id="+obj_data["object_subtype"][1]+"><div id="+obj_data["object_subtype"][2]+"><h6 id="+obj_data["object_subtype"][3]+"></h6></div></div>")
+    var data=obj_data["object_subtype"][0];
+    var s = $("<select id="+obj_data["object_subtype"][5]+" class=\"form-control\" multiple/>");
+    for(var val in data) {
+	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
+    }
+    c.appendTo("#container")
+    s.appendTo(var1);
 };
     
-    function DropdownMenu(var1, var2, par1)
-	{
-            obj=par1;
-	    
-	    $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container") 
-	    
-	    $.each(alphabet_engl, function( index) {
-		$(obj[alphabet_engl[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_engl[index]][4])
-		$(".form-group#"+obj[alphabet_engl[index]][1]).show()
-	    });
-	  
-	    $.each(alphabet_orig, function( index) {
-		$(obj[alphabet_orig[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_orig[index]][4])
-		$(".form-group#"+obj[alphabet_orig[index]][1]).show()
-		       });
-	    
-	    $("#msall").hide()
-	    $(var1).css("opacity", "1")
-	    
-	    $("#moreoptions").css("opacity", "0")
-	    w2ui.layout.content('main', var2);
-   
-	};
-
+function DropdownMenu2(var1, var2, par1)
+{
+    obj_data=par1;
     
-var currentAlpha="";
-var currentBeta="";
+    $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container") 
+    $("#msall").hide()
+    $(var1).css("opacity", "1")
+	    
+    $("#moreoptions").css("opacity", "0")
+    w2ui.layout.content('main', var2);
+    
+};
 
-    function SelectionMenu(var1,par1,par2)
-    {
-	obj=par1;
-	$("#selectionresult").appendTo("#header")
-	
-	$( "<p id='personen' style='opacity:0.3; font-size:18px;'>Persons (english):<br></p>" ).appendTo("#header")
-	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><br>Gender:<br></p>" ).appendTo("#header")
-	
-	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><br>Persons (original):<br></p>" ).appendTo("#header")
+function SelectionMenu2(var1,par1,par2)
+{
+       
+    obj_data=par1;
+    $("#selectionresult").appendTo("#header")
+    $( "<p id='object_type' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
+    $( "<p id='object_subtype' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
+    $("#selectionresult").css("opacity", "1")
+    
+       
+    $("#container" ).on("click", ".dropdown-item", function () {
 
+	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
+	$("#selectedvalues").css("opacity","1")
 	$("#selectionresult").css("opacity", "1")
-	$("<div class='personality'></div>")
-        $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
-        uniquepersonlist_engl=[]
-		       $.each(alphabet_engl, function(index) {	       
-        uniquepersonlist_engl.push(persons[3].english[alphabet_engl[index].replace(/\d+/g, '')])
-		       })
-	uniquepersonlist_orig=[]
-		       $.each(alphabet_orig, function(index) {	       
-        uniquepersonlist_orig.push(persons[3].name[alphabet_orig[index].replace(/\d+/g, '')])
-		       })
-		       
-        $("#container" ).on("click", ".dropdown-item", function () {
-
-	   
-	    if (currentAlpha == "") {
-		currentAlpha="A"
-	    }
-
-	    if (currentBeta == "") {
-		currentBeta="B"
-	    }
-	    
-	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
-	    $("#selectedvalues").css("opacity","1")
-	    $("#selectionresult").css("opacity", "1")
-	    d=$( ".mt-2.mb-3" ).find('span').text()
-            f=d.split('[X]').filter(function(v){return v!==''});
-	  
-	    $( ".mt-2.mb-3" ).hide()  
-
-            selvalues = new Object()
-            $("#personen").find('strong').remove()
-            $("#genders").find('strong').remove()
-	    
-	    $("#originals").find('strong').remove()
-	    
-            $.each(f, function(index) {
-
-	      if($.inArray($.trim(f[index]), uniquepersonlist_engl.flat()) != -1)
-		{
-		       
-		    $("#personen").css("opacity", "1")
-		    $("#personen").append( "<strong>  "+f[index]+"     </strong>" );
-		    
-		    var seen = {};
-		    $('#personen').find('strong').each(function() {
-			var txt = $(this).text();
-			if (seen[txt])
-			    $(this).remove();
-		       else
-		       seen[txt] = true;
-		       });
-		       
-		       selvalues[$.trim(f[index])]="name_translit";
-		       }
-		       
-		       if($.inArray($.trim(f[index]), persons[3].gender) != -1)
-		       
-		       {
-		       
-		       $( "#selectrules1" ).css("opacity","1")
+	d=$( ".mt-2.mb-3" ).find('span').text()
+        f=d.split('[X]').filter(function(v){return v!==''});
+	$( ".mt-2.mb-3" ).hide()  
 	
-		       $( ".mt-2.mb-3" ).hide()  
-		       $("#genders").css("opacity", "1")
-	       	       $( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
-		       
-		       selvalues[$.trim(f[index])]="gender"
-		       }
-
-		initid=[]
-		$.each(persons[2], function( index, value_pers ) {
-		    initid.push(value_pers.id_persons)
-		});
-		
-		
-		       if($.inArray($.trim(f[index]),initid ) != -1)
+        selvalues = new Object()
+        $("#object_type").find('strong').remove()
+        $("#object_subtype").find('strong').remove()
+	
+	$.each(f, function(index) {
+	    
+	    if($.inArray($.trim(f[index]), objects[3].Type) != -1)
+		    
 		       {
-		       
-		       $( "#selectrules2" ).css("opacity","1")
-		       $("#ids").css("opacity", "1")
-		       $("#ids").append( "<strong>  "+f[index]+"     </strong>" );
-
-		       var seen = {};
-		       $('#ids').find('strong').each(function() {
-		       var txt = $(this).text();
-		       if (seen[txt])
-		       $(this).remove();
-		       else
-		       seen[txt] = true;
-		       });
-		       
-		       selvalues[$.trim(f[index])]="id_persons";
+			   $( "#selectrules1" ).css("opacity","1")
+			   $( ".mt-2.mb-3" ).hide()  
+			   $("#object_type").css("opacity", "1")
+	       		   $( "#object_type" ).append( "<strong>  "+f[index]+"     </strong>" );
+			   selvalues[$.trim(f[index])]="object_type"
 		       }
 
-		
-		if($.inArray($.trim(f[index]), uniquepersonlist_orig.flat()) != -1)
-		{
+	    if($.inArray($.trim(f[index]), objects[3].Subtype) != -1)
 		    
-		    $("#originals").css("opacity", "1")
-		    $("#originals").append( "<strong>  "+f[index]+"     </strong>" );
-		    
-		    var seen = {};
-		    $('#originals').find('strong').each(function() {
-			var txt = $(this).text();
-			if (seen[txt])
-			    $(this).remove();
-			else
-			    seen[txt] = true;
-		    });
-		    
-		    selvalues[$.trim(f[index])]="name";
-		}
-
+		       {
+			   $( "#selectrules1" ).css("opacity","1")
+			   $( ".mt-2.mb-3" ).hide()  
+			   $( "#object_subtype").css("opacity", "1")
+	       		   $( "#object_subtype" ).append( "<strong>  "+f[index]+"     </strong>" );
+			   selvalues[$.trim(f[index])]="object_subtype"
+		       }
+	    
+	
 	    })
-		       
 	});
-	currentAlpha=""
-	currentBeta=""
- };
+    };
 
 function getDropdownObjects()
 {
 
     $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>').appendTo("#upper")
-    //Personenanzeige (englisch)
-    $("[id^=Alpha]").css("background-color","white")
-    
-    currentAlpha="A";
-    containerlistengl=["#bsd1-container"]
-    $("#main_content_engl").on("click", "[id^=alpha]", function () {
-	
-	$("[id^=alpha]").css("color","black")
-	$("[id^=alpha]").css("font-size","15px")
-        currentAlpha=$(this).attr("id").replace('alpha','').replace(/\d+/g, '');
-	
-		       
-	$("#"+$(this).attr("id")).css("color","#007bff")
-	$("#"+$(this).attr("id")).css("font-size","18px")
-	var data=[persons[3].english[$(this).text()][0]];
-	
-        str=containerlistengl.pop()
-	$(str).hide()
-	
-        $(obj[$(this).text()+"1"][7]).show()
-	$("#main_content_engl").appendTo("#container")
-	$("#main_content_engl").show();
-	
-        $(obj[$(this).text()+"1"][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-20px","position":"absolute"}).show();
-	
-	containerlistengl.push(obj[$(this).text()+"1"][7]) 
-	return currentAlpha;
-    });
-
-    //Personenanzeige (original name)
-    $("[id^=Beta]").css("background-color","white")
-    currentBeta="B";
-    containerlistorig=["#bsd21-container"]
-    $("#main_content_orig").on("click", "[id^=beta]", function () {
-      
-	$("[id^=beta]").css("color","black")
-	$("[id^=beta]").css("font-size","15px")
-        currentBeta=$(this).attr("id").replace('beta','').replace(/\d+/g, '');
-	$("#"+$(this).attr("id")).css("color","#007bff")
-	$("#"+$(this).attr("id")).css("font-size","18px")
-	var data=[persons[3].name[$(this).text()][0]];
-	str=containerlistorig.pop()
-	$(str).hide()
-        $(obj[$(this).text()+"2"][7]).show()
-	$("#main_content_orig").appendTo("#container")
-	$("#main_content_orig").show();
-	
-        $(obj[$(this).text()+"2"][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-20px","position":"absolute"}).show();
-	
-        containerlistorig.push(obj[$(this).text()+"2"][7]) 
-	return currentBeta;
-    });
-    
-    $("#obj").css("opacity","1")
+    $("#objec").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
     
-    english_container=[]
-    gender_container=[]
-    name_container=[]
-
-    $.each(alphabet_engl, function(index) {
-	myObject[alphabet_engl[index]] = [persons[3].english[alphabet_engl[index].replace(/\d+/g, '')], "pers_engl", "pers", "engl_name", "Select english name beginning with "+alphabet_engl[index].replace(/\d+/g, ''),alphabet_engl[index] , "#"+alphabet_engl[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
-	english_container.push("bsd"+String(index+1)+"-button") 
-    })
-    var i=Object.keys(myObject).length
-    myObject["gender"]=[persons[3].gender, "pers_gender", "pers", "gender", "Select Gender", "gender","#gender", "#bsd"+(i+1)+"-container", "gender","gender"]
-    gender_container.push("bsd"+(i+1)+"-button") 
-   
-    var i=Object.keys(myObject).length
-    $.each(alphabet_orig, function(index) {
-	myObject[alphabet_orig[index]]=[persons[3].name[alphabet_orig[index].replace(/\d+/g, '')], "pers_name", "pers", "orig_name", "Select original name beginning with "+alphabet_orig[index].replace(/\d+/g, ''), alphabet_orig[index], "#"+alphabet_orig[index], "#bsd"+String(index+i+1)+"-container", "name","original"];
-	name_container.push("bsd"+String(index+i+1)+"-button")
-    })
   
+    myObject["object_type"]=[objects[3].Type, "obj_type", "object", "type", "Select object type", "type", "#type", "#bsd1-container", "type","type"]
+    myObject["object_subtype"]=[objects[3].Subtype, "obj_subtype", "object", "subtype", "Select object sub-type", "subtype", "#subtype", "#bsd2-container", "subtype","subtype"]
     var vars = JSON.stringify(myObject);
-    var obj = jQuery.parseJSON( vars );
-    console.log(obj) 
+    var obj_data = jQuery.parseJSON( vars );
+    
     
     $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
-	$.each(alphabet_engl, function(index) {
-	    $(obj[alphabet_engl[index]][6]).selectDropdown();
-	    $(obj[alphabet_engl[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_engl[index]][4]);
-	    $(obj[alphabet_engl[index]][7]).find('.dropdown-menu').css("z-index","12000")
-	    $(obj[alphabet_engl[index]][7]).css("margin-bottom","22px")
-	    if (index==0){$(obj[alphabet_engl[index]][7]).show()}
-	    else {$(obj[alphabet_engl[index]][7]).hide()}
-	});
 	
-	$(obj["gender"][6]).selectDropdown();
-	$(obj["gender"][7]+" .input-group .form-control").attr("placeholder", obj["gender"][4]);
-	$(obj["gender"][7]).find('.dropdown-menu').css("z-index","12000")
-	$(obj["gender"][7]).css("margin-bottom","22px")
-
-	$.each(alphabet_orig, function(index) {
-	    $(obj[alphabet_orig[index]][6]).selectDropdown();
-	    $(obj[alphabet_orig[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_orig[index]][4]);
-	    $(obj[alphabet_orig[index]][7]).find('.dropdown-menu').css("z-index","12000")
-	    $(obj[alphabet_orig[index]][7]).css("margin-bottom","22px")
-	    if (index==0){$(obj[alphabet_orig[index]][7]).show()}
-	    else {$(obj[alphabet_orig[index]][7]).hide()}
-	});
+	$(obj_data["object_type"][6]).selectDropdown();
+	$(obj_data["object_type"][7]+" .input-group .form-control").attr("placeholder", obj_data["object_type"][4]);
+	$(obj_data["object_type"][7]).find('.dropdown-menu').css("z-index","12000")
+	$(obj_data["object_type"][7]).css("margin-bottom","22px")
+	
+	$(obj_data["object_subtype"][6]).selectDropdown();
+	$(obj_data["object_subtype"][7]+" .input-group .form-control").attr("placeholder", obj_data["object_subtype"][4]);
+	$(obj_data["object_subtype"][7]).find('.dropdown-menu').css("z-index","12000")
+	$(obj_data["object_subtype"][7]).css("margin-bottom","22px")
 
     });
     
-    BasicMenu("#pers", par1=obj, par2=0, par3="");
-    DropdownMenu("#pers", w2ui.grid2, par1=obj);
-    SelectionMenu("#pers", par1=obj, "grid2");
+    BasicMenu2("#objectsl", par1=obj_data, par2=0, par3="");
+    DropdownMenu2("#objectsl", w2ui.grid2, par1=obj_data);
+    SelectionMenu2("#objectsl", par1=obj_data, "grid2");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
-    
-        $("#container").on("click","[id*=-button]", function() {
-         
+   
+    $("#container").on("click","#bsd1-button", function() {
+        
 
-	    if($.inArray($(this).attr("id"), english_container) != -1) {
-		$("#main_content_engl").appendTo("#container");
-		$("#main_content_engl").show();
-		$("#main_content_id").hide();
-		$("#main_content_orig").hide();
-		v="#"+$(this).attr("id")
-	    	
-		$("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
-		$(v).find(".dropdown-menu.dropdown-menu-right").show();
-	    }
-            
-
-       
-	    if($.inArray($(this).attr("id"), gender_container) != -1) {
-		
-		
-		$("#main_content_engl").hide();
-		$("#main_content_id").hide();
-		$("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
-		$("#bsd20-button").css({position: 'relative'});
-      		$("#bsd20-button").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-		$("#bsd20-button").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-		$("#bsd20-button").find(".dropdown-menu.dropdown-menu-right").show()
-	}
 	    
-		if($.inArray($(this).attr("id"), name_container) != -1) {
-		    
-		    $("#main_content_orig").show();
-		    $("#main_content_engl").hide();
-		    $("#main_content_id").hide();
-		    $("#main_content_orig").appendTo("#container");
-		    
-		    v="#"+$(this).attr("id")
-		    
-		    $("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
-		    $(v).find(".dropdown-menu.dropdown-menu-right").show();
-		    
-		}
-		
-	    });
+	    $("#bsd1-button").css({position: 'relative'});
+      	    $("#bsd1-button").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	    $("#bsd1-button").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	    $("#bsd1-button").find(".dropdown-menu.dropdown-menu-right").show()
 
- $("#textfieldsearch").on("click",  function () {
+    });
+
+    $("#container").on("click","#bsd2-button", function() {
+        
+
+	    
+	    $("#bsd2-button").css({position: 'relative'});
+      	    $("#bsd2-button").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	    $("#bsd2-button").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	    $("#bsd2-button").find(".dropdown-menu.dropdown-menu-right").show()
+	
+});
+    
+
+    $("#textfieldsearch").on("click",  function () {
 	$("#back").css("opacity", "1")
 	v=$("#searchfields").val()
 	g=w2ui["grid2"].getSearch()
@@ -378,5 +157,102 @@ function getDropdownObjects()
 	w2ui['layout'].show('main', window.instant)
     })
 
+   
+
+   
+    // SEARCH GRID
+    // initalize grid
+    initdata=[]
+    $.each(objects[2], function( index, value_obj ) {
+	initdata.push(parseInt(value_obj.recid))
+    });
+
+    initlist=[]
+    $.each(initdata, function(index) {
+	    initlist.push(w2ui['grid2'].get(initdata[index])); 
+    })
+
+    
+function select(values="",par1="") {
+
+    w2ui[par1].clear();
+    w2ui[par1].add(initlist);
+    $("#back").css("opacity", "1")
+    $("#upper").addClass(".mt-2 mb-3")
+    var search_object_type=[]
+    var search_object_subtype=[]
+
+    $.each(values, function(index)
+	   {
+	       if (values[index]=="object_type") {
+		   search_object_type.push({ field: values[index], value: String(index), operator: "is"  })}
+	       if (values[index]=="object_subtype") {
+		   search_object_subtype.push({ field: values[index], value: String(index), operator: "is"  })}
+	   });
+    
+    $( ".container" ).hide();
+    w2ui['layout'].show('main', window.instant)
+    
+    var currentIds1=[]
+    var currentIds2=[]
+    
+    if (search_object_type.length>0) {
+	w2ui[par1].search(search_object_type, 'OR');
+	currentIds1=w2ui[par1].last.searchIds;
+    }
+    else {
+	currentIds1=initdata
+    }
+    
+    if (search_object_subtype.length>0) {
+	w2ui[par1].search(search_object_subtype, 'OR');
+	currentIds2=w2ui[par1].last.searchIds;
+    }
+    else {
+	currentIds2=initdata
+    }
+
+    
+  
+    // AND SELECTION
+	
+    var common=""
+    
+    /*temp = $.grep(currentIds1, function(element) {
+	return $.inArray(element, currentIds2 ) !== -1;
+    });
+    */
+    common = $.grep(currentIds1, function(element) {
+	return $.inArray(element, currentIds2 ) !== -1;
+	});
+
+    var tempresult = [];
+    $.each(common, function(index) {
+	tempresult.push(w2ui[par1].get(common[index])); 
+    });
+    
+    currentIds=common; //for onClick in grid.js!!
+    w2ui[par1].clear();
+    w2ui[par1].add(tempresult);
+    
+}
+
+    //########################
+    // SHOW SELECTION RESULT #
+    //########################
+    
+    $("#selectionresult").on("click",  function () {
+
+    $.fn.ignore = function(sel){
+	return this.clone().find(sel||">*").remove().end();
+    };
+    file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
+    collection = file.split(' ');
+    
+    $("#w2ui-grid-box").css("height","70%")
+    $("#layout_layout_panel_main").css("height","100%")
+    $(".w2ui-scroll-wrapper").css("width","95%")
+    select(values=selvalues,par1="grid2")
+	})
 }
     

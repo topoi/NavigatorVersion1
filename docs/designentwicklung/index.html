@@ -57,7 +57,7 @@ a {display: block;}
 
 
 <span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
-<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:1" id="reset"><h4>&#9776; Main Menu</h4></span>
 <div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
   <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
   <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
@@ -112,7 +112,7 @@ alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 </div>
 
 <h2 id="persname" style="opacity:0">Persons</h2>
-<h2 id="obj" style="opacity:0">Objects</h2>
+<h2 id="objectsl" style="opacity:0">Objects</h2>
 <h2 id="title" style="opacity:0">Titles</h2>
 
 <span style="font-size:30px;cursor:pointer; opacity:0" id="selectionresult"><h4>Current Selection &#128269;<br><br><br></h4></span>
@@ -152,15 +152,11 @@ var parameters = getParameters();
   titles=$.parseJSON(getValue('data/titles.json'))
 
 		       
- 
-
-
-
-$("html, body").css({
+  $("html, body").css({
       overflow: 'hidden',
       height: '100%'
-});
-
+  });
+  
 
 
 //##########################################
@@ -178,7 +174,7 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
     
     $(".dropdown-menu.dropdown-menu-right.show").appendTo("#container")
     $("#back").click(function() {
-	$("#reset").css("opacity", "1");
+	
 	$("#back").css("opacity", "1");
 	$("#bgroup").css("opacity", "0");
 	w2ui['layout'].hide('main', window.instant)
@@ -199,24 +195,7 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 	
     })
     
-    //########################
-    // SHOW SELECTION RESULT #
-    //########################
-    
-    $("#selectionresult").on("click",  function () {
 
-    $.fn.ignore = function(sel){
-	return this.clone().find(sel||">*").remove().end();
-    };
-    file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
-    collection = file.split(' ');
-    
-    $("#w2ui-grid-box").css("height","70%")
-    $("#layout_layout_panel_main").css("height","100%")
-    $(".w2ui-scroll-wrapper").css("width","95%")
-    select(values=selvalues,par1="grid1")
-	
-})
 
 //#####################
 //      PERSONS       #
@@ -238,130 +217,15 @@ $( "#sel_obj" ).click(function() {
 //#################
 // TITLES         #
 //#################
-    
+
+
 $( "#sel_title" ).click(function() {
  getDropdownTitles();
 });
 
     
-if (parameters.persons == "true") {
 
-$( ".container" ).hide();
-w2ui['layout'].show('main', window.instant)
-
-    
-    
-var values=parameters.id
-$.each(persons[2], function( index, value_pers ) {
-      if (values == value_pers.id_persons){
-        name=value_pers.name
-       }
-});
-
-    
-    w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
-    w2ui['layout'].show('main', window.instant)
-    document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+values+"&name="+name)
-};
-
-    // SEARCH TEXT FIELD
-    //!!! Tabellenköpfe!
-
-		       
-    // SEARCH GRID
-    // initalize grid
-    initdata=[]
-    $.each(persons[2], function( index, value_pers ) {
-	initdata.push(parseInt(value_pers.recid))
-    });
-
-    initlist=[]
-    $.each(initdata, function(index) {
-	    initlist.push(w2ui['grid1'].get(initdata[index])); 
-    })
-
-    
-    function select(values="",par1="") {
-
-	w2ui[par1].clear();
-	w2ui[par1].add(initlist);
-	console.log(values)
-	$("#reset").css("opacity", "1")
-	$("#back").css("opacity", "1")
-	$("#upper").addClass(".mt-2 mb-3")
-	var search_name_engl=[]
-	var search_gender=[]
-	var search_name_orig=[]
-	
-        $.each(values, function(index)
-	   {
-	       if (values[index]=="name_translit") {
-		   search_name_engl.push({ field: values[index], value: String(index), operator: "is"  })}
-	       if (values[index]=="gender") {
-		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
-	      
-	       if (values[index]=="name") {
-		   search_name_orig.push({ field: values[index], value: String(index), operator: "is"})}
-	       
-	   });
-    
-	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-
-	var currentIds1=[]
-	var currentIds2=[]
-        var currentIds3=[]
-	
-	
-	if (search_name_engl.length>0) {
-	 
-	    w2ui[par1].search(search_name_engl, 'OR');
-	    currentIds1=w2ui[par1].last.searchIds;
-	    
-	}
-	else {
-	    currentIds1=initdata
-	}
-	if (search_gender.length>0) {
-	w2ui[par1].search(search_gender, 'OR');
-	currentIds2=w2ui[par1].last.searchIds;
-	}
-	else {
-	    currentIds2=initdata
-	}
-	
-	if (search_name_orig.length>0) {
-            w2ui[par1].search(search_name_orig, 'OR');
-	    currentIds3=w2ui[par1].last.searchIds;
-	}
-	else {
-	    currentIds3=initdata
-	}
-  
-	// AND SELECTION
-	
-	var common=""
-    
-	temp = $.grep(currentIds1, function(element) {
-	    return $.inArray(element, currentIds2 ) !== -1;
-	});
-
-	common = $.grep(currentIds3, function(element) {
-	    return $.inArray(element, temp ) !== -1;
-	});
-
-	
-   // };
-
-        var tempresult = [];
-	$.each(common, function(index) {
-	    tempresult.push(w2ui[par1].get(common[index])); 
-	});
-
-        currentIds=common; //for onClick in grid.js!!
-	w2ui[par1].clear();
-	w2ui[par1].add(tempresult);
-    }
+ 
 });
 
 </script>

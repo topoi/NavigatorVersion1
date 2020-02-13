@@ -1,8 +1,6 @@
    
  
-
-		       
-function BasicMenu(var1, par1="", par2="", par3="") {
+function BasicMenu3(var1, par1="", par2="", par3="") {
     obj=par1;
     
     // NAME ENGLISH
@@ -46,7 +44,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 
 };
     
-    function DropdownMenu(var1, var2, par1)
+    function DropdownMenu3(var1, var2, par1)
 	{
             obj=par1;
 	    
@@ -74,7 +72,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 var currentAlpha="";
 var currentBeta="";
 
-    function SelectionMenu(var1,par1,par2)
+    function SelectionMenu3(var1,par1,par2)
     {
 	obj=par1;
 	$("#selectionresult").appendTo("#header")
@@ -312,9 +310,9 @@ function getDropdownTitles()
 
     });
     
-    BasicMenu("#pers", par1=obj, par2=0, par3="");
-    DropdownMenu("#pers", w2ui.grid3, par1=obj);
-    SelectionMenu("#pers", par1=obj, "grid3");
+    BasicMenu3("#pers", par1=obj, par2=0, par3="");
+    DropdownMenu3("#pers", w2ui.grid3, par1=obj);
+    SelectionMenu3("#pers", par1=obj, "grid3");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
     
