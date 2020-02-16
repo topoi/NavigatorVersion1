@@ -332,12 +332,8 @@ function getDropdownPersons()
     
     
         $("#container").on("click","[id*=-button]", function() {
-            
-	    $("[id*=-button]").css("background-color","#007bff")
-	    $("[id*=-button]").css("border-color","#007bff")
-	    $("#"+$(this).attr("id")).css("background-color","lightgreen")
-	    $("#"+$(this).attr("id")).css("border-color","lightgreen")
-	    
+            $("[id*=-button]").css("opacity","0.5")
+	    $("#"+$(this).attr("id")).css("opacity","1")
 	    if($.inArray($(this).attr("id"), english_container) != -1) {
 		$("#main_content_engl").appendTo("#container");
 		$("#main_content_engl").show();

@@ -15,7 +15,7 @@ $.each(alphabet_engl, function(index) {
     $("#main_content_engl ul").append('<li id="Alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" class="limenu" style="margin-right:10px"><a id="alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:13px">'+alphabet_engl[index].replace(/\d+/g, '')+'</a></li>');
 })
 
-keys=[["gott_kult","Gods and other Authorities"],["region","Toponyms"],["ad_sec","Administrative Institution"],["field2","Field of Profession"],["field3","Field of Specialization"],["field5","Profession"],["field4","Gender"]]
+keys=[["gott_kult","Gods and other Authorities","#bsd39-container"],["region","Toponyms","#bsd40-container"],["ad_sec","Administrative Institution","#bsd41-container"],["field2","Field of Profession","#bsd42-container"],["field3","Field of Specialization","#bsd43-container"],["field5","Profession","#bsd44-container"],["field4","Gender","#bsd45-container"]]
 function deselect(e) {
   $('.pop').slideFadeToggle(function() {
     e.removeClass('selected');
@@ -164,7 +164,8 @@ function SelectionMenu(var1,par1,par2)
 	
 	$.each(f, function(index) {
 	    $.each(keys, function(index_basic) {
-		if($.inArray($.trim(f[index]), titles[3][keys[index_basic][1]]) != -1)
+		if($.inArray($.trim(f[index]), titles[3][keys[index_basic][1]]) != -1 && "#"+temp ==  keys[index_basic][2])
+		
 		{
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()  
@@ -331,10 +332,8 @@ function getDropdownTitles()
     $("#selectpopup").append($("#main_content_orig"))
     
     $("#container").on("click","[id*=-button]", function() {
-	$("[id*=-button]").css("background-color","#007bff")
-	$("[id*=-button]").css("border-color","#007bff")
-	$("#"+$(this).attr("id")).css("background-color","lightgreen")
-	$("#"+$(this).attr("id")).css("border-color","lightgreen")
+	$("[id*=-button]").css("opacity","0.5")
+	$("#"+$(this).attr("id")).css("opacity","1")
 	if($.inArray($(this).attr("id"), english_container) != -1) {
 	    
 	    $("#main_content_engl").show();

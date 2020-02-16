@@ -1,17 +1,16 @@
-
 $("#persname").hide()
 $("#title").hide()
 
 
-keys=[["object_type","Type"],["object_subtype","Subtype"],["object_location","Location"],["object_provenance","Provenance"],["object_material","Material"]]
+keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd2-container"],["object_location","Location","#bsd3-container"],["object_provenance","Provenance","#bsd4-container"],["object_material","Material","#bsd5-container"]]
 
 function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
 
     $.each(keys, function(index) {
 	console.log(keys[index][0]) 
-    c=$("<div class=\"form-group\" id="+obj[keys[index][0]][1]+"><div id="+obj[keys[index][0]][2]+"><h6 id="+obj[keys[index][0]][3]+"></h6></div></div>")
-    var data=obj[keys[index][0]][0];
+	c=$("<div class=\"form-group\" id="+obj[keys[index][0]][1]+"><div id="+obj[keys[index][0]][2]+"><h6 id="+obj[keys[index][0]][3]+"></h6></div></div>")
+	var data=obj[keys[index][0]][0];
     var s = $("<select id="+obj[keys[index][0]][5]+" class=\"form-control\" multiple/>");
     for(var val in data) {
 	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
@@ -48,7 +47,7 @@ function SelectionMenu(var1,par1,par2)
     
        
     $("#container" ).on("click", ".dropdown-item", function () {
-
+	
 	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
 	$("#selectedvalues").css("opacity","1")
 	$("#selectionresult").css("opacity", "1")
@@ -67,24 +66,23 @@ function SelectionMenu(var1,par1,par2)
 	
 	$.each(f, function(index) {
 
-	   $.each(keys, function(index_basic) {
-	   
-		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1)
-		    
-		       {
-			   $( "#selectrules1" ).css("opacity","1")
-			   $( ".mt-2.mb-3" ).hide()
-			   $("#"+keys[index_basic][0]+"s").css("opacity", "1")
-			   $("#"+keys[index_basic][0]).css("opacity", "1")
-	       		   $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
-			   selvalues[$.trim(f[index])]=keys[index_basic][0]
-		       }
-		      }) 
-		
-	  
-	    })
-	});
-    };
+	    $.each(keys, function(index_basic) {
+	
+		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 && "#"+temp ==  keys[index_basic][2])
+		{
+		    $( "#selectrules1" ).css("opacity","1")
+		    $( ".mt-2.mb-3" ).hide()
+		    $("#"+keys[index_basic][0]+"s").css("opacity", "1")
+		    $("#"+keys[index_basic][0]).css("opacity", "1")
+	       	    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+		    selvalues[$.trim(f[index])]=keys[index_basic][0]
+		}
+	    }) 
+	    
+	    
+	})
+    });
+};
 
 function getDropdownObjects()
 {
@@ -126,10 +124,8 @@ function getDropdownObjects()
 
     $("#container").on("click",buttonlist[index], function() {
 
-	$("[id*=-button]").css("background-color","#007bff")
-	$("[id*=-button]").css("border-color","#007bff")
-	$("#"+$(this).attr("id")).css("background-color","lightgreen")
-	$("#"+$(this).attr("id")).css("border-color","lightgreen")
+	$("[id*=-button]").css("opacity","0.5")
+	$("#"+$(this).attr("id")).css("opacity","1")
 	$(buttonlist[index]).css({position: 'relative'});
       	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
 	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
