@@ -1,19 +1,3 @@
-   
-$("#title").hide()
-$("#objectsl").hide()
-
-
-alphabet_engl = ['A1', 'B1', 'D1', 'E1', 'G1', 'H1', 'I1', 'K1', 'M1', 'N1', 'O1', 'P1','Q1','R1','S1','T1', 'U1', 'W1', 'Y1' ]
-alphabet_orig = ['B2', 'C2', 'E2', 'G2', 'J2', 'K2', 'M2', 'N2', 'O2', 'P2', 'R2', 'V2', 'W2']
-$.each(alphabet_engl, function(index) {
-    $("#main_content_engl ul").append('<li id="Alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" class="limenu"><a id="alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:15px">'+alphabet_engl[index].replace(/\d+/g, '')+'</a></li>');
-})
-
-$.each(alphabet_orig, function(index) {
-    $("#main_content_orig ul").append('<li id="Beta'+alphabet_orig[index].replace(/\d+/g, '')+'" class="limenu" style="margin-right:30px"><a id="beta'+alphabet_orig[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:15px">'+alphabet_orig[index].replace(/\d+/g, '')+'</a></li>');
-	
-})
-
 function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
     
@@ -70,7 +54,6 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	    });
 	  
 	    $.each(alphabet_orig, function( index) {
-	
 		$(obj[alphabet_orig[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_orig[index]][4])
 		$(".form-group#"+obj[alphabet_orig[index]][1]).show()
 		       });
@@ -90,14 +73,14 @@ var currentBeta="";
     function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
-	
 	$("#selectionresult").appendTo("#header")
 	$( "<p id='personen' style='opacity:0.3; font-size:18px;'>Persons (english):<br></p>" ).appendTo("#header")
 	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><br>Gender:<br></p>" ).appendTo("#header")
 	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><br>Persons (original):<br></p>" ).appendTo("#header")
 	$("#selectionresult").css("opacity", "1")
-	//$("#selectionresult").appendTo("#header")
-
+	$("#selectionresult").appendTo("#currentselection")
+	$("<div class='personality'></div>")
+        $( ".mt-2.mb-3" ).clone().appendTo( ".personality" );
         uniquepersonlist_engl=[]
 		       $.each(alphabet_engl, function(index) {	       
         uniquepersonlist_engl.push(persons[3].english[alphabet_engl[index].replace(/\d+/g, '')])
@@ -120,7 +103,7 @@ var currentBeta="";
 	    
 	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
 	    $("#selectedvalues").css("opacity","1")
-	    
+	    $("#selectionresult").css("opacity", "1")
 	    d=$( ".mt-2.mb-3" ).find('span').text()
             f=d.split('[X]').filter(function(v){return v!==''});
 	  
@@ -134,7 +117,7 @@ var currentBeta="";
 	    
             $.each(f, function(index) {
 
-		if($.inArray($.trim(f[index]), uniquepersonlist_engl.flat()) != -1)
+	      if($.inArray($.trim(f[index]), uniquepersonlist_engl.flat()) != -1)
 		{
 		       
 		    $("#personen").css("opacity", "1")
@@ -216,10 +199,10 @@ var currentBeta="";
 	currentBeta=""
  };
 
-function getDropdownPersons()
+function getDropdownTitles()
 {
-
-    $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary dropdown" style="font-size:0.75rem;">Show results</button></h4></span>').appendTo("#upper")
+    $('<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary" style="font-size:0.75rem; ">Show results</button></h4></span>').appendTo("#upper")
+       
     //Personenanzeige (englisch)
     $("[id^=Alpha]").css("background-color","white")
     
@@ -240,7 +223,7 @@ function getDropdownPersons()
 	$(str).hide()
 	
         $(obj[$(this).text()+"1"][7]).show()
-	$("#main_content_engl").appendTo("#bsd1-container")
+	$("#main_content_engl").appendTo("#container")
 	$("#main_content_engl").show();
 	
         $(obj[$(this).text()+"1"][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-20px","position":"absolute"}).show();
@@ -264,7 +247,7 @@ function getDropdownPersons()
 	str=containerlistorig.pop()
 	$(str).hide()
         $(obj[$(this).text()+"2"][7]).show()
-	$("#main_content_orig").appendTo("#bsd21-container")
+	$("#main_content_orig").appendTo("#container")
 	$("#main_content_orig").show();
 	
         $(obj[$(this).text()+"2"][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-20px","position":"absolute"}).show();
@@ -273,7 +256,7 @@ function getDropdownPersons()
 	return currentBeta;
     });
     
-    $("#persname").css("opacity","1")
+    $("#title").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
     
@@ -326,18 +309,14 @@ function getDropdownPersons()
     });
     
     BasicMenu("#pers", par1=obj, par2=0, par3="");
-    DropdownMenu("#pers", w2ui.grid1, par1=obj);
-    SelectionMenu("#pers", par1=obj, "grid1");
+    DropdownMenu("#pers", w2ui.grid3, par1=obj);
+    SelectionMenu("#pers", par1=obj, "grid3");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
     
         $("#container").on("click","[id*=-button]", function() {
-            
-	    $("[id*=-button]").css("background-color","#007bff")
-	    $("[id*=-button]").css("border-color","#007bff")
-	    $("#"+$(this).attr("id")).css("background-color","lightgreen")
-	    $("#"+$(this).attr("id")).css("border-color","lightgreen")
-	    
+         
+
 	    if($.inArray($(this).attr("id"), english_container) != -1) {
 		$("#main_content_engl").appendTo("#container");
 		$("#main_content_engl").show();
@@ -379,136 +358,19 @@ function getDropdownPersons()
 		
 	    });
 
-    $("#textfieldsearch").on("click",  function () {
+ $("#textfieldsearch").on("click",  function () {
 	$("#back").css("opacity", "1")
 	v=$("#searchfields").val()
-	g=w2ui["grid1"].getSearch()
+	g=w2ui["grid3"].getSearch()
 	fieldsearch= [];
 	$.each(g, function(index) {
 	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
 	})
-	w2ui["grid1"].search(fieldsearch, 'OR');
-	currentIds=w2ui["grid1"].last.searchIds;
+	w2ui["grid3"].search(fieldsearch, 'OR');
+	currentIds=w2ui["grid3"].last.searchIds;
 	$( ".container" ).hide();
 	w2ui['layout'].show('main', window.instant)
     })
 
-
-   
-    // SEARCH GRID
-    // initalize grid
-    initdata=[]
-    $.each(persons[2], function( index, value_pers ) {
-	initdata.push(parseInt(value_pers.recid))
-    });
-
-    initlist=[]
-    $.each(initdata, function(index) {
-	    initlist.push(w2ui['grid1'].get(initdata[index])); 
-    })
-
-    
-function select(values="",par1="") {
-
-	w2ui[par1].clear();
-	w2ui[par1].add(initlist);
-	console.log(values)
-	
-	$("#back").css("opacity", "1")
-	$("#upper").addClass(".mt-2 mb-3")
-	var search_name_engl=[]
-	var search_gender=[]
-	var search_name_orig=[]
-	
-        $.each(values, function(index)
-	   {
-	       if (values[index]=="name_translit") {
-		   search_name_engl.push({ field: values[index], value: String(index), operator: "is"  })}
-	       if (values[index]=="gender") {
-		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
-	      
-	       if (values[index]=="name") {
-		   search_name_orig.push({ field: values[index], value: String(index), operator: "is"})}
-	       
-	   });
-    
-	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-
-	var currentIds1=[]
-	var currentIds2=[]
-        var currentIds3=[]
-	
-	
-	if (search_name_engl.length>0) {
-	 
-	    w2ui[par1].search(search_name_engl, 'OR');
-	    currentIds1=w2ui[par1].last.searchIds;
-	    
-	}
-	else {
-	    currentIds1=initdata
-	}
-	if (search_gender.length>0) {
-	w2ui[par1].search(search_gender, 'OR');
-	currentIds2=w2ui[par1].last.searchIds;
-	}
-	else {
-	    currentIds2=initdata
-	}
-	
-	if (search_name_orig.length>0) {
-            w2ui[par1].search(search_name_orig, 'OR');
-	    currentIds3=w2ui[par1].last.searchIds;
-	}
-	else {
-	    currentIds3=initdata
-	}
-  
-	// AND SELECTION
-	
-	var common=""
-    
-	temp = $.grep(currentIds1, function(element) {
-	    return $.inArray(element, currentIds2 ) !== -1;
-	});
-
-	common = $.grep(currentIds3, function(element) {
-	    return $.inArray(element, temp ) !== -1;
-	});
-
-	
-   // };
-
-        var tempresult = [];
-	$.each(common, function(index) {
-	    tempresult.push(w2ui[par1].get(common[index])); 
-	});
-
-        currentIds=common; //for onClick in grid.js!!
-	w2ui[par1].clear();
-	w2ui[par1].add(tempresult);
-
-}
-
-    //########################
-    // SHOW SELECTION RESULT #
-    //########################
-    
-    $("#selectionresult").on("click",  function () {
-
-    $.fn.ignore = function(sel){
-	return this.clone().find(sel||">*").remove().end();
-    };
-    file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
-    collection = file.split(' ');
-    
-    $("#w2ui-grid-box").css("height","70%")
-    $("#layout_layout_panel_main").css("height","100%")
-    $(".w2ui-scroll-wrapper").css("width","95%")
-    select(values=selvalues,par1="grid1")
-	
-})
-    
 }
     

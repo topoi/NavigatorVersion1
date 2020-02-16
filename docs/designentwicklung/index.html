@@ -12,12 +12,13 @@
 <!--<link rel="stylesheet" href="css/demo.css">
 <link rel="stylesheet" href="css/listnav.css">-->
 <script src="grids.js"></script>
-<script src="dropdown_persons.js"></script>
+<!--<script src="dropdown_persons.js"></script>
 <script src="dropdown_objects.js"></script>
-<script src="dropdown_titles.js"></script>
+<script src="dropdown_titles.js"></script>-->
+
 <style>
 body { background-color: #FFFFFF; overflow-y: hidden;  }
-.container { margin-top: 150px; max-width: 450px; }
+.container { margin-top: 70px; max-width: 450px; }
 .limenu {background-color:white; margin-left: 3px; margin-top: 1px; margin-bottom: 10px;width:12px; height:12px; font-size:15px; font-color:black; opacity:1;}
 .form-control{border:0px;font-size:16px}
 .btn.btn-primary.dropdown-toggle {border-radius:0.65rem; }
@@ -32,6 +33,26 @@ a {display: block;}
      opacity: 0.8;
      width: 120px;
 }
+
+a.selected {
+  background-color:#1F75CC;
+  color:white;
+  z-index:100;
+}
+
+.main_letter {
+
+    background-color:white;
+    margin-bottom:2px;
+    width:430px;
+    height: 30px;
+    z-index: 100000;
+    position:absolute;
+       
+
+}
+
+
 </style>
 </head>
 
@@ -42,7 +63,7 @@ a {display: block;}
   <a href="#" onclick="window.open('detail/projectinformation.html')">Project </a>
   <a href="#" onclick="window.open('detail/instructions.html')">Instructions </a>
   <a href="#">Help</a>
-  <a href="#" onclick="kalauer()">Kalauer des Tages</a>
+  <!--<a href="#" onclick="kalauer()">Kalauer des Tages</a>-->
 </div>
 
 <div id="upper">
@@ -53,8 +74,6 @@ a {display: block;}
 <a class="radio" style="display:inline; top:7%; margin-left:10px; opacity:0"><input type="radio" name="query" value="begins"> begins  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
-<!--<span class="radio" style="display:inline; position: absolute;  top:9%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4>&#128269;</h4></span>-->
-
 
 <span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
 <span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:1" id="reset"><h4>&#9776; Main Menu</h4></span>
@@ -68,7 +87,6 @@ a {display: block;}
   <div id="header" style="position: absolute; top:200px; left:20px; width:400px;" >
     </div>
 </div>
-
 
 <script>
 function openNav() {
@@ -105,7 +123,7 @@ alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
     <h5> A tool designed for database navigation</h5>
     <br>
     <br>
-    
+     
     <span style="font-size:30px;cursor:pointer" id="sel_pers"><h4>&#9776; Persons</h4></span>
     <span style="font-size:30px;cursor:pointer" id="sel_obj"><h4>&#9776; Objects</h4></span>
     <span style="font-size:30px;cursor:pointer" id="sel_title"><h4>&#9776; Titles</h4></span>
@@ -113,7 +131,7 @@ alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 
 <h2 id="persname" style="opacity:0">Persons</h2>
 <h2 id="objectsl" style="opacity:0">Objects</h2>
-<h2 id="title" style="opacity:0">Titles</h2>
+<h2 id="title" style="opacity:0; top:10px">Titles</h2>
 
 <span style="font-size:30px;cursor:pointer; opacity:0" id="selectionresult" ><h4>Current Selection   <button id="selectionresult" class="btn btn-primary" style="font-size:0.75rem;">Show results</button></h4></span>
 <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
@@ -121,8 +139,9 @@ alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
 <div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
 
 </div>
-<div id="main_content_engl" style="background-color:white;margin-bottom:40px; width:330px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
-<div id="main_content_orig" style="background-color:white; margin-bottom:40px; width:330px"><ul style="background-color:white; margin-bottom:40px"></ul></div>
+<div id="main_content_engl" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
+<div id="main_content_orig" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
+
 <script>
 
 function getParameters()
@@ -174,7 +193,9 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
     
     $(".dropdown-menu.dropdown-menu-right.show").appendTo("#container")
     $("#back").click(function() {
-	
+	$("#searchfield").show()
+	$("#textfieldsearch").show()
+	$(".radio").show()
 	$("#back").css("opacity", "1");
 	$("#bgroup").css("opacity", "0");
 	w2ui['layout'].hide('main', window.instant)
@@ -184,49 +205,43 @@ $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
     var collection=[]
    
-    alphabet_engl = ['A1', 'B1', 'D1', 'E1', 'G1', 'H1', 'I1', 'K1', 'M1', 'N1', 'O1', 'P1','Q1','R1','S1','T1', 'U1', 'W1', 'Y1' ]
-    alphabet_orig = ['B2', 'C2', 'E2', 'G2', 'J2', 'K2', 'M2', 'N2', 'O2', 'P2', 'R2', 'V2', 'W2']
-    $.each(alphabet_engl, function(index) {
-	$("#main_content_engl ul").append('<li id="Alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" class="limenu"><a id="alpha'+alphabet_engl[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:15px">'+alphabet_engl[index].replace(/\d+/g, '')+'</a></li>');
-    })
-
-    $.each(alphabet_orig, function(index) {
-	$("#main_content_orig ul").append('<li id="Beta'+alphabet_orig[index].replace(/\d+/g, '')+'" class="limenu" style="margin-right:30px"><a id="beta'+alphabet_orig[index].replace(/\d+/g, '')+'" href="#" style="color:black; font-size:15px">'+alphabet_orig[index].replace(/\d+/g, '')+'</a></li>');
-	
-    })
-    
+   
 
 
 //#####################
 //      PERSONS       #
 //#####################
 
-    $( "#sel_pers" ).on("click", function () {
+$( "#sel_pers" ).on("click", function () {
+    $.getScript( "dropdown_persons.js", function() {
+	
 	getDropdownPersons();
-
     });
     
+
+
+});
+
 //#####################
 //      OBJECTS       #
 //#####################
 
 $( "#sel_obj" ).click(function() {
+$.getScript( "dropdown_objects.js", function() {
     getDropdownObjects();
+});
 });
     
 //#################
 // TITLES         #
 //#################
 
-
 $( "#sel_title" ).click(function() {
- getDropdownTitles();
+	$.getScript( "dropdown_titles.js", function() {
+	    getDropdownTitles();
 });
-
-    
-
- 
 });
+  });
 
 </script>
 <script type="text/javascript">

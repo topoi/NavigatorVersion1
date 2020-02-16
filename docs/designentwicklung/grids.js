@@ -28,8 +28,11 @@ multiSearch: true,
     },
     
     onClick: function(event) {
-	
-        $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
+
+	$("#searchfield").hide()
+	$("#textfieldsearch").hide()
+	$(".radio").hide()
+        $("#upper").css({"height":"40px", "z-index": "10000"})
         
         $("#bgroup").css("opacity", "1");
         var grid = this;
@@ -93,13 +96,19 @@ $('#grid2').w2grid({
 	    var grid = this;
 	    
 	},
-        onClick: function(event) {
-        $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
+    
+    onClick: function(event) {
+	$("#searchfield").hide()
+	$("#textfieldsearch").hide()
+	$(".radio").hide()
+
+
+	$("#upper").css({"height":"40px", "z-index": "10000"})
         $("#bgroup").css("opacity","1");
         
         var grid = this;
         var plo= [];
-        $.each(grid.last.searchIds, function( index, value ) {
+        $.each(currentIds, function( index, value ) {
 
              plo.push({"id":grid.get(value).id_objects,"type":grid.get(value).object_type})
          
@@ -134,19 +143,19 @@ $(document).ready(function(){
 });
 
 //##################################   TITLES  #########################################
-if (w2ui['grid3'] != null) {
+    if (w2ui['grid3'] != null) {
 	w2ui['grid3'].reset();
 	w2ui['grid3'].destroy();
     }
-   
-$('#grid3').w2grid({
-    name    : 'grid3',
- show: { 
+    
+    $('#grid3').w2grid({
+	name    : 'grid3',
+	show: { 
             toolbar: true,
             footer: true
         },
-multiSearch: true,
-    searches: titles[0],
+	multiSearch: true,
+	searches: titles[0],
         columns: titles[1],
         records: titles[2],
         onSearch: function (target, info) {
@@ -154,13 +163,17 @@ multiSearch: true,
             //console.log(grid)
 	    
 	},
-        onClick: function(event) {
-        $("#upper").css({"background":"#D3D3D3", "opacity":"0.5", "height":"50px", "z-index": "10000"})
+    onClick: function(event) {
+	$("#searchfield").hide()
+	$("#textfieldsearch").hide()
+	$(".radio").hide()
+	$("#upper").css({"height":"40px", "z-index": "10000"})
+
         $("#bgroup").css("opacity", "1");
         var grid = this;
 
         var plt= [];
-         $.each(grid.last.searchIds, function( index, value ) {
+         $.each(currentIds, function( index, value ) {
 
              plt.push({"id":grid.get(value).id,"title":grid.get(value).titles_translat_eng})
          

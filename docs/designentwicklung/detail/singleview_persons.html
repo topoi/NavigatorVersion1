@@ -10,10 +10,7 @@
 </head>
 <body>
 
-<!--<nav class="main-nav">
-  <a href="#top">Top</a>
-</nav>
--->
+
 
 <div id="container1"></div>
 <div id="container2"></div>
@@ -27,28 +24,15 @@
     </ul>
 </div>
 
-<span id="buttonup" style="top: -2%; left: 50%; position: fixed;"><h4 style="font-size:30px;cursor:pointer; opacity:0.3">&#x2227;</h4></span> 
-<span id="buttondown" style="top: 40%; left: 47%; position: fixed;"><h4 style="font-size:30px;cursor:pointer; opacity:0.3">&#x2228;</h4></span>
 <script type="text/javascript">
 
 $("html, body").css({
-    overflow: 'hidden',
-    height: '100%'
-});
-
-$(document).ready(function() {
     
-    $('#buttondown').click(function(){
-        $('html, body').animate({scrollTop:1500}, 'slow');
-        return false;
-    });
-
-   $('#buttonup').click(function(){
-        $('html, body').animate({scrollTop:0}, 'slow');
-        return false;
-    });
-
+    height: '800px'
 });
+
+
+  
 
 function getParameters()
  {
@@ -280,8 +264,7 @@ $('#ContentSame').appendTo('#container2')
 $('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
 $('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#container2');
 $('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#container2');
-$('<p class="pstyle"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#container2');
-$('<p class="pstyle" ><b>Date: </b>07.06.2019</p>').appendTo('#container2');
+$('<p class="pstyle" ><b>Date: </b>28.02.2020</p>').appendTo('#container2');
 $('<p class="pstyle"><b>Comment: </b>Verteilung der Personen</p>').appendTo('#container2'); 
      
 $("#container2").appendTo("#container1"); 
@@ -290,13 +273,13 @@ $('a[href*="#"]').on('click',function(e) {
 		e.preventDefault();
               	var target = this.hash;
                 var $target = $(target);
-                
+                /*
 		$('html, body, Content').stop().animate({
                         
 			'scrollTop': $target.offset().top
 		}, 400, 'swing', function () {
 			window.location.hash = target;
-		});
+		});*/
 	});
 </script>
 

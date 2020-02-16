@@ -19,7 +19,7 @@
 <script type="text/javascript">
 
 $("html, body").css({
-    overflow: 'hidden',
+    
     height: '100%'
 });
 function getParameters()
@@ -44,22 +44,22 @@ function getValue(file){
    return value;
 }
 
-persons=$.parseJSON(getValue('../data/persons.json'))
-persons_sel=persons[4]
-objects=$.parseJSON(getValue('../data/objects.json'))
-objects_sel=objects[4]
-titles=$.parseJSON(getValue('../data/titles.json'))
-titles_sel=titles[4]
-relationright=$.parseJSON(getValue('../data/relation_rightleftid.json'))  
-relationleft=$.parseJSON(getValue('../data/relation_leftrightid.json'))  
-datings=$.parseJSON(getValue('../data/dating_selection.json'))  
-images=$.parseJSON(getValue('../data/Konkordanzliste.json')) 
- 
-       var sel_record = parameters.ids;
-       var sel_type = parameters.type;
-       
-         $.each(images, function( index, value_image ) {
-         if (value_image.id == sel_record)
+  persons=$.parseJSON(getValue('../data/persons.json'))
+  persons_sel=persons[4]
+  objects=$.parseJSON(getValue('../data/objects.json'))
+  objects_sel=objects[4]
+  titles=$.parseJSON(getValue('../data/titles.json'))
+  titles_sel=titles[4]
+  relationright=$.parseJSON(getValue('../data/relation_rightleftid.json'))  
+  relationleft=$.parseJSON(getValue('../data/relation_leftrightid.json'))  
+  datings=$.parseJSON(getValue('../data/dating_selection.json'))  
+  images=$.parseJSON(getValue('../data/Konkordanzliste.json')) 
+  
+  var sel_record = parameters.ids;
+  var sel_type = parameters.type;
+  
+  $.each(images, function( index, value_image ) {
+      if (value_image.id == sel_record)
          {
 	   $('#Content').append('<a target="_blank" rel="noopener noreferrer" id="external"><img id="image" class="Image" width="320"/></a>')
            document.getElementById('image').setAttribute('src',value_image.link);

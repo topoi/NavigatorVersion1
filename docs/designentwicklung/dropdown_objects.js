@@ -1,30 +1,29 @@
-function BasicMenu2(var1, par1="", par2="", par3="") {
-    obj_data=par1;
-    
-    // OBJECT TYPE
-    c=$("<div class=\"form-group\" id="+obj_data["object_type"][1]+"><div id="+obj_data["object_type"][2]+"><h6 id="+obj_data["object_type"][3]+"></h6></div></div>")
-    var data=obj_data["object_type"][0];
-    var s = $("<select id="+obj_data["object_type"][5]+" class=\"form-control\" multiple/>");
+
+$("#persname").hide()
+$("#title").hide()
+
+
+keys=[["object_type","Type"],["object_subtype","Subtype"],["object_location","Location"],["object_provenance","Provenance"],["object_material","Material"]]
+
+function BasicMenu(var1, par1="", par2="", par3="") {
+    obj=par1;
+
+    $.each(keys, function(index) {
+	console.log(keys[index][0]) 
+    c=$("<div class=\"form-group\" id="+obj[keys[index][0]][1]+"><div id="+obj[keys[index][0]][2]+"><h6 id="+obj[keys[index][0]][3]+"></h6></div></div>")
+    var data=obj[keys[index][0]][0];
+    var s = $("<select id="+obj[keys[index][0]][5]+" class=\"form-control\" multiple/>");
     for(var val in data) {
 	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
     }
     c.appendTo("#container")
-    s.appendTo(var1);
-    
-    // OBJECT SUBTYPE
-    c=$("<div class=\"form-group\" id="+obj_data["object_subtype"][1]+"><div id="+obj_data["object_subtype"][2]+"><h6 id="+obj_data["object_subtype"][3]+"></h6></div></div>")
-    var data=obj_data["object_subtype"][0];
-    var s = $("<select id="+obj_data["object_subtype"][5]+" class=\"form-control\" multiple/>");
-    for(var val in data) {
-	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-    }
-    c.appendTo("#container")
-    s.appendTo(var1);
+	s.appendTo(var1);
+    })
 };
     
-function DropdownMenu2(var1, var2, par1)
+function DropdownMenu(var1, var2, par1)
 {
-    obj_data=par1;
+    obj=par1;
     
     $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container") 
     $("#msall").hide()
@@ -35,13 +34,16 @@ function DropdownMenu2(var1, var2, par1)
     
 };
 
-function SelectionMenu2(var1,par1,par2)
+function SelectionMenu(var1,par1,par2)
 {
        
-    obj_data=par1;
+    obj=par1;
     $("#selectionresult").appendTo("#header")
-    $( "<p id='object_type' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
-    $( "<p id='object_subtype' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
+    $( "<p id='object_types' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
+    $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
+    $( "<p id='object_locations' style='opacity:0.3; font-size:18px;'>Object location:<br></p>" ).appendTo("#header")
+    $( "<p id='object_provenances' style='opacity:0.3; font-size:18px;'>Object provenance:<br></p>" ).appendTo("#header")
+    $( "<p id='object_materials' style='opacity:0.3; font-size:18px;'>Object material:<br></p>" ).appendTo("#header")
     $("#selectionresult").css("opacity", "1")
     
        
@@ -55,32 +57,31 @@ function SelectionMenu2(var1,par1,par2)
 	$( ".mt-2.mb-3" ).hide()  
 	
         selvalues = new Object()
-        $("#object_type").find('strong').remove()
-        $("#object_subtype").find('strong').remove()
+        $("#object_types").find('strong').remove()
+        $("#object_subtypes").find('strong').remove()
+	$("#object_locations").find('strong').remove()
+	$("#object_provenances").find('strong').remove()
+	$("#object_materials").find('strong').remove()
+	
+	
 	
 	$.each(f, function(index) {
-	    
-	    if($.inArray($.trim(f[index]), objects[3].Type) != -1)
-		    
-		       {
-			   $( "#selectrules1" ).css("opacity","1")
-			   $( ".mt-2.mb-3" ).hide()  
-			   $("#object_type").css("opacity", "1")
-	       		   $( "#object_type" ).append( "<strong>  "+f[index]+"     </strong>" );
-			   selvalues[$.trim(f[index])]="object_type"
-		       }
 
-	    if($.inArray($.trim(f[index]), objects[3].Subtype) != -1)
+	   $.each(keys, function(index_basic) {
+	   
+		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1)
 		    
 		       {
 			   $( "#selectrules1" ).css("opacity","1")
-			   $( ".mt-2.mb-3" ).hide()  
-			   $( "#object_subtype").css("opacity", "1")
-	       		   $( "#object_subtype" ).append( "<strong>  "+f[index]+"     </strong>" );
-			   selvalues[$.trim(f[index])]="object_subtype"
+			   $( ".mt-2.mb-3" ).hide()
+			   $("#"+keys[index_basic][0]+"s").css("opacity", "1")
+			   $("#"+keys[index_basic][0]).css("opacity", "1")
+	       		   $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+			   selvalues[$.trim(f[index])]=keys[index_basic][0]
 		       }
-	    
-	
+		      }) 
+		
+	  
 	    })
 	});
     };
@@ -96,52 +97,46 @@ function getDropdownObjects()
   
     myObject["object_type"]=[objects[3].Type, "obj_type", "object", "type", "Select object type", "type", "#type", "#bsd1-container", "type","type"]
     myObject["object_subtype"]=[objects[3].Subtype, "obj_subtype", "object", "subtype", "Select object sub-type", "subtype", "#subtype", "#bsd2-container", "subtype","subtype"]
+    myObject["object_location"]=[objects[3].Location, "obj_location", "object", "location", "Select object location", "location", "#location", "#bsd3-container", "location","loction"]
+    myObject["object_provenance"]=[objects[3].Provenance, "obj_provenance", "object", "provenance", "Select object provenance", "provenance", "#provenance", "#bsd4-container", "provenance","provenance"]
+    myObject["object_material"]=[objects[3].Material, "obj_material", "object", "location", "Select object material", "material", "#material", "#bsd5-container", "material","material"]
     var vars = JSON.stringify(myObject);
-    var obj_data = jQuery.parseJSON( vars );
+    var obj = jQuery.parseJSON( vars );
     
     
     $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
-	
-	$(obj_data["object_type"][6]).selectDropdown();
-	$(obj_data["object_type"][7]+" .input-group .form-control").attr("placeholder", obj_data["object_type"][4]);
-	$(obj_data["object_type"][7]).find('.dropdown-menu').css("z-index","12000")
-	$(obj_data["object_type"][7]).css("margin-bottom","22px")
-	
-	$(obj_data["object_subtype"][6]).selectDropdown();
-	$(obj_data["object_subtype"][7]+" .input-group .form-control").attr("placeholder", obj_data["object_subtype"][4]);
-	$(obj_data["object_subtype"][7]).find('.dropdown-menu').css("z-index","12000")
-	$(obj_data["object_subtype"][7]).css("margin-bottom","22px")
+
+	$.each(keys, function(index_basic) {
+	$(obj[keys[index_basic][0]][6]).selectDropdown();
+	$(obj[keys[index_basic][0]][7]+" .input-group .form-control").attr("placeholder", obj[keys[index_basic][0]][4]);
+	$(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
+	$(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
+	})
+
 
     });
     
-    BasicMenu2("#objectsl", par1=obj_data, par2=0, par3="");
-    DropdownMenu2("#objectsl", w2ui.grid2, par1=obj_data);
-    SelectionMenu2("#objectsl", par1=obj_data, "grid2");
+    BasicMenu("#objectsl", par1=obj, par2=0, par3="");
+    DropdownMenu("#objectsl", w2ui.grid2, par1=obj);
+    SelectionMenu("#objectsl", par1=obj, "grid2");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
-   
-    $("#container").on("click","#bsd1-button", function() {
-        
+    buttonlist=["#bsd1-button","#bsd2-button","#bsd3-button","#bsd4-button","#bsd5-button"]
+    $.each(buttonlist, function(index) {
 
-	    
-	    $("#bsd1-button").css({position: 'relative'});
-      	    $("#bsd1-button").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	    $("#bsd1-button").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	    $("#bsd1-button").find(".dropdown-menu.dropdown-menu-right").show()
+    $("#container").on("click",buttonlist[index], function() {
 
-    });
-
-    $("#container").on("click","#bsd2-button", function() {
-        
-
-	    
-	    $("#bsd2-button").css({position: 'relative'});
-      	    $("#bsd2-button").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	    $("#bsd2-button").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	    $("#bsd2-button").find(".dropdown-menu.dropdown-menu-right").show()
+	$("[id*=-button]").css("background-color","#007bff")
+	$("[id*=-button]").css("border-color","#007bff")
+	$("#"+$(this).attr("id")).css("background-color","lightgreen")
+	$("#"+$(this).attr("id")).css("border-color","lightgreen")
+	$(buttonlist[index]).css({position: 'relative'});
+      	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").show()
 	
-});
-    
+    });
+    });
 
     $("#textfieldsearch").on("click",  function () {
 	$("#back").css("opacity", "1")
@@ -157,16 +152,13 @@ function getDropdownObjects()
 	w2ui['layout'].show('main', window.instant)
     })
 
-   
-
-   
     // SEARCH GRID
     // initalize grid
     initdata=[]
     $.each(objects[2], function( index, value_obj ) {
 	initdata.push(parseInt(value_obj.recid))
     });
-
+    
     initlist=[]
     $.each(initdata, function(index) {
 	    initlist.push(w2ui['grid2'].get(initdata[index])); 
@@ -181,13 +173,22 @@ function select(values="",par1="") {
     $("#upper").addClass(".mt-2 mb-3")
     var search_object_type=[]
     var search_object_subtype=[]
-
+    var search_object_location=[]
+    var search_object_provenance=[]
+    var search_object_material=[]
+    
     $.each(values, function(index)
 	   {
 	       if (values[index]=="object_type") {
 		   search_object_type.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="object_subtype") {
 		   search_object_subtype.push({ field: values[index], value: String(index), operator: "is"  })}
+	       if (values[index]=="object_location") {
+		   search_object_location.push({ field: values[index], value: String(index), operator: "is"  })}
+	       if (values[index]=="object_provenance") {
+		   search_object_provenance.push({ field: values[index], value: String(index), operator: "is"  })}
+	       if (values[index]=="object_material") {
+		   search_object_material.push({ field: values[index], value: String(index), operator: "is"  })}
 	   });
     
     $( ".container" ).hide();
@@ -195,6 +196,9 @@ function select(values="",par1="") {
     
     var currentIds1=[]
     var currentIds2=[]
+    var currentIds3=[]
+    var currentIds4=[]
+    var currentIds5=[]
     
     if (search_object_type.length>0) {
 	w2ui[par1].search(search_object_type, 'OR');
@@ -212,18 +216,47 @@ function select(values="",par1="") {
 	currentIds2=initdata
     }
 
+    if (search_object_location.length>0) {
+	w2ui[par1].search(search_object_location, 'OR');
+	currentIds3=w2ui[par1].last.searchIds;
+    }
+    else {
+	currentIds3=initdata
+    }
+    if (search_object_provenance.length>0) {
+	w2ui[par1].search(search_object_provenance, 'OR');
+	currentIds4=w2ui[par1].last.searchIds;
+    }
+    else {
+	currentIds4=initdata
+    }
+    if (search_object_material.length>0) {
+	w2ui[par1].search(search_object_material, 'OR');
+	currentIds5=w2ui[par1].last.searchIds;
+    }
+    else {
+	currentIds5=initdata
+    }
     
-  
+    
     // AND SELECTION
 	
     var common=""
     
-    /*temp = $.grep(currentIds1, function(element) {
+    temp0 = $.grep(currentIds1, function(element) {
 	return $.inArray(element, currentIds2 ) !== -1;
     });
-    */
-    common = $.grep(currentIds1, function(element) {
-	return $.inArray(element, currentIds2 ) !== -1;
+    
+    temp1 = $.grep(temp0, function(element) {
+	return $.inArray(element, currentIds3 ) !== -1;
+    });
+
+    temp2 = $.grep(temp1, function(element) {
+	return $.inArray(element, currentIds4 ) !== -1;
+    });
+    
+    common = $.grep(temp2, function(element) {
+	return $.inArray(element, currentIds5 ) !== -1;
 	});
 
     var tempresult = [];
