@@ -2,7 +2,7 @@ $("#persname").hide()
 $("#title").hide()
 
 
-keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd2-container"],["object_location","Location","#bsd3-container"],["object_provenance","Provenance","#bsd4-container"],["object_material","Material","#bsd5-container"],["object_subtype_other","Subtype II","#bsd6-container"]]
+keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd2-container"],["object_subtype_other","Subtype II","#bsd3-container"],["object_location","Location","#bsd4-container"],["object_provenance","Provenance","#bsd5-container"],["object_material","Material","#bsd6-container"]]
 
 function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
@@ -97,10 +97,11 @@ function getDropdownObjects()
   
     myObject["object_type"]=[objects[3].Type, "obj_type", "object", "type", "Select object type", "type", "#type", "#bsd1-container", "type","type"]
     myObject["object_subtype"]=[objects[3].Subtype, "obj_subtype", "object", "subtype", "Select object sub-type", "subtype", "#subtype", "#bsd2-container", "subtype","subtype"]
-    myObject["object_location"]=[objects[3].Location, "obj_location", "object", "location", "Select object location", "location", "#location", "#bsd3-container", "location","loction"]
-    myObject["object_provenance"]=[objects[3].Provenance, "obj_provenance", "object", "provenance", "Select object provenance", "provenance", "#provenance", "#bsd4-container", "provenance","provenance"]
-    myObject["object_material"]=[objects[3].Material, "obj_material", "object", "location", "Select object material", "material", "#material", "#bsd5-container", "material","material"]
-    myObject["object_subtype_other"]=[objects[3]["Subtype II"], "obj_subtype_other", "object", "subtype_other", "Select object sub-type II", "subtype_other", "#subtype_other", "#bsd6-container", "subtype_other","subtype_other"]
+    myObject["object_subtype_other"]=[objects[3]["Subtype II"], "obj_subtype_other", "object", "subtype_other", "Select object sub-type II", "subtype_other", "#subtype_other", "#bsd3-container", "subtype_other","subtype_other"]
+    myObject["object_location"]=[objects[3].Location, "obj_location", "object", "location", "Select object location", "location", "#location", "#bsd4-container", "location","loction"]
+    myObject["object_provenance"]=[objects[3].Provenance, "obj_provenance", "object", "provenance", "Select object provenance", "provenance", "#provenance", "#bsd5-container", "provenance","provenance"]
+    myObject["object_material"]=[objects[3].Material, "obj_material", "object", "location", "Select object material", "material", "#material", "#bsd6-container", "material","material"]
+   
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
     
