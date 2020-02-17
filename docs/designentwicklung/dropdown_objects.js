@@ -2,7 +2,7 @@ $("#persname").hide()
 $("#title").hide()
 
 
-keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd2-container"],["object_location","Location","#bsd3-container"],["object_provenance","Provenance","#bsd4-container"],["object_material","Material","#bsd5-container"]]
+keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd2-container"],["object_location","Location","#bsd3-container"],["object_provenance","Provenance","#bsd4-container"],["object_material","Material","#bsd5-container"],["object_subtype_other","Subtype II","#bsd6-container"]]
 
 function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
@@ -40,9 +40,11 @@ function SelectionMenu(var1,par1,par2)
     $("#selectionresult").appendTo("#header")
     $( "<p id='object_types' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
     $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
+    $( "<p id='object_subtype_others' style='opacity:0.3; font-size:18px;'>Object sub-type II:<br></p>" ).appendTo("#header")
     $( "<p id='object_locations' style='opacity:0.3; font-size:18px;'>Object location:<br></p>" ).appendTo("#header")
     $( "<p id='object_provenances' style='opacity:0.3; font-size:18px;'>Object provenance:<br></p>" ).appendTo("#header")
     $( "<p id='object_materials' style='opacity:0.3; font-size:18px;'>Object material:<br></p>" ).appendTo("#header")
+    
     $("#selectionresult").css("opacity", "1")
     
        
@@ -61,14 +63,14 @@ function SelectionMenu(var1,par1,par2)
 	$("#object_locations").find('strong').remove()
 	$("#object_provenances").find('strong').remove()
 	$("#object_materials").find('strong').remove()
-	
+	$("#object_subtype_others").find('strong').remove()
 	
 	
 	$.each(f, function(index) {
 
 	    $.each(keys, function(index_basic) {
 	
-		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 && "#"+temp ==  keys[index_basic][2])
+		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 /* && "#"+temp ==  keys[index_basic][2]*/)
 		{
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()
@@ -98,6 +100,7 @@ function getDropdownObjects()
     myObject["object_location"]=[objects[3].Location, "obj_location", "object", "location", "Select object location", "location", "#location", "#bsd3-container", "location","loction"]
     myObject["object_provenance"]=[objects[3].Provenance, "obj_provenance", "object", "provenance", "Select object provenance", "provenance", "#provenance", "#bsd4-container", "provenance","provenance"]
     myObject["object_material"]=[objects[3].Material, "obj_material", "object", "location", "Select object material", "material", "#material", "#bsd5-container", "material","material"]
+    myObject["object_subtype_other"]=[objects[3]["Subtype II"], "obj_subtype_other", "object", "subtype_other", "Select object sub-type II", "subtype_other", "#subtype_other", "#bsd6-container", "subtype_other","subtype_other"]
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
     
@@ -119,7 +122,7 @@ function getDropdownObjects()
     SelectionMenu("#objectsl", par1=obj, "grid2");
     $(".form-control").css({"border":"0px","font-size":"12px"})
     
-    buttonlist=["#bsd1-button","#bsd2-button","#bsd3-button","#bsd4-button","#bsd5-button"]
+    buttonlist=["#bsd1-button","#bsd2-button","#bsd3-button","#bsd4-button","#bsd5-button","#bsd6-button"]
     $.each(buttonlist, function(index) {
 
     $("#container").on("click",buttonlist[index], function() {
@@ -172,6 +175,7 @@ function select(values="",par1="") {
     var search_object_location=[]
     var search_object_provenance=[]
     var search_object_material=[]
+    var search_object_subtype_other=[]
     
     $.each(values, function(index)
 	   {
@@ -185,6 +189,8 @@ function select(values="",par1="") {
 		   search_object_provenance.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="object_material") {
 		   search_object_material.push({ field: values[index], value: String(index), operator: "is"  })}
+	       if (values[index]=="object_subtype_other") {
+		   search_object_subtype_other.push({ field: values[index], value: String(index), operator: "is"  })}
 	   });
     
     $( ".container" ).hide();
@@ -195,6 +201,7 @@ function select(values="",par1="") {
     var currentIds3=[]
     var currentIds4=[]
     var currentIds5=[]
+    var currentIds6=[]
     
     if (search_object_type.length>0) {
 	w2ui[par1].search(search_object_type, 'OR');
@@ -234,6 +241,13 @@ function select(values="",par1="") {
 	currentIds5=initdata
     }
     
+    if (search_object_subtype_other.length>0) {
+	w2ui[par1].search(search_object_subtype_other, 'OR');
+	currentIds6=w2ui[par1].last.searchIds;
+    }
+    else {
+	currentIds6=initdata
+    }
     
     // AND SELECTION
 	
@@ -251,8 +265,12 @@ function select(values="",par1="") {
 	return $.inArray(element, currentIds4 ) !== -1;
     });
     
-    common = $.grep(temp2, function(element) {
+    temp3 = $.grep(temp2, function(element) {
 	return $.inArray(element, currentIds5 ) !== -1;
+    });
+    
+    common = $.grep(temp3, function(element) {
+	return $.inArray(element, currentIds6 ) !== -1;
 	});
 
     var tempresult = [];
