@@ -56,27 +56,22 @@ function SelectionMenu(var1,par1,par2)
         f=d.split('[X]').filter(function(v){return v!==''});
 	$( ".mt-2.mb-3" ).hide()  
 	selvalues = new Object()
+	$("#object_types").find('strong').remove()
+	$("#object_subtypes").find('strong').remove()
+	$("#object_subtype_others").find('strong').remove()
+	$("#object_locations").find('strong').remove()
+	$("#object_provenances").find('strong').remove()
+	$("#object_materials").find('strong').remove()
 	
 	$.each(f, function(index) {
 	    $.each(keys, function(index_basic) {
-		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 && "#"+temp ==  keys[index_basic][2])
+		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 /*&& "#"+temp ==  keys[index_basic][2]*/)
 		{
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()
 		    $("#"+keys[index_basic][0]+"s").css("opacity", "1")
 		    $("#"+keys[index_basic][0]).css("opacity", "1")
-		    console.log("FIND")
-		    gt=$("#"+keys[index_basic][0]+"s").find('strong').text()
-		    
-		    console.log(gt.split('  '))
-		    console.log(f[index])
-		    if($.inArray(f[index], gt.split('  ') ) == -1  )  {
-
-			$("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
-		
-
-		    }
-		    //$("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+		    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
 		    selvalues[$.trim(f[index])]=keys[index_basic][0]
 		}
 	    })
