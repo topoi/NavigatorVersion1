@@ -38,50 +38,44 @@ function SelectionMenu(var1,par1,par2)
        
     obj=par1;
     $("#selectionresult").appendTo("#header")
+   
+    $("#selectionresult").css("opacity", "1")
+    
     $( "<p id='object_types' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
     $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
     $( "<p id='object_subtype_others' style='opacity:0.3; font-size:18px;'>Object sub-type II:<br></p>" ).appendTo("#header")
     $( "<p id='object_locations' style='opacity:0.3; font-size:18px;'>Object location:<br></p>" ).appendTo("#header")
     $( "<p id='object_provenances' style='opacity:0.3; font-size:18px;'>Object provenance:<br></p>" ).appendTo("#header")
     $( "<p id='object_materials' style='opacity:0.3; font-size:18px;'>Object material:<br></p>" ).appendTo("#header")
-    
-    $("#selectionresult").css("opacity", "1")
-    
-       
     $("#container" ).on("click", ".dropdown-item", function () {
-	
+
 	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
 	$("#selectedvalues").css("opacity","1")
 	$("#selectionresult").css("opacity", "1")
 	d=$( ".mt-2.mb-3" ).find('span').text()
         f=d.split('[X]').filter(function(v){return v!==''});
 	$( ".mt-2.mb-3" ).hide()  
-	
-        selvalues = new Object()
-        $("#object_types").find('strong').remove()
-        $("#object_subtypes").find('strong').remove()
-	$("#object_locations").find('strong').remove()
-	$("#object_provenances").find('strong').remove()
-	$("#object_materials").find('strong').remove()
-	$("#object_subtype_others").find('strong').remove()
-	
+	selvalues = new Object()
 	
 	$.each(f, function(index) {
-
 	    $.each(keys, function(index_basic) {
-	
-		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 /* && "#"+temp ==  keys[index_basic][2]*/)
+		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 && "#"+temp ==  keys[index_basic][2])
 		{
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()
 		    $("#"+keys[index_basic][0]+"s").css("opacity", "1")
 		    $("#"+keys[index_basic][0]).css("opacity", "1")
-	       	    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+		    
+		    console.log($("#"+keys[index_basic][0]+"s").find('strong'))
+		    if($.inArray(f[index], $("#"+keys[index_basic][0]+"s").find('strong')) != -1  )  {
+
+			alert("CHECK")
+
+		    }
+		    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
 		    selvalues[$.trim(f[index])]=keys[index_basic][0]
 		}
-	    }) 
-	    
-	    
+	    })
 	})
     });
 };
