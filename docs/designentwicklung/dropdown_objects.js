@@ -65,14 +65,18 @@ function SelectionMenu(var1,par1,par2)
 		    $( ".mt-2.mb-3" ).hide()
 		    $("#"+keys[index_basic][0]+"s").css("opacity", "1")
 		    $("#"+keys[index_basic][0]).css("opacity", "1")
+		    console.log("FIND")
+		    gt=$("#"+keys[index_basic][0]+"s").find('strong').text()
 		    
-		    console.log($("#"+keys[index_basic][0]+"s").find('strong'))
-		    if($.inArray(f[index], $("#"+keys[index_basic][0]+"s").find('strong')) != -1  )  {
+		    console.log(gt.split('  '))
+		    console.log(f[index])
+		    if($.inArray(f[index], gt.split('  ') ) == -1  )  {
 
-			alert("CHECK")
+			$("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+		
 
 		    }
-		    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+		    //$("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
 		    selvalues[$.trim(f[index])]=keys[index_basic][0]
 		}
 	    })
