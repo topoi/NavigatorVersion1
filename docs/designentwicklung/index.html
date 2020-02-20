@@ -55,11 +55,12 @@ a.selected {
   <a href="#" onclick="window.open('detail/projectinformation.html')">Project </a>
   <a href="#" onclick="window.open('detail/instructions.html')">Instructions </a>
   <a href="#" onclick="show_networks()">Networks</a>
+  <a href="#" id="subm0" style="font-size:15px" onclick="window.open('detail/network.html')">Description</a>
   <a href="#" id="subm1" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Memphite-Tombs-I/')">Memphite Tombs I</a>
   <a href="#" id="subm2" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Memphite-Tombs-II/')">Memphite Tombs II</a>
   <a href="#" id="subm3" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Maya/')">Overseer of Treasury Maya</a>
   <a href="#" id="subm4" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Treasury/')">Treasury</a>
-  <a href="#">Help</a>
+  <a href="#" onclick="window.open('detail/contact.html')">Contact</a>
 </div>
 
 <div id="upper">
@@ -87,10 +88,10 @@ a.selected {
 <script>
 
 function show_networks()  {
-      if($("#subm1,#subm2,#subm3,#subm4").is(":hidden")){
-	  $("#subm1,#subm2,#subm3,#subm4").show()}
-      else if($("#subm1,#subm2,#subm3,#subm4").is(":visible")){
-	  $("#subm1,#subm2,#subm3,#subm4").hide()}
+      if($("#subm0,#subm1,#subm2,#subm3,#subm4").is(":hidden")){
+	  $("#subm0,#subm1,#subm2,#subm3,#subm4").show()}
+      else if($("#subm0,#subm1,#subm2,#subm3,#subm4").is(":visible")){
+	  $("#subm0,#subm1,#subm2,#subm3,#subm4").hide()}
 }
 function openNav() {
   document.getElementById("mySidenav").style.width = "300px";
@@ -183,7 +184,7 @@ var parameters = getParameters();
 //#############################################
 
 $(document).ready(function(){
-    $("#subm1,#subm2,#subm3,#subm4").hide()
+    $("#subm0,#subm1,#subm2,#subm3,#subm4").hide()
     $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
     
