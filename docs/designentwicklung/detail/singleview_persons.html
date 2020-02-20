@@ -10,8 +10,6 @@
 </head>
 <body>
 
-
-
 <div id="container1"></div>
 <div id="container2"></div>
 
@@ -30,9 +28,6 @@ $("html, body").css({
     
     height: '800px'
 });
-
-
-  
 
 function getParameters()
  {
@@ -71,7 +66,8 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
       
         //loop 
          var i;
-         
+  
+  
          $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
 	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#container2');
 
@@ -261,12 +257,10 @@ $table.appendTo('#ContentSame');
 $('#ContentSame').appendTo('#container2')
 }
 
-$('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
-$('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#container2');
-$('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#container2');
-$('<p class="pstyle" ><b>Date: </b>28.02.2020</p>').appendTo('#container2');
-$('<p class="pstyle"><b>Comment: </b>Verteilung der Personen</p>').appendTo('#container2'); 
-     
+$('<li><a href="#metadata" class="tocstyle">Document link</li>').appendTo('#toc');
+$('<h2 id="metadata" class="h2style" >DOCUMENT LINK</h2>').appendTo('#container2');
+$("<p class='pstyle'>"+document.URL+"</p>").appendTo('#container2');
+
 $("#container2").appendTo("#container1"); 
 $('a[href*="#"]').on('click',function(e) {
                 
@@ -280,7 +274,11 @@ $('a[href*="#"]').on('click',function(e) {
 		}, 400, 'swing', function () {
 			window.location.hash = target;
 		});*/
-	});
+});
+
+  
+
+  
 </script>
 
 

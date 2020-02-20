@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<title>Select names</title>
+<title>Prosopographia Memphitica</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
 <link href="docs/bundle.css" rel="stylesheet" type="text/css">
 <script src="grids.js"></script>
@@ -53,9 +53,9 @@ a.selected {
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#" onclick="window.open('detail/projectinformation.html')">Project </a>
-  <a href="#" onclick="window.open('detail/instructions.html')">Instructions </a>
+  <a href="#" onclick="window.open('detail/instructions.html')">How to use</a>
   <a href="#" onclick="show_networks()">Networks</a>
-  <a href="#" id="subm0" style="font-size:15px" onclick="window.open('detail/network.html')">Description</a>
+  <a href="#" id="subm0" style="font-size:15px" onclick="window.open('detail/network.html')">About Network Studies</a>
   <a href="#" id="subm1" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Memphite-Tombs-I/')">Memphite Tombs I</a>
   <a href="#" id="subm2" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Memphite-Tombs-II/')">Memphite Tombs II</a>
   <a href="#" id="subm3" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Maya/')">Overseer of Treasury Maya</a>
@@ -64,7 +64,7 @@ a.selected {
 </div>
 
 <div id="upper">
-<span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
+<span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Menu</h4></span>
 <p class="radio" id="searchfield" style="display:inline; font-size:20px;cursor:pointer; top:0; left:40%; opacity:0">Text Search: <input type="text" id="searchfields" value=""></p>
 <br>
 <a class="radio" style="display:inline; top:7%; left:40%; opacity:0"><input type="radio" name="query" value="is" checked="checked" >is  </input></a>
@@ -72,8 +72,8 @@ a.selected {
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
 <a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
 
-<span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
-<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:1" id="reset"><h4>&#9776; Main Menu</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to search</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:0" id="reset"><h2>&#127968; </h2></span>
 <div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
   <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
   <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
@@ -107,7 +107,7 @@ function closeNav() {
 <script src="dist/fuse.js"></script>
 <script src="dist/bootstrap-select-dropdown.js"></script>
 
-<title>Memphis Navigator</title>
+<title>Prosopographia Memphitica</title>
 
 <script type="text/javascript" src="js/w2ui.js"></script>
 <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
@@ -116,8 +116,8 @@ function closeNav() {
 
 <div class="container" id="container">
 <div class="form-group" id="msall">
-    <h1> Memphis Navigator</h1>
-    <h5> A tool designed for database navigation</h5>
+    <h1>Prosopographia Memphitica</h1>
+    <h5>A Prosopographical Database</h5>
     <br>
     <br>
      
@@ -206,7 +206,8 @@ var collection=[]
 //      PERSONS       #
 //#####################
 
-$( "#sel_pers" ).on("click", function () {
+    $( "#sel_pers" ).on("click", function () {
+	$("#reset").css("opacity","1")
     $.getScript( "dropdown_persons.js", function() {
 	
 	getDropdownPersons();
@@ -220,7 +221,8 @@ $( "#sel_pers" ).on("click", function () {
 //      OBJECTS       #
 //#####################
 
-$( "#sel_obj" ).click(function() {
+    $( "#sel_obj" ).click(function() {
+	$("#reset").css("opacity","1")
 $.getScript( "dropdown_objects.js", function() {
     getDropdownObjects();
 });
@@ -230,7 +232,8 @@ $.getScript( "dropdown_objects.js", function() {
 // TITLES         #
 //#################
 
-$( "#sel_title" ).click(function() {
+    $( "#sel_title" ).click(function() {
+	$("#reset").css("opacity","1")
 	$.getScript( "dropdown_titles.js", function() {
 	    getDropdownTitles();
 });

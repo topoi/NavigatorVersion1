@@ -255,16 +255,11 @@ $(divelements2[index]).appendTo('#Content')
  
 });
 */
-
-    $('<li><a href="#metadata" class="tocstyle">Metadata</li>').appendTo('#toc');
-  $('<h2 id="metadata" class="h2style" >METADATA</h2>').appendTo('#Content');
-  $('<p class="pstyle" ><b>Creator: </b> Anne Herzberg-Beiersdorf</p>').appendTo('#Content');
-  $('<p class="pstyle"><b>Co-Creator: </b>Gordon Fischer</p>').appendTo('#Content');
-  $('<p class="pstyle" ><b>Date: </b>07.06.2019</p>').appendTo('#Content');
-  $('<p class="pstyle"><b>Comment: </b>Verteilung der Personen</p>').appendTo('#Content');
-       
-     
-
+  
+$('<li><a href="#metadata" class="tocstyle">Document link</li>').appendTo('#toc');
+$('<h2 id="metadata" class="h2style" >DOCUMENT LINK</h2>').appendTo('#container2');
+$("<p class='pstyle'>"+document.URL+"</p>").appendTo('#container2');
+    
 $('a[href*="#"]').on('click',function(e) {
                 
 		e.preventDefault();
