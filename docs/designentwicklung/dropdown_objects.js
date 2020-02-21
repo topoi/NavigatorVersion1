@@ -159,7 +159,8 @@ function getDropdownObjects()
 
     
 function select(values="",par1="") {
-
+    w2ui.layout.content('main', w2ui.grid2);
+    
     w2ui[par1].clear();
     w2ui[par1].add(initlist);
     $("#back").css("opacity", "1")
@@ -283,8 +284,7 @@ function select(values="",par1="") {
     //########################
     
     $("#selectionresult").on("click",  function () {
-
-    $.fn.ignore = function(sel){
+	$.fn.ignore = function(sel){
 	return this.clone().find(sel||">*").remove().end();
     };
     file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
@@ -293,7 +293,8 @@ function select(values="",par1="") {
     $("#w2ui-grid-box").css("height","70%")
     $("#layout_layout_panel_main").css("height","100%")
     $(".w2ui-scroll-wrapper").css("width","95%")
-    select(values=selvalues,par1="grid2")
-	})
+
+	select(values=selvalues,par1="grid2")
+    })
 }
     

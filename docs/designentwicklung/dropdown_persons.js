@@ -405,18 +405,18 @@ function getDropdownPersons()
 
     
 function select(values="",par1="") {
-
-	w2ui[par1].clear();
-	w2ui[par1].add(initlist);
-	console.log(values)
+    w2ui.layout.content('main', w2ui.grid1);
+    w2ui[par1].clear();
+    w2ui[par1].add(initlist);
+    console.log(values)
 	
-	$("#back").css("opacity", "1")
-	$("#upper").addClass(".mt-2 mb-3")
-	var search_name_engl=[]
-	var search_gender=[]
-	var search_name_orig=[]
+    $("#back").css("opacity", "1")
+    $("#upper").addClass(".mt-2 mb-3")
+    var search_name_engl=[]
+    var search_gender=[]
+    var search_name_orig=[]
 	
-        $.each(values, function(index)
+    $.each(values, function(index)
 	   {
 	       if (values[index]=="name_translit") {
 		   search_name_engl.push({ field: values[index], value: String(index), operator: "is"  })}

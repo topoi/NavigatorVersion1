@@ -394,7 +394,7 @@ function getDropdownTitles()
 
     
 function select(values="",par1="") {
-
+    w2ui.layout.content('main', w2ui.grid3);
     w2ui[par1].clear();
     w2ui[par1].add(initlist);
     $("#back").css("opacity", "1")

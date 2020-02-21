@@ -101,32 +101,31 @@ $('#grid2').w2grid({
 	$("#searchfield").hide()
 	$("#textfieldsearch").hide()
 	$(".radio").hide()
-
-
 	$("#upper").css({"height":"40px", "z-index": "10000"})
         $("#bgroup").css("opacity","1");
         
         var grid = this;
-        var plo= [];
+	
+	var plo= [];
         $.each(currentIds, function( index, value ) {
 
              plo.push({"id":grid.get(value).id_objects,"type":grid.get(value).object_type})
-         
+            
         })
-   
-$(document).ready(function(){
-       var count = 0
-       $("#p1").click(function(){
-         
-          count=count+1
-          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
-     });
-   
-     $("#p0").click(function(){
-          count=count-1
-          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
-     });
-      });
+	
+	$(document).ready(function(){
+	    var count = 0
+	    $("#p1").click(function(){
+		
+		count=count+1
+		document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
+	    });
+	    
+	    $("#p0").click(function(){
+		count=count-1
+		document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plo[count].id+"&type="+plo[count].type)
+	    });
+	});
 
         event.onComplete = function() {
         var sel_rec_ids = grid.getSelection();
