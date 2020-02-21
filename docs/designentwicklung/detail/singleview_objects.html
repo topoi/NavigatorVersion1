@@ -326,11 +326,13 @@ $('<h3 class="h3style">Appearance of '+objects_sel[sel_record].object_type+ ' in
 
 
 });
-*/
-  
-$('<li><a href="#metadata" class="tocstyle">Document link</li>').appendTo('#toc');
-$('<h2 id="metadata" class="h2style" >DOCUMENT LINK</h2>').appendTo('#container2');
-$("<p class='pstyle'>"+document.URL+"</p>").appendTo('#container2');
+		    */
+
+
+$('<li><a href="#metadata" class="tocstyle">Citation</li>').appendTo('#toc');
+$('<h2 id="metadata" class="h2style" >CITATION</h2>').appendTo('#Content');
+$("<p class='pstyle'><a style='font-size:15px'>Permalink:</a> <a href='"+document.URL+"'>"+document.URL+"</a></p>").appendTo('#Content');
+$("<p class='pstyle'><a style='font-size:15px'>Citation:</a>  Anne Herzberg-Beiersdorf, Prosopographia Memphitica, <a href='"+document.URL+"'>"+document.URL+"</a> Access Date: 28.02.2020</p>").appendTo('#Content');
 
 
 $('a[href*="#"]').on('click',function(e) {
