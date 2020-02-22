@@ -30,7 +30,6 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	s.appendTo(var1);
     });
 
-    
     // GENDER
     c=$("<div class=\"form-group\" id="+obj["gender"][1]+"><div id="+obj["gender"][2]+"><h6 id="+obj["gender"][3]+"></h6></div></div>")
     var data=obj["gender"][0];
@@ -40,7 +39,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     }
     c.appendTo("#container")
     s.appendTo(var1);
-
+    
     // NAME ORIGINAL
     $.each(alphabet_orig, function(index) {
 	
