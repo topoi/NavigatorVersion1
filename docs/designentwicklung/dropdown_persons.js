@@ -52,13 +52,14 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	}
 	c.appendTo("#container")
 	s.appendTo(var1);
-    });      
-   
-  
+    });
+    
+    $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
+    $("#selectionresult").appendTo("#container")
 
 };
     
-    function DropdownMenu(var1, var2, par1)
+function DropdownMenu(var1, var2, par1)
 	{
             obj=par1;
 	    
@@ -87,17 +88,15 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 var currentAlpha="";
 var currentBeta="";
 
-    function SelectionMenu(var1,par1,par2)
+function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
-	
-	$("#selectionresult").appendTo("#header")
+	$("#selectionresulttext,#selectionresult").css("opacity", "1")
+	$("#selectionresulttext").appendTo("#header")
 	$( "<p id='personen' style='opacity:0.3; font-size:18px;'>Persons (english):<br></p>" ).appendTo("#header")
 	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><br>Gender:<br></p>" ).appendTo("#header")
 	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><br>Persons (original):<br></p>" ).appendTo("#header")
-	//$( "<br><span style='position: absolute; font-size:30px;cursor:pointer; opacity:1' id='back'><h4>&#8617; Back to search</h4></span>" ).appendTo("#header")
-	$("#selectionresult").css("opacity", "1")
-	//$("#selectionresult").appendTo("#header")
+	
 
         uniquepersonlist_engl=[]
 		       $.each(alphabet_engl, function(index) {	       
@@ -241,7 +240,7 @@ function getDropdownPersons()
 	$(str).hide()
 	
         $(obj[$(this).text()+"1"][7]).show()
-	$("#main_content_engl").appendTo("#bsd1-container")
+	$("#main_content_engl").appendTo("#container")
 	$("#main_content_engl").show();
 	
         $(obj[$(this).text()+"1"][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-20px","position":"absolute"}).show();
@@ -265,7 +264,7 @@ function getDropdownPersons()
 	str=containerlistorig.pop()
 	$(str).hide()
         $(obj[$(this).text()+"2"][7]).show()
-	$("#main_content_orig").appendTo("#bsd21-container")
+	$("#main_content_orig").appendTo("#container")
 	$("#main_content_orig").show();
 	
         $(obj[$(this).text()+"2"][7]).find(".dropdown-menu.dropdown-menu-right").css({"top":"0","right":"-20px","position":"absolute"}).show();
@@ -405,9 +404,7 @@ function getDropdownPersons()
 	
     })
 
-    
-    
- // SEARCH GRID
+    // SEARCH GRID
     function select(values="",par1="") {
 	$('#layout').show()
 	w2ui['layout'].hide('main', window.instant)
@@ -434,8 +431,7 @@ function getDropdownPersons()
 	   });
     
 	$( ".container" ).hide();
-	//w2ui['layout'].hide('main', window.instant)
-	//w2ui['layout'].show('right', window.instant)
+	
 	var currentIds1=[]
 	var currentIds2=[]
         var currentIds3=[]

@@ -18,6 +18,9 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     c.appendTo("#container")
 	s.appendTo(var1);
     })
+
+    $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
+    $("#selectionresult").appendTo("#container")
 };
     
 function DropdownMenu(var1, var2, par1)
@@ -37,10 +40,8 @@ function SelectionMenu(var1,par1,par2)
 {
        
     obj=par1;
-    $("#selectionresult").appendTo("#header")
-   
-    $("#selectionresult").css("opacity", "1")
-    
+    $("#selectionresult,#selectionresulttext").css("opacity", "1")
+    $("#selectionresulttext").appendTo("#header")
     $( "<p id='object_types' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
     $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
     $( "<p id='object_subtype_others' style='opacity:0.3; font-size:18px;'>Object sub-type II:<br></p>" ).appendTo("#header")
@@ -164,8 +165,10 @@ function getDropdownObjects()
    
     
 function select(values="",par1="") {
-    //w2ui.layout.content('main', w2ui.grid2);
     
+    $('#layout').show()
+    w2ui['layout'].hide('main', window.instant)
+    w2ui['layout'].show('right', window.instant)
     w2ui[par1].clear();
     w2ui[par1].add(initlist);
     $("#back").css("opacity", "1")
@@ -194,7 +197,7 @@ function select(values="",par1="") {
 	   });
     
     $( ".container" ).hide();
-    w2ui['layout'].show('main', window.instant)
+    
     
     var currentIds1=[]
     var currentIds2=[]

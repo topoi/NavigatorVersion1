@@ -92,6 +92,8 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	$("#main_content_orig").appendTo("#container")
 	s.appendTo(var1);
     })
+     $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
+    $("#selectionresult").appendTo("#container")
 };
     
 function DropdownMenu(var1, var2, par1)
@@ -113,7 +115,8 @@ var currentBeta="";
 function SelectionMenu(var1,par1,par2)
 {
     obj=par1;
-    $("#selectionresult").appendTo("#header")
+    $("#selectionresult,#selectionresulttext").css("opacity", "1")
+    $("#selectionresulttext").appendTo("#header")
     $( "<p id='titles_translits' style='opacity:0.3; font-size:18px;'>Titles:<br></p>" ).appendTo("#header")
     $( "<p id='titles_translat_engs' style='opacity:0.3; font-size:18px;'>Translation:<br></p>" ).appendTo("#header")
     $( "<p id='gott_kults' style='opacity:0.3; font-size:18px;'>Gods and other Authorities :<br></p>" ).appendTo("#header")
@@ -123,7 +126,7 @@ function SelectionMenu(var1,par1,par2)
     $( "<p id='field3s' style='opacity:0.3; font-size:18px;'>Field of Specialization:<br></p>" ).appendTo("#header")
     $( "<p id='field5s' style='opacity:0.3; font-size:18px;'>Profession:<br></p>" ).appendTo("#header")
     $( "<p id='field4s' style='opacity:0.3; font-size:18px;'>Gender:<br></p>" ).appendTo("#header")
-    $("#selectionresult").css("opacity", "1")
+   
 
     uniquetitlelist_engl=[]
     $.each(alphabet_engl, function(index) {
