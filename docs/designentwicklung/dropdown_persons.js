@@ -391,7 +391,6 @@ function getDropdownPersons()
 	$('#layout').show()
 	w2ui["grid1"].clear();
 	w2ui["grid1"].add(initlist);
-	
 	$("#back").css("opacity", "1")
 	v=$("#searchfields").val()
 	g=w2ui["grid1"].getSearch()
@@ -399,14 +398,10 @@ function getDropdownPersons()
 	$.each(g, function(index) {
 	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
 	})
-	console.log(fieldsearch)
 	w2ui["grid1"].search(fieldsearch, 'OR');
-	
 	currentIds=w2ui["grid1"].last.searchIds;
 	$( ".container" ).hide();
-	//w2ui['layout'].hide('main', window.instant)
-	w2ui['layout'].show('right', "Gordon")
-	//w2ui["layout"].show('right', w2ui.grid1);
+	w2ui["layout"].show('right', w2ui.grid1);
 	
     })
 

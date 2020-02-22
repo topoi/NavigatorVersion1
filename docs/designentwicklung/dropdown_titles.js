@@ -104,7 +104,7 @@ function DropdownMenu(var1, var2, par1)
     $(var1).css("opacity", "1")
 	    
     $("#moreoptions").css("opacity", "0")
-    w2ui.layout.content('main', var2);
+    w2ui.layout.content('right', var2);
     
 };
 var currentAlpha="";
@@ -366,21 +366,6 @@ function getDropdownTitles()
     });
     });
 
-    $("#textfieldsearch").on("click",  function () {
-	$("#back").css("opacity", "1")
-	v=$("#searchfields").val()
-	g=w2ui["grid3"].getSearch()
-	fieldsearch= [];
-	$.each(g, function(index) {
-	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
-	})
-	w2ui["grid3"].search(fieldsearch, 'OR');
-	currentIds=w2ui["grid3"].last.searchIds;
-	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-    })
-    
-    // SEARCH GRID
     // initalize grid
     initdata=[]
     $.each(titles[2], function( index, value_tit ) {
@@ -391,21 +376,43 @@ function getDropdownTitles()
     $.each(initdata, function(index) {
 	    initlist.push(w2ui['grid3'].get(initdata[index])); 
     })
-
     
-function select(values="",par1="") {
-    w2ui.layout.content('main', w2ui.grid3);
-    w2ui[par1].clear();
-    w2ui[par1].add(initlist);
-    $("#back").css("opacity", "1")
-    $("#upper").addClass(".mt-2 mb-3")
-    var search_title_translat_eng=[]
-    var search_title_translit=[]
-    var search_title_gott=[]
-    var search_title_region=[]
-    var search_title_ad_sec=[]
-    var search_title_field2=[]
-    var search_title_field3=[]
+    $("#textfieldsearch").on("click",  function () {
+	$('#layout').show()
+	w2ui["grid3"].clear();
+	w2ui["grid3"].add(initlist);
+	$("#back").css("opacity", "1")
+	v=$("#searchfields").val()
+	g=w2ui["grid3"].getSearch()
+	fieldsearch= [];
+	$.each(g, function(index) {
+	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
+	})
+	w2ui["grid3"].search(fieldsearch, 'OR');
+	currentIds=w2ui["grid3"].last.searchIds;
+	$( ".container" ).hide();
+	w2ui["layout"].show('right', w2ui.grid3);
+    })
+    
+    // SEARCH GRID
+
+    function select(values="",par1="") {
+	
+	$('#layout').show()
+	w2ui['layout'].hide('main', window.instant)
+	w2ui['layout'].show('right', window.instant)
+
+	w2ui[par1].clear();
+	w2ui[par1].add(initlist);
+	$("#back").css("opacity", "1")
+	$("#upper").addClass(".mt-2 mb-3")
+	var search_title_translat_eng=[]
+	var search_title_translit=[]
+	var search_title_gott=[]
+	var search_title_region=[]
+	var search_title_ad_sec=[]
+	var search_title_field2=[]
+	var search_title_field3=[]
     var search_title_field5=[]
     var search_title_field4=[]
     

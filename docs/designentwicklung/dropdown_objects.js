@@ -29,7 +29,7 @@ function DropdownMenu(var1, var2, par1)
     $(var1).css("opacity", "1")
 	    
     $("#moreoptions").css("opacity", "0")
-    w2ui.layout.content('main', var2);
+    w2ui.layout.content('right', var2);
     
 };
 
@@ -143,10 +143,9 @@ function getDropdownObjects()
     })
 
     $("#textfieldsearch").on("click",  function () {
-	
+	$('#layout').show()
 	w2ui["grid2"].clear();
 	w2ui["grid2"].add(initlist);
-	//w2ui.layout.content('main', w2ui.grid2);
 	$("#back").css("opacity", "1")
 	v=$("#searchfields").val()
 	g=w2ui["grid2"].getSearch()
@@ -158,7 +157,7 @@ function getDropdownObjects()
 	w2ui["grid2"].search(fieldsearch, 'OR');
 	currentIds=w2ui["grid2"].last.searchIds;
 	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
+	w2ui["layout"].show('right', w2ui.grid2);
     })
 
     // SEARCH GRID

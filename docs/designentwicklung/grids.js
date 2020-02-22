@@ -1,3 +1,7 @@
+var plp= [];
+var plo= [];
+var plt= [];
+
 function allTables(var1="")
 {
     
@@ -26,19 +30,17 @@ multiSearch: true,
     },
     
     onClick: function(event) {
-
+	
         $("#upper").css({"height":"40px", "z-index": "10000"})
-        
         $("#bgroup").css("opacity", "1");
         var grid = this;
         //Anmerkung: das sind die Ids aus der onSearch Funktion davor!
         //Beim nächsten Aufruf, werden die Search IDs ausgegeben
         //Daher hier bei onClick die Methode '.last'
-         var plp= [];
-         $.each(currentIds, function( index, value ) {
-
-             plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
-         
+	
+	
+        $.each(currentIds, function( index, value ) {
+	    plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
         })
        
        
@@ -61,7 +63,6 @@ multiSearch: true,
         
         if (sel_rec_ids.length) {
             var sel_record = grid.get(sel_rec_ids[0]);
-	    $("#main1").css("width","100%")
 	    w2ui['layout'].hide('right', window.instant)
 	    w2ui['layout'].show('main', window.instant)
             w2ui['layout'].content('main', '<iframe class="row" id="Content2" style="height: 100%;overflow-y: hidden"></iframe>' )
@@ -88,10 +89,11 @@ $('#grid2').w2grid({
     searches: objects[0],
         columns: objects[1],
         records: objects[2],
-        onSearch: function (target, info) {
-	    var grid = this;
-	    
-	},
+
+    onSearch: function (target, info) {
+	var grid = this;
+	
+    },
     
     onClick: function(event) {
 
@@ -100,7 +102,6 @@ $('#grid2').w2grid({
         
         var grid = this;
 	
-	var plo= [];
         $.each(currentIds, function( index, value ) {
 
              plo.push({"id":grid.get(value).id_objects,"type":grid.get(value).object_type})
@@ -165,7 +166,7 @@ $('#grid2').w2grid({
         $("#bgroup").css("opacity", "1");
         var grid = this;
 
-        var plt= [];
+        
          $.each(currentIds, function( index, value ) {
 
              plt.push({"id":grid.get(value).id,"title":grid.get(value).titles_translat_eng})
@@ -247,7 +248,7 @@ $(function () {
     //$().w2grid(config.grid1);
     //$().w2grid(config.grid2);
     //$().w2grid(config.grid3);
-    //w2ui["layout"].content('right', w2ui.grid1);
-    w2ui["layout"].content('right', "Gordon");
+    //w2ui["layout"].content('right', w2ui.grid2);
+    //w2ui["layout"].content('right', "Gordon");
 });
 }
