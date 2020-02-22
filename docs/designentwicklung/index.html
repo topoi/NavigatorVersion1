@@ -14,7 +14,7 @@
 
 <style>
 body { background-color: #FFFFFF; overflow-y: hidden;  }
-.container { margin-top: 70px; max-width: 450px; }
+.container { margin-top: 70px; max-width: 400px; }
 .limenu {background-color:white; margin-left: 3px; margin-top: 1px; margin-bottom: 10px;width:12px; height:12px; font-size:15px; font-color:black; opacity:1;}
 .form-control{border:0px;font-size:16px}
 .btn.btn-primary.dropdown-toggle {border-radius:0.65rem; }
@@ -78,8 +78,8 @@ a.selected {
   <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
   <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
 </div>
-
-</div> 
+</div>
+<div id="layout" style="opacity:1; width: 75%; position: absolute; top:10%; right:12px; bottom:10%; margin-right:10px; padding:0px"></div>
 <div id="selectedvalues" style="position: absolute; top:12%; left:2px;" >
   <div id="header" style="position: absolute; top:200px; left:20px; width:400px;" >
     </div>
@@ -133,8 +133,6 @@ function closeNav() {
 <span style="font-size:30px;cursor:pointer; opacity:0" id="selectionresult" ><h4>Current Selection   <button id="selectionresult" class="btn btn-primary" style="font-size:0.75rem;">Show results</button></h4></span>
 <span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
 </div>
-<div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
-
 </div>
 <div id="main_content_engl" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
 <div id="main_content_orig" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
@@ -184,7 +182,7 @@ var parameters = getParameters();
 //#############################################
 
 $(document).ready(function(){
-    $("#subm0,#subm1,#subm2,#subm3,#subm4").hide()
+    $("#subm0,#subm1,#subm2,#subm3,#subm4,#layout, #main_content_orig, #main_content_engl").hide()
     $.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
     
@@ -195,7 +193,9 @@ $(document).ready(function(){
 	$(".radio").show()
 	$("#back").css("opacity", "1");
 	$("#bgroup").css("opacity", "0");
+	$("#layout").hide()
 	w2ui['layout'].hide('main', window.instant)
+	w2ui['layout'].show('right', window.instant)
 	$( ".container" ).show();
     })
 })

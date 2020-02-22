@@ -79,7 +79,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	    $(var1).css("opacity", "1")
 	    
 	    $("#moreoptions").css("opacity", "0")
-	    w2ui.layout.content('main', var2);
+	    w2ui["layout"].content('right', var2);
    
 	};
 
@@ -95,6 +95,7 @@ var currentBeta="";
 	$( "<p id='personen' style='opacity:0.3; font-size:18px;'>Persons (english):<br></p>" ).appendTo("#header")
 	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><br>Gender:<br></p>" ).appendTo("#header")
 	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><br>Persons (original):<br></p>" ).appendTo("#header")
+	//$( "<br><span style='position: absolute; font-size:30px;cursor:pointer; opacity:1' id='back'><h4>&#8617; Back to search</h4></span>" ).appendTo("#header")
 	$("#selectionresult").css("opacity", "1")
 	//$("#selectionresult").appendTo("#header")
 
@@ -375,7 +376,22 @@ function getDropdownPersons()
 		
 	    });
 
+ // initalize grid
+    initdata=[]
+    $.each(persons[2], function( index, value_pers ) {
+	initdata.push(parseInt(value_pers.recid))
+    });
+    
+    initlist=[]
+    $.each(initdata, function(index) {
+	initlist.push(w2ui['grid1'].get(initdata[index])); 
+    })
+    
     $("#textfieldsearch").on("click",  function () {
+	$('#layout').show()
+	w2ui["grid1"].clear();
+	w2ui["grid1"].add(initlist);
+	
 	$("#back").css("opacity", "1")
 	v=$("#searchfields").val()
 	g=w2ui["grid1"].getSearch()
@@ -383,42 +399,36 @@ function getDropdownPersons()
 	$.each(g, function(index) {
 	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
 	})
+	console.log(fieldsearch)
 	w2ui["grid1"].search(fieldsearch, 'OR');
+	
 	currentIds=w2ui["grid1"].last.searchIds;
 	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-    })
-
-
-   
-    // SEARCH GRID
-    // initalize grid
-    initdata=[]
-    $.each(persons[2], function( index, value_pers ) {
-	initdata.push(parseInt(value_pers.recid))
-    });
-
-    initlist=[]
-    $.each(initdata, function(index) {
-	    initlist.push(w2ui['grid1'].get(initdata[index])); 
+	//w2ui['layout'].hide('main', window.instant)
+	w2ui['layout'].show('right', "Gordon")
+	//w2ui["layout"].show('right', w2ui.grid1);
+	
     })
 
     
-function select(values="",par1="") {
-    w2ui.layout.content('main', w2ui.grid1);
-    w2ui[par1].clear();
-    w2ui[par1].add(initlist);
-    console.log(values)
-	
-    $("#back").css("opacity", "1")
-    $("#upper").addClass(".mt-2 mb-3")
-    var search_name_engl=[]
-    var search_gender=[]
-    var search_name_orig=[]
+    
+ // SEARCH GRID
+    function select(values="",par1="") {
+	$('#layout').show()
+	w2ui['layout'].hide('main', window.instant)
+	w2ui['layout'].show('right', window.instant)
+	w2ui[par1].clear();
+	w2ui[par1].add(initlist);
+	$("#back").css("opacity", "1")
+	$("#upper").addClass(".mt-2 mb-3")
+	var search_name_engl=[]
+	var search_gender=[]
+	var search_name_orig=[]
 	
     $.each(values, function(index)
 	   {
 	       if (values[index]=="name_translit") {
+		   
 		   search_name_engl.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="gender") {
 		   search_gender.push({ field: values[index], value: String(index), operator: "is"})}
@@ -429,8 +439,8 @@ function select(values="",par1="") {
 	   });
     
 	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-
+	//w2ui['layout'].hide('main', window.instant)
+	//w2ui['layout'].show('right', window.instant)
 	var currentIds1=[]
 	var currentIds2=[]
         var currentIds3=[]

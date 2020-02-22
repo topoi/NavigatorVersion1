@@ -130,22 +130,7 @@ function getDropdownObjects()
 	
     });
     });
-
-    $("#textfieldsearch").on("click",  function () {
-	$("#back").css("opacity", "1")
-	v=$("#searchfields").val()
-	g=w2ui["grid2"].getSearch()
-	fieldsearch= [];
-	$.each(g, function(index) {
-	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
-	})
-	w2ui["grid2"].search(fieldsearch, 'OR');
-	currentIds=w2ui["grid2"].last.searchIds;
-	$( ".container" ).hide();
-	w2ui['layout'].show('main', window.instant)
-    })
-
-    // SEARCH GRID
+    
     // initalize grid
     initdata=[]
     $.each(objects[2], function( index, value_obj ) {
@@ -157,9 +142,30 @@ function getDropdownObjects()
 	    initlist.push(w2ui['grid2'].get(initdata[index])); 
     })
 
+    $("#textfieldsearch").on("click",  function () {
+	
+	w2ui["grid2"].clear();
+	w2ui["grid2"].add(initlist);
+	//w2ui.layout.content('main', w2ui.grid2);
+	$("#back").css("opacity", "1")
+	v=$("#searchfields").val()
+	g=w2ui["grid2"].getSearch()
+	fieldsearch= [];
+	$.each(g, function(index) {
+	    fieldsearch.push({ field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()  })
+	})
+	console.log(fieldsearch)
+	w2ui["grid2"].search(fieldsearch, 'OR');
+	currentIds=w2ui["grid2"].last.searchIds;
+	$( ".container" ).hide();
+	w2ui['layout'].show('main', window.instant)
+    })
+
+    // SEARCH GRID
+   
     
 function select(values="",par1="") {
-    w2ui.layout.content('main', w2ui.grid2);
+    //w2ui.layout.content('main', w2ui.grid2);
     
     w2ui[par1].clear();
     w2ui[par1].add(initlist);
