@@ -371,7 +371,7 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
     classBtnSelectAll: "btn btn-outline-secondary",
     // Multiselect only
     // HTML
-    htmlClear: "",
+    htmlClear: "Clear input field",
     htmlDeselectAll: "Deselect all",
     // Multiselect only
     htmlSelectAll: "Select all",
