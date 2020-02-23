@@ -112,6 +112,7 @@ function getDropdownObjects()
 
     });
     
+    
     BasicMenu("#objectsl", par1=obj, par2=0, par3="");
     DropdownMenu("#objectsl", w2ui.grid2, par1=obj);
     SelectionMenu("#objectsl", par1=obj, "grid2");
@@ -120,16 +121,16 @@ function getDropdownObjects()
     buttonlist=["#bsd1-button","#bsd2-button","#bsd3-button","#bsd4-button","#bsd5-button","#bsd6-button"]
     $.each(buttonlist, function(index) {
 
-    $("#container").on("click",buttonlist[index], function() {
-
-	$("[id*=-button]").css("opacity","0.5")
-	$("#"+$(this).attr("id")).css("opacity","1")
-	$(buttonlist[index]).css({position: 'relative'});
-      	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	$(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").show()
+	/*$("#container").on("click",buttonlist[index], function() {
+	    $("[id*=-button]").css("opacity","0.5")
+	    $("#"+$(this).attr("id")).css("opacity","1")
+	    
+	    $(buttonlist[index]).css({position: 'relative'});
+      	    $(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	    $(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	    $(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").show()
 	
-    });
+	});*/
     });
     
     // initalize grid

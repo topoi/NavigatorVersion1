@@ -58,7 +58,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	
 	c.appendTo("#container")
 	if (index==0) {
-	    $("#main_content_orig").appendTo("#container")
+	    $("#main_content_orig").appendTo("#abc")
 	}
 	s.appendTo(var1);
     });  
@@ -75,7 +75,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	}
 	c.appendTo("#container")
 	if (index==0) {
-	    $("#main_content_engl").appendTo("#container")
+	    $("#main_content_engl").appendTo("#abc")
 	}
 	s.appendTo(var1);
      });
@@ -89,7 +89,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	    $("<option/>", {value: data[val], text: data[val]}).appendTo(s);
 	}
 	c.appendTo("#container")
-	$("#main_content_orig").appendTo("#container")
+	$("#main_content_orig").appendTo("#abc")
 	s.appendTo(var1);
     })
      $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
