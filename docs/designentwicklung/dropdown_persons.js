@@ -121,10 +121,10 @@ function SelectionMenu(var1,par1,par2)
 	$("#selectionresulttext,#selectionresult").css("opacity", "1")
 	$("#selectionresulttext").appendTo("#header")
 	
-	$( "<p id='personen' style='opacity:0.3; font-size:18px;'>Persons (english):<br></p>" ).appendTo("#header")
-	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><br>Gender:<br></p>" ).appendTo("#header")
-	$( "<p id='originalstext' style='opacity:0.3; font-size:18px;'>Persons (original):<br></p>").appendTo("#header")
-	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><br><br></p>" ).appendTo("#header")
+	$( "<p id='personen' style='opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
+	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
+	//$( "<p id='originalstext' style='opacity:0.3; font-size:18px;'><h3>Persons (original):</h3></p>").appendTo("#header")
+	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><a id='H5'>Persons (original):<br></a></p>" ).appendTo("#header")
 	
 	/*
         uniquepersonlist_engl=[]
@@ -374,7 +374,9 @@ function getDropdownPersons()
 	$(obj["original"][7]).find(".dropdown-item:contains('Show selected')").css("font-family","italic")
 	$(obj["original"][7]).find(".dropdown-item:contains('Clear input field')").css("font-family","italic")
 	$("#originals").css("font-family","aegypt")
-	
+	$("#originals").find("#H5:contains('Persons (original):')").css("font-family","italic")
+	$("#genders").find("#H5:contains('Gender:')").css("font-family","italic")
+	$("#personen").find("#H5:contains('Persons (english):')").css("font-family","italic")
 	
 	/*$.each(alphabet_orig, function(index) {
 	    $(obj[alphabet_orig[index]][6]).selectDropdown();
