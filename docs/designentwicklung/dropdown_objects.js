@@ -26,7 +26,8 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 function DropdownMenu(var1, var2, par1)
 {
     obj=par1;
-    
+    $("div.dropdown-menu.dropdown-menu-right" ).css("width", "300px")
+    $("div.dropdown-menu.dropdown-menu-right.show" ).css("width", "300px")
     $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container") 
     $("#msall").hide()
     $(var1).css("opacity", "1")
@@ -105,7 +106,8 @@ function getDropdownObjects()
 	$.each(keys, function(index_basic) {
 	$(obj[keys[index_basic][0]][6]).selectDropdown();
 	$(obj[keys[index_basic][0]][7]+" .input-group .form-control").attr("placeholder", obj[keys[index_basic][0]][4]);
-	$(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
+	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
+	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("width","400px")
 	$(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
 	})
 
@@ -188,8 +190,10 @@ function select(values="",par1="") {
 	       if (values[index]=="object_subtype") {
 		   search_object_subtype.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="object_location") {
-		   search_object_location.push({ field: values[index], value: String(index), operator: "is"  })}
+		   f=(String(index).replace(' (location)', ''))
+		   search_object_location.push({ field: values[index], value: f, operator: "is"  })}
 	       if (values[index]=="object_provenance") {
+		   f=(String(index).replace(' (provenance)', ''))
 		   search_object_provenance.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="object_material") {
 		   search_object_material.push({ field: values[index], value: String(index), operator: "is"  })}
