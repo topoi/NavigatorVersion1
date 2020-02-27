@@ -162,7 +162,7 @@ function getDropdownTitles()
 	$("#field2s").find("#H5:contains('Field of Profession:')").css("font-family","italic")
 	$("#field3s").find("#H5:contains('Field of Specialization:')").css("font-family","italic")
 	$("#field5s").find("#H5:contains('Profession:')").css("font-family","italic")
-	$("#field2s").find("#H5:contains('Gender:')").css("font-family","italic")
+	$("#field4s").find("#H5:contains('Gender:')").css("font-family","italic")
     });
     
     BasicMenu("#title", par1=obj, par2=0, par3="");

@@ -212,7 +212,7 @@ var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;';
         panels: [
             
             { type: 'main', style: pstyle, content: 'main' },
-            { type: 'right', size: 1440, resizable: true, style: pstyle, content: 'right' }
+            { type: 'right', size: "100%", resizable: true, style: pstyle, content: 'right' }
             
         ]
     });
