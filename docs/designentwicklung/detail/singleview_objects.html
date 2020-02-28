@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
 </head>
 <body>
-<div class="Content" id="Content" style="overflow-y: hidden; top:0; left:10px width:95%; height: 200%"></div>
+<div class="Content" id="Content" style="overflow-y: hidden; top:0; left:10px width:95%; height:300%;"></div>
 <div id="toc" style="top:0;float:right;">
     <ul class="jump">
    
@@ -57,7 +57,10 @@ function getValue(file){
   
   var sel_record = parameters.ids;
   var sel_type = parameters.type;
-  
+   var i;
+  $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
+  $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#Content');
+
   $.each(images, function( index, value_image ) {
       if (value_image.id == sel_record)
          {
@@ -71,9 +74,7 @@ function getValue(file){
           }
          });
         //loop 
-         var i;
-         $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
-	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#Content');
+        
 
        var sametype= [];
        
