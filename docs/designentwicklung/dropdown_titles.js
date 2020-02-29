@@ -120,8 +120,8 @@ function getDropdownTitles()
     $(".radio").css("opacity","1")
     var myObject = new Object();
     
-    myObject["titles_translat_eng"]=[titles[3]["Translation"], "titles_translat_eng", "title", "titles_translat_eng", "Select translation" , "trans","#trans","#bsd1-container", "titles_translat_eng","titles_translat_eng"];
-    myObject["titles_translit"]=[titles[3]["Title"], "titles_translit", "title", "titles_translit", "Select title" ,"titles" , "#titles","#bsd2-container", "titles_translit","titles_translit"];
+    myObject["titles_translat_eng"]=[titles[3]["Translation"], "titles_translat_eng", "title", "titles_translat_eng", "Select Translation" , "trans","#trans","#bsd1-container", "titles_translat_eng","titles_translat_eng"];
+    myObject["titles_translit"]=[titles[3]["Title"], "titles_translit", "title", "titles_translit", "Select Title" ,"titles" , "#titles","#bsd2-container", "titles_translit","titles_translit"];
     myObject["gott_kult"]=[titles[3]["Gods and other Authorities"], "gott_kult", "title", "gott_kult", "Select Gods and other Autorities", "gott_kult", "#gott_kult", "#bsd3-container", "gott_kult","gott_kult"]
     myObject["region"]=[titles[3]["Toponyms"], "region", "title", "region", "Select Toponyms", "region", "#region", "#bsd4-container", "region","region"]
     myObject["ad_sec"]=[titles[3]["Administrative Institution"], "ad_sec", "title", "ad_sec", "Select Administrative Institution", "ad_sec", "#ad_sec", "#bsd5-container", "ad_sec","ad_sec"]

@@ -40,17 +40,6 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     c.appendTo("#container")
     s.appendTo(var1);
 
-    /*$.each(alphabet_orig, function(index) {
-	c=$("<div class=\"form-group\" id="+obj[alphabet_orig[index]][1]+"><div id="+obj[alphabet_orig[index]][2]+"><h6 id="+obj[alphabet_orig[index]][3]+"></h6></div></div>")
-	var data=obj[alphabet_orig[index]][0];
-	var s = $("<select id="+obj[alphabet_orig[index]][5]+" class=\"form-control\" multiple/>");
-	for(var val in data) {
-	    $("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-	}
-	c.appendTo("#container")
-	s.appendTo(var1);
-    });*/
-    
     $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
     $("#selectionresult").appendTo("#container")
 
@@ -61,17 +50,7 @@ function DropdownMenu(var1, var2, par1)
             obj=par1;
 	    
 	    $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container") 
-	    /*
-	    $.each(alphabet_engl, function( index) {
-		$(obj[alphabet_engl[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_engl[index]][4])
-		$(".form-group#"+obj[alphabet_engl[index]][1]).show()
-	    });*/
-	    /*
-	    $.each(alphabet_orig, function( index) {
-	
-		$(obj[alphabet_orig[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet_orig[index]][4])
-		$(".form-group#"+obj[alphabet_orig[index]][1]).show()
-		       });*/
+	  
 	    
 	    $("#msall").hide()
 	    $(var1).css("opacity", "1")
@@ -81,9 +60,7 @@ function DropdownMenu(var1, var2, par1)
    
 	};
 
-    
-//var currentAlpha="";
-//var currentBeta="";
+
 
 function SelectionMenu(var1,par1,par2)
     {

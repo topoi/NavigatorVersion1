@@ -43,12 +43,12 @@ function SelectionMenu(var1,par1,par2)
     obj=par1;
     $("#selectionresult,#selectionresulttext").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
-    $( "<p id='object_types' style='opacity:0.3; font-size:18px;'>Object type:<br></p>" ).appendTo("#header")
-    $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'>Object sub-type:<br></p>" ).appendTo("#header")
-    $( "<p id='object_subtype_others' style='opacity:0.3; font-size:18px;'>Object sub-type II:<br></p>" ).appendTo("#header")
-    $( "<p id='object_locations' style='opacity:0.3; font-size:18px;'>Object location:<br></p>" ).appendTo("#header")
-    $( "<p id='object_provenances' style='opacity:0.3; font-size:18px;'>Object provenance:<br></p>" ).appendTo("#header")
-    $( "<p id='object_materials' style='opacity:0.3; font-size:18px;'>Object material:<br></p>" ).appendTo("#header")
+    $( "<p id='object_types' style='opacity:0.3; font-size:18px;'><a id='H5'>Object type:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_subtype_others' style='opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type II:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_locations' style='opacity:0.3; font-size:18px;'><a id='H5'>Object location:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_provenances' style='opacity:0.3; font-size:18px;'><a id='H5'>Object provenance:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_materials' style='opacity:0.3; font-size:18px;'><a id='H5'>Object material:<br></a></p>" ).appendTo("#header")
     $("#container" ).on("click", ".dropdown-item", function () {
 
 	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
@@ -108,12 +108,21 @@ function getDropdownObjects()
 	$(obj[keys[index_basic][0]][7]+" .input-group .form-control").attr("placeholder", obj[keys[index_basic][0]][4]);
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("width","400px")
-	$(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
+	    $(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
+	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
+	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
+	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Show selected')").css("font-family","italic")
+	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Clear input field')").css("font-family","italic")
 	})
-
-
+	
+	$("#object_types").find("#H5:contains('Object type:')").css("font-family","italic")
+	$("#object_subtypes").find("#H5:contains('Object sub-type:')").css("font-family","italic")
+	$("#object_subtype_others").find("#H5:contains('Object sub-type II:')").css("font-family","italic")
+	$("#object_locations").find("#H5:contains('Object location:')").css("font-family","italic")
+	$("#object_provenances").find("#H5:contains('Object provenance:')").css("font-family","italic")
+	$("#object_materials").find("#H5:contains('Object material:')").css("font-family","italic")
+	
     });
-    
     
     BasicMenu("#objectsl", par1=obj, par2=0, par3="");
     DropdownMenu("#objectsl", w2ui.grid2, par1=obj);
@@ -123,16 +132,6 @@ function getDropdownObjects()
     buttonlist=["#bsd1-button","#bsd2-button","#bsd3-button","#bsd4-button","#bsd5-button","#bsd6-button"]
     $.each(buttonlist, function(index) {
 
-	/*$("#container").on("click",buttonlist[index], function() {
-	    $("[id*=-button]").css("opacity","0.5")
-	    $("#"+$(this).attr("id")).css("opacity","1")
-	    
-	    $(buttonlist[index]).css({position: 'relative'});
-      	    $(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	    $(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
-	    $(buttonlist[index]).find(".dropdown-menu.dropdown-menu-right").show()
-	
-	});*/
     });
     
     // initalize grid

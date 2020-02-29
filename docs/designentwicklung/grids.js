@@ -2,9 +2,15 @@ var plp= [];
 var plo= [];
 var plt= [];
 
+
 function allTables(var1="")
 {
-    
+    console.log( titles[1])
+    persons[1][1]["style"]= "font-family: aegypt;"
+    titles[1][2]["style"]= "font-family: aegypt;"
+    persons[1][1]["caption"]= "Egyptian name"
+    persons[1][2]["caption"]= "English name"
+
     if (w2ui['grid1'] != null) {
 	w2ui['grid1'].reset();
 	w2ui['grid1'].destroy();
@@ -13,8 +19,8 @@ function allTables(var1="")
     
 $('#grid1').w2grid({
     name    : 'grid1',
-   
-
+    recordHeight: 30,
+    style: 'font-size:32px;',
     show: { 
             toolbar: true,
             footer: true
@@ -80,6 +86,8 @@ if (w2ui['grid2'] != null) {
    
 $('#grid2').w2grid({
     name    : 'grid2',
+    recordHeight: 30,
+    style: 'font-size:32px;',
     show: { 
             toolbar: true,
             footer: true
@@ -146,6 +154,8 @@ $('#grid2').w2grid({
     
     $('#grid3').w2grid({
 	name    : 'grid3',
+	recordHeight: 30,
+	style: 'font-size:32px;',
 	show: { 
             toolbar: true,
             footer: true
