@@ -91,7 +91,7 @@ function SelectionMenu(var1,par1,par2)
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()  
 		    $("#personen").css("opacity", "1")
-	       	    $( "#personen" ).append( "<strong>  "+f[index]+"     </strong>" );
+	       	    $( "#personen" ).append( "<strong>  "+f[index]+" -    </strong>" );
 		    selvalues[$.trim(f[index])]="name_translit"
 		}
 		
@@ -100,7 +100,7 @@ function SelectionMenu(var1,par1,par2)
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()  
 		    $("#genders").css("opacity", "1")
-	       	    $( "#genders" ).append( "<strong>  "+f[index]+"     </strong>" );
+	       	    $( "#genders" ).append( "<strong>  "+f[index]+" -     </strong>" );
 		    selvalues[$.trim(f[index])]="gender"
 		}
 		
@@ -110,7 +110,7 @@ function SelectionMenu(var1,par1,par2)
 		    $( ".mt-2.mb-3" ).hide()  
 		    $("#originals").css("opacity", "1")
 		    $("#originalstext").css("opacity", "1")
-	       	    $( "#originals" ).append( "<strong>  "+f[index]+"     </strong>" );
+	       	    $( "#originals" ).append( "<strong>  "+f[index]+" -     </strong>" );
 		    selvalues[$.trim(f[index])]="name"
 		}
 	    })
@@ -138,7 +138,7 @@ function getDropdownPersons()
     	$(obj["english"][6]).selectDropdown();
 	$(obj["english"][7]+" .input-group .form-control").attr("placeholder", obj["english"][4]);
 	$(obj["english"][7]).find('.dropdown-menu').css("z-index","12000")
-	$(obj["english"][7]).find('.dropdown-menu').css("width","300px")
+	$(obj["english"][7]).find('.dropdown-menu').css("width","400px")
 	$(obj["english"][7]).css("margin-bottom","22px")
 	$(obj["english"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	$(obj["english"][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")

@@ -62,8 +62,8 @@ function SelectionMenu(var1,par1,par2)
     obj=par1;
     $("#selectionresult,#selectionresulttext").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
-    $( "<p id='titles_translits' style='opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header")
     $( "<p id='titles_translat_engs' style='opacity:0.3; font-size:18px;'><a id='H5'>Translation:<br></a></p>" ).appendTo("#header")
+    $( "<p id='titles_translits' style='opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header")
     $( "<p id='gott_kults' style='opacity:0.3; font-size:18px;'><a id='H5'>Gods and other Authorities:<br></a></p>" ).appendTo("#header")
     $( "<p id='regions' style='opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header")
     $( "<p id='ad_secs' style='opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header")
@@ -100,7 +100,7 @@ function SelectionMenu(var1,par1,par2)
 		    $( "#selectrules1" ).css("opacity","1")
 		    $( ".mt-2.mb-3" ).hide()  
 		    $("#"+keys[index_basic][0]+"s").css("opacity", "1")
-	       	    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+	       	    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+" - </strong>" );
 		    selvalues[$.trim(f[index])]=keys[index_basic][0]
 		}
 	    }) 
@@ -140,7 +140,7 @@ function getDropdownTitles()
 	$(obj[keys[index_basic][0]][6]).selectDropdown();
 	$(obj[keys[index_basic][0]][7]+" .input-group .form-control").attr("placeholder", obj[keys[index_basic][0]][4]);
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
-	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("width","300px")
+	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("width","400px")
 	    $(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
@@ -247,7 +247,8 @@ function getDropdownTitles()
 	       if (values[index]=="titles_translit") {
 		   search_title_translit.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="gott_kult") {
-		   search_title_gott.push({ field: values[index], value: String(index), operator: "is"  })}
+		   f=(String(index).replace(' (god)', ''))
+		   search_title_gott.push({ field: values[index], value: f, operator: "is"  })}
 	       if (values[index]=="region") {
 		   search_title_region.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="ad_sec") {
@@ -257,7 +258,8 @@ function getDropdownTitles()
 	       if (values[index]=="field3") {
 		   search_title_field3.push({ field: values[index], value: String(index), operator: "is"  })}
 	       if (values[index]=="field5") {
-		   search_title_field5.push({ field: values[index], value: String(index), operator: "is"  })}
+		   f=(String(index).replace(' (prof.)', ''))
+		   search_title_field5.push({ field: values[index], value: f, operator: "is"  })}
 	       if (values[index]=="field4") {
 		   search_title_field4.push({ field: values[index], value: String(index), operator: "is"  })}
 	   });

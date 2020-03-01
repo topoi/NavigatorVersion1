@@ -371,7 +371,7 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
     classBtnSelectAll: "btn btn-outline-secondary",
     // Multiselect only
     // HTML
-    htmlClear: "Clear input field",
+    htmlClear: "Deselect all",
     htmlDeselectAll: "Deselect all",
     // Multiselect only
     htmlSelectAll: "Select all",
@@ -748,7 +748,7 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
         // Select item.
         this.els.dropdownOptions.on(Event.CLICK, function (event) {
           event.preventDefault();
-
+	    
           if (_this3._multiselect) {
             _this3._preventDropdownHide();
           }
@@ -759,7 +759,7 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
         if (this._config.deselectAll) {
           this.els.deselectAll.on(Event.CLICK, function (event) {
             event.preventDefault();
-
+	      
             _this3._preventDropdownHide();
 
             if (!$(event.currentTarget).hasClass('disabled')) {
@@ -772,12 +772,13 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
         if (this._config.selectAll) {
           this.els.selectAll.on(Event.CLICK, function (event) {
             event.preventDefault();
-
+	      
             _this3._preventDropdownHide();
 
             if (!$(event.currentTarget).hasClass('disabled')) {
               _this3.selectAll();
             }
+	      
           });
         } // Clear search.
 
@@ -785,14 +786,18 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
         if (this._config.search) {
           this.els.clear.on(Event.CLICK, function (event) {
             event.preventDefault();
+	      
+ _this3._preventDropdownHide();
 
-            _this3.els.controlSearch.val('');
+            if (!$(event.currentTarget).hasClass('disabled')) {
+              _this3.deselectAll();
+            }
 
-            _this3._preventDropdownHide();
-
-            _this3._refresh();
-
-            _this3._searchControlFocus();
+	      _this3.els.controlSearch.val('');
+	      _this3._preventDropdownHide();
+	      _this3._refresh();
+	      _this3._searchControlFocus();
+	      
           });
         } // Show selected.
 
@@ -992,18 +997,22 @@ var bootstrap_select_dropdown_SelectDropdown = function ($) {
        */
 
     }, {
-      key: "_buildControlClear",
-      value: function _buildControlClear() {
-        return $('<a>', {
+	key: "_buildControlClear",
+	
+	value: function _buildControlClear() {
+	    return $('<a>', {
           href: '#',
           "class": ClassName.ITEM
-        }).html(this._config.htmlClear);
-      }
-      /**
-       * Build HTML: Deselect all element
-       * @return {object} jQuery
-       */
+	}).html(this._config.htmlClear);
+	  
+	}
 
+	
+	/**
+	 * Build HTML: Deselect all element
+	 * @return {object} jQuery
+	 */
+	
     }, {
       key: "_buildDeselectAll",
       value: function _buildDeselectAll() {

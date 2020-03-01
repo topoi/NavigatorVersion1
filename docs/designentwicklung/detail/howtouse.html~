@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How to use</title>
+    <script src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/w2ui.js"></script>
+   
+    <link rel="stylesheet" type="text/css" href="../css/metadata_pages.css" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+<body>
+<style>
+body{background: #f5f5f5}
+</style>
+
+
+<div class="col" style="overflow: hidden;" >
+  <h1 class="col" style="font-size:18px">How to Use</h1>
+  <br>
+
+  <h2 class="col" >Home</h2>
+  <img src="images/Home.pdf" width="100%" height="400px" alt="" class="center" />
+
+  <h2 class="col" >Menu</h2>
+  <img src="images/SubMenu.pdf" width="100%" height="400px" alt="" class="center" />
+
+  <h2 class="col" >Category (Persons, Objects, Titles</h2>
+  <img src="images/Searchfield.pdf" width="100%" height="400px" alt="" class="center" />
+
+  <img src="images/Dropdown.pdf" width="100%" height="400px" alt="" class="center" />
+
+  <h2 class="col" >Table</h2>
+  <img src="images/ShowHide.pdf" width="100%" height="400px" alt="" class="center" />
+
+  <h2 class="col" >Single view</h2>
+  <img src="images/SingleView.pdf" width="100%" height="400px" alt="" class="center" />
+    
+</div>
+
+
+

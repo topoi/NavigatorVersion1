@@ -73,7 +73,7 @@ function SelectionMenu(var1,par1,par2)
 		    $( ".mt-2.mb-3" ).hide()
 		    $("#"+keys[index_basic][0]+"s").css("opacity", "1")
 		    $("#"+keys[index_basic][0]).css("opacity", "1")
-		    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+"     </strong>" );
+		    $("#"+keys[index_basic][0]+"s").append( "<strong>  "+f[index]+" -      </strong>" );
 		    selvalues[$.trim(f[index])]=keys[index_basic][0]
 		}
 	    })

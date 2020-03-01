@@ -187,12 +187,12 @@ $('#grid2').w2grid({
      var count = 0
      $("#p1").click(function(){
           count=count+1
-          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_titles.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
    
      $("#p0").click(function(){
           count=count-1
-          document.getElementById('Content2').setAttribute('src',"detail/singleview_objects.html?ids="+plt[count].id+"&title="+plt[count].title)
+          document.getElementById('Content2').setAttribute('src',"detail/singleview_titles.html?ids="+plt[count].id+"&title="+plt[count].title)
      });
  });
 	    
